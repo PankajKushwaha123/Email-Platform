@@ -8,6 +8,7 @@ import img5 from "../assets/media/avatars/avatar12.jpg";
 import img6 from "../assets/media/photos/photo1.jpg";
 import img7 from "../assets/media/photos/photo2.jpg";
 import img8 from "../assets/media/photos/photo3.jpg";
+import { Link } from "react-router-dom";
 
 function Inbox() {
   return (
@@ -170,10 +171,12 @@ function Inbox() {
 
                 <li className="nav-main-heading">Contacts</li>
                 <li className="nav-main-item">
-                  <a className="nav-main-link" href="contacts.html">
-                    <i className="nav-main-link-icon si si-users"></i>
-                    <span className="nav-main-link-name">All Contacts</span>
-                  </a>
+                  <Link to="/contacts">
+                    <a className="nav-main-link">
+                      <i className="nav-main-link-icon si si-users"></i>
+                      <span className="nav-main-link-name">All Contacts</span>
+                    </a>
+                  </Link>
                 </li>
                 <li className="nav-main-item">
                   <a className="nav-main-link" href="lists.html">
@@ -1516,7 +1519,7 @@ function Inbox() {
                   <form
                     action="be_pages_generic_inbox.html"
                     method="POST"
-                    onsubmit="return false;"
+                    onSubmit="return false;"
                   >
                     <div className="block block-rounded block-transparent mb-0">
                       <div className="block-header block-header-default">
@@ -1725,7 +1728,7 @@ function Inbox() {
                           <div className="options-container fx-item-zoom-in mb-2">
                             <img
                               className="img-fluid options-item"
-                              src="assets/media/photos/photo3.jpg"
+                              src={img8}
                               alt=""
                             />
                             <div className="options-overlay bg-black-75">

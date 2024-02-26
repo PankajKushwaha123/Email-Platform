@@ -5,6 +5,9 @@ import Index from "./components/Index";
 import Inbox from "./components/Inbox";
 import Register from "./components/Register";
 import Contacts from "./components/Contacts";
+import Createcampaign from "./components/Createcampaign";
+import Lists from "./components/Lists";
+import Campaign from "./components/Campaign";
 function App() {
   return (
     <div className="App">
@@ -14,6 +17,9 @@ function App() {
           <Route path="/inbox" element={<Inbox />}></Route>
           <Route path="/Register" element={<Register />}></Route>
           <Route path="/contacts" element={<Contacts />}></Route>
+          <Route path="/Createcampaign" element={<Createcampaign />}></Route>
+          <Route path="/lists" element={<Lists />}></Route>
+          <Route path="/campaigns" element={<Campaign />}></Route>
         </Routes>
       </Router>
     </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 const c = "nav-main-link  ";
-var c1 = c;
+var c1 = c + " active";
 var c2 = c;
 var c3 = c;
 var c4 = c;

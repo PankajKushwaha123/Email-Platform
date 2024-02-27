@@ -8,6 +8,7 @@ import Contacts from "./components/Contacts";
 import Createcampaign from "./components/Createcampaign";
 import Lists from "./components/Lists";
 import Campaign from "./components/Campaign";
+import Statistics from "./components/Statistics";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/Createcampaign" element={<Createcampaign />}></Route>
           <Route path="/lists" element={<Lists />}></Route>
           <Route path="/campaigns" element={<Campaign />}></Route>
+          <Route path="/statistics" element={<Statistics />}></Route>
         </Routes>
       </Router>
     </div>

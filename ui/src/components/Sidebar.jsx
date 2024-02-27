@@ -9,22 +9,17 @@ var c5 = c;
 
 function Sidebar() {
   let loc = useLocation().pathname;
-
+  c1 = c2 = c3 = c4 = c5 = c;
   if (loc == "/inbox") {
     c1 = c + " active";
-    c2 = c3 = c4 = c5 = c;
   } else if (loc == "/contacts") {
     c2 = c + " active";
-    c1 = c3 = c4 = c5 = c;
   } else if (loc == "/lists") {
     c3 = c + " active";
-    c1 = c2 = c4 = c5 = c;
   } else if (loc == "/Createcampaign") {
     c4 = c + " active";
-    c1 = c2 = c3 = c5 = c;
   } else if (loc == "/campaigns") {
     c5 = c + " active";
-    c1 = c2 = c3 = c4 = c;
   }
 
   return (

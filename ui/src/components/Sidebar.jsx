@@ -1,6 +1,32 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+const c = "nav-main-link  ";
+var c1 = c;
+var c2 = c;
+var c3 = c;
+var c4 = c;
+var c5 = c;
+
 function Sidebar() {
+  let loc = useLocation().pathname;
+
+  if (loc == "/inbox") {
+    c1 = c + " active";
+    c2 = c3 = c4 = c5 = c;
+  } else if (loc == "/contacts") {
+    c2 = c + " active";
+    c1 = c3 = c4 = c5 = c;
+  } else if (loc == "/lists") {
+    c3 = c + " active";
+    c1 = c2 = c4 = c5 = c;
+  } else if (loc == "/Createcampaign") {
+    c4 = c + " active";
+    c1 = c2 = c3 = c5 = c;
+  } else if (loc == "/campaigns") {
+    c5 = c + " active";
+    c1 = c2 = c3 = c4 = c;
+  }
+
   return (
     <div className="js-sidebar-scroll">
       <div className="content-side">
@@ -8,9 +34,10 @@ function Sidebar() {
           <li className="nav-main-heading">Inbox</li>
           <li className="nav-main-item">
             <Link to="/inbox">
-              <a className="nav-main-link active" href="inbox">
+              {/* error */}
+              <a className={c1} href="/">
                 <i className="nav-main-link-icon si si-envelope-letter"></i>
-                <span className="nav-main-link-name">Admin Inbox</span>
+                <span className="nav-main-link-name">Admin Inbox </span>
               </a>
             </Link>
           </li>
@@ -18,7 +45,7 @@ function Sidebar() {
           <li className="nav-main-heading">Contacts</li>
           <li className="nav-main-item">
             <Link to="/contacts">
-              <a className="nav-main-link">
+              <a className={c2}>
                 <i className="nav-main-link-icon si si-users"></i>
                 <span className="nav-main-link-name">All Contacts</span>
               </a>
@@ -26,7 +53,7 @@ function Sidebar() {
           </li>
           <li className="nav-main-item">
             <Link to="/lists">
-              <a className="nav-main-link">
+              <a className={c3}>
                 <i className="nav-main-link-icon si si-list"></i>
                 <span className="nav-main-link-name">Lists</span>
               </a>
@@ -36,7 +63,7 @@ function Sidebar() {
           <li className="nav-main-heading">Campaigns</li>
           <li className="nav-main-item">
             <Link to="/Createcampaign">
-              <a className="nav-main-link">
+              <a className={c4}>
                 <i className="nav-main-link-icon si si-plus"></i>
                 <span className="nav-main-link-name">Create Campaign</span>
               </a>
@@ -44,7 +71,7 @@ function Sidebar() {
           </li>
           <li className="nav-main-item">
             <Link to="/campaigns">
-              <a className="nav-main-link">
+              <a className={c5}>
                 <i className="nav-main-link-icon si si-energy"></i>
                 <span className="nav-main-link-name">Dashboard</span>
               </a>

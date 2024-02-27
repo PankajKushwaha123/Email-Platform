@@ -7,23 +7,32 @@ var c3 = c;
 var c4 = c;
 var c5 = c;
 var c6 = c;
+var c7 = c;
 
 function Sidebar() {
   let loc = useLocation().pathname;
 
-  c1 = c2 = c3 = c4 = c5 = c6 = c;
+  c2 = c3 = c4 = c5 = c6 = c7 = c;
   if (loc == "/inbox") {
     c1 = c + " active";
   } else if (loc == "/contacts") {
     c2 = c + " active";
+    c1 = c;
   } else if (loc == "/lists") {
     c3 = c + " active";
+    c1 = c;
   } else if (loc == "/Createcampaign") {
     c4 = c + " active";
+    c1 = c;
   } else if (loc == "/campaigns") {
     c5 = c + " active";
+    c1 = c;
   } else if (loc == "/statistics") {
     c6 = c + " active";
+    c1 = c;
+  } else if (loc == "/settings") {
+    c7 = c + " active";
+    c1 = c;
   }
 
   return (
@@ -85,10 +94,12 @@ function Sidebar() {
             </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="campaign-settings.html">
-              <i className="nav-main-link-icon si si-settings"></i>
-              <span className="nav-main-link-name">Settings</span>
-            </a>
+            <Link to="/settings">
+              <a className={c7} href="">
+                <i className="nav-main-link-icon si si-settings"></i>
+                <span className="nav-main-link-name">Settings</span>
+              </a>
+            </Link>
           </li>
 
           <li className="nav-main-heading">Transactional</li>

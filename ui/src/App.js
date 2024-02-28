@@ -10,6 +10,8 @@ import Lists from "./components/Lists";
 import Campaign from "./components/Campaign";
 import Statistics from "./components/Statistics";
 import Setting from "./components/Setting";
+import Transactional from "./components/Transactional";
+import TransactionalStats from "./components/TransactionalStats";
 function App() {
   return (
     <div className="App">
@@ -24,6 +26,11 @@ function App() {
           <Route path="/campaigns" element={<Campaign />}></Route>
           <Route path="/statistics" element={<Statistics />}></Route>
           <Route path="/settings" element={<Setting />}></Route>
+          <Route path="/transactional" element={<Transactional />}></Route>
+          <Route
+            path="/transactionalstats"
+            element={<TransactionalStats />}
+          ></Route>
         </Routes>
       </Router>
     </div>

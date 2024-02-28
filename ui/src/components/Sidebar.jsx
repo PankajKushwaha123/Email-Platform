@@ -8,11 +8,12 @@ var c4 = c;
 var c5 = c;
 var c6 = c;
 var c7 = c;
-
+var c8 = c;
+var c9 = c;
 function Sidebar() {
   let loc = useLocation().pathname;
 
-  c2 = c3 = c4 = c5 = c6 = c7 = c;
+  c2 = c3 = c4 = c5 = c6 = c7 = c8 = c9 = c;
   if (loc == "/inbox") {
     c1 = c + " active";
   } else if (loc == "/contacts") {
@@ -32,6 +33,12 @@ function Sidebar() {
     c1 = c;
   } else if (loc == "/settings") {
     c7 = c + " active";
+    c1 = c;
+  } else if (loc == "/transactional") {
+    c8 = c + "active";
+    c1 = c;
+  } else if (loc == "/transactionalstats") {
+    c9 = c + " active";
     c1 = c;
   }
 
@@ -104,16 +111,20 @@ function Sidebar() {
 
           <li className="nav-main-heading">Transactional</li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="transactional.html">
-              <i className="nav-main-link-icon si si-vector"></i>
-              <span className="nav-main-link-name">Configurations</span>
-            </a>
+            <Link to="/transactional">
+              <a className={c8} href="#">
+                <i className="nav-main-link-icon si si-vector"></i>
+                <span className="nav-main-link-name">Configurations</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="transactional-statistics.html">
-              <i className="nav-main-link-icon si si-bar-chart"></i>
-              <span className="nav-main-link-name">Statistics</span>
-            </a>
+            <Link to="/transactionalstats">
+              <a className={c9} href="#">
+                <i className="nav-main-link-icon si si-bar-chart"></i>
+                <span className="nav-main-link-name">Statistics</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
             <a className="nav-main-link" href="transactional-settings.html">

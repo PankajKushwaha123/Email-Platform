@@ -10,10 +10,16 @@ var c6 = c;
 var c7 = c;
 var c8 = c;
 var c9 = c;
+var c10 = c;
+var c11 = c;
+var c12 = c;
+var c13 = c;
+var c14 = c;
+var c15 = c;
 function Sidebar() {
   let loc = useLocation().pathname;
 
-  c2 = c3 = c4 = c5 = c6 = c7 = c8 = c9 = c;
+  c2 = c3 = c4 = c5 = c6 = c7 = c8 = c9 = c10 = c11 = c12 = c13 = c;
   if (loc == "/inbox") {
     c1 = c + " active";
   } else if (loc == "/contacts") {
@@ -40,6 +46,22 @@ function Sidebar() {
   } else if (loc == "/transactionalstats") {
     c9 = c + " active";
     c1 = c;
+  } else if (loc == "/transactionalsetting") {
+    c10 = c + " active";
+    c1 = c;
+  } else if (loc == "/senders") {
+    c11 = c + " active";
+    c1 = c;
+  } else if (loc == "/domain") {
+    c12 = c + " active";
+    c1 = c;
+  } else if (loc == "/security") {
+    c13 = c + " active";
+    c1 = c;
+  } else if (loc == "/myplan") {
+    c14 = c + " active";
+  } else if (loc == "/logout") {
+    c15 = c + " active";
   }
 
   return (
@@ -50,7 +72,7 @@ function Sidebar() {
           <li className="nav-main-item">
             <Link to="/inbox">
               {/* error */}
-              <a className={c1} href="/">
+              <a className={c1} href="#">
                 <i className="nav-main-link-icon si si-envelope-letter"></i>
                 <span className="nav-main-link-name">Admin Inbox </span>
               </a>
@@ -127,42 +149,54 @@ function Sidebar() {
             </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="transactional-settings.html">
-              <i className="nav-main-link-icon si si-settings"></i>
-              <span className="nav-main-link-name">Settings</span>
-            </a>
+            <Link to="/transactionalsetting">
+              <a className={c10} href="#">
+                <i className="nav-main-link-icon si si-settings"></i>
+                <span className="nav-main-link-name">Settings</span>
+              </a>
+            </Link>
           </li>
 
           <li className="nav-main-heading">Account</li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="senders.html">
-              <i className="nav-main-link-icon si si-users"></i>
-              <span className="nav-main-link-name">Senders</span>
-            </a>
+            <Link to="/senders">
+              <a className={c11} href="#">
+                <i className="nav-main-link-icon si si-users"></i>
+                <span className="nav-main-link-name">Senders</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="domains.html">
-              <i className="nav-main-link-icon si si-globe-alt"></i>
-              <span className="nav-main-link-name">Domains</span>
-            </a>
+            <Link to="/domain">
+              <a className={c12} href="#">
+                <i className="nav-main-link-icon si si-globe-alt"></i>
+                <span className="nav-main-link-name">Domains</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="security.html">
-              <i className="nav-main-link-icon si si-lock"></i>
-              <span className="nav-main-link-name">Security</span>
-            </a>
+            <Link to="/security">
+              <a className={c13} href="#">
+                <i className="nav-main-link-icon si si-lock"></i>
+                <span className="nav-main-link-name">Security</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="plans.html">
-              <i className="nav-main-link-icon si si-wallet"></i>
-              <span className="nav-main-link-name">My Plan</span>
-            </a>
+            <Link to="/myplan">
+              <a className={c14} href="#">
+                <i className="nav-main-link-icon si si-wallet"></i>
+                <span className="nav-main-link-name">My Plan</span>
+              </a>
+            </Link>
           </li>
           <li className="nav-main-item">
-            <a className="nav-main-link" href="logout.html">
-              <i className="nav-main-link-icon si si-logout"></i>
-              <span className="nav-main-link-name">Log out</span>
-            </a>
+            <Link to="/logout">
+              <a className={c15} href="#">
+                <i className="nav-main-link-icon si si-logout"></i>
+                <span className="nav-main-link-name">Log out</span>
+              </a>
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,94 +1,180 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 
     <title>Sender Profiles</title>
 
-    <link rel="shortcut icon" href="assets/media/favicons/favicon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/media/favicons/favicon-192x192.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/media/favicons/apple-touch-icon-180x180.png">
+    <link rel="shortcut icon" href="assets/media/favicons/favicon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/media/favicons/favicon-192x192.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/media/favicons/apple-touch-icon-180x180.png"
+    />
     <!-- END Icons -->
 
     <!-- Stylesheets -->
     <!-- Fonts and OneUI framework -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" id="css-main" href="assets/css/oneui.min.css" />
 
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
     <!-- END Stylesheets -->
   </head>
   <body>
-    <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+    <div
+      id="page-container"
+      class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow"
+    >
       <!-- Sidebar -->
       <nav id="sidebar" aria-label="Main Navigation">
-
         <!-- Side Header -->
         <div class="content-header">
           <a class="fw-semibold text-dual" href="index.html">
             <span class="smini-visible">
               <i class="fa fa-circle-notch text-primary"></i>
             </span>
-            <span class="smini-hide fs-5 tracking-wider">Mail<span class="fw-normal">Mort</span></span>
+            <span class="smini-hide fs-5 tracking-wider"
+              >Mail<span class="fw-normal">Mort</span></span
+            >
           </a>
 
           <div>
-            <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="dark_mode_toggle">
+            <button
+              type="button"
+              class="btn btn-sm btn-alt-secondary"
+              data-toggle="layout"
+              data-action="dark_mode_toggle"
+            >
               <i class="far fa-moon"></i>
             </button>
 
             <div class="dropdown d-inline-block ms-1">
-              <button type="button" class="btn btn-sm btn-alt-secondary" id="sidebar-themes-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button
+                type="button"
+                class="btn btn-sm btn-alt-secondary"
+                id="sidebar-themes-dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="far fa-circle"></i>
               </button>
-              <div class="dropdown-menu dropdown-menu-end fs-sm smini-hide border-0" aria-labelledby="sidebar-themes-dropdown">
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="default" href="#">
+              <div
+                class="dropdown-menu dropdown-menu-end fs-sm smini-hide border-0"
+                aria-labelledby="sidebar-themes-dropdown"
+              >
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="default"
+                  href="#"
+                >
                   <span>Default</span>
                   <i class="fa fa-circle text-default"></i>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css" href="#">
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="assets/css/themes/amethyst.min.css"
+                  href="#"
+                >
                   <span>Amethyst</span>
                   <i class="fa fa-circle text-amethyst"></i>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/city.min.css" href="#">
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="assets/css/themes/city.min.css"
+                  href="#"
+                >
                   <span>City</span>
                   <i class="fa fa-circle text-city"></i>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/flat.min.css" href="#">
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="assets/css/themes/flat.min.css"
+                  href="#"
+                >
                   <span>Flat</span>
                   <i class="fa fa-circle text-flat"></i>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/modern.min.css" href="#">
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="assets/css/themes/modern.min.css"
+                  href="#"
+                >
                   <span>Modern</span>
                   <i class="fa fa-circle text-modern"></i>
                 </a>
-                <a class="dropdown-item d-flex align-items-center justify-content-between fw-medium" data-toggle="theme" data-theme="assets/css/themes/smooth.min.css" href="#">
+                <a
+                  class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
+                  data-toggle="theme"
+                  data-theme="assets/css/themes/smooth.min.css"
+                  href="#"
+                >
                   <span>Smooth</span>
                   <i class="fa fa-circle text-smooth"></i>
                 </a>
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="sidebar_style_light" href="javascript:void(0)">
+                <a
+                  class="dropdown-item fw-medium"
+                  data-toggle="layout"
+                  data-action="sidebar_style_light"
+                  href="javascript:void(0)"
+                >
                   <span>Sidebar Light</span>
                 </a>
-                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="sidebar_style_dark" href="javascript:void(0)">
+                <a
+                  class="dropdown-item fw-medium"
+                  data-toggle="layout"
+                  data-action="sidebar_style_dark"
+                  href="javascript:void(0)"
+                >
                   <span>Sidebar Dark</span>
                 </a>
 
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="header_style_light" href="javascript:void(0)">
+                <a
+                  class="dropdown-item fw-medium"
+                  data-toggle="layout"
+                  data-action="header_style_light"
+                  href="javascript:void(0)"
+                >
                   <span>Header Light</span>
                 </a>
-                <a class="dropdown-item fw-medium" data-toggle="layout" data-action="header_style_dark" href="javascript:void(0)">
+                <a
+                  class="dropdown-item fw-medium"
+                  data-toggle="layout"
+                  data-action="header_style_dark"
+                  href="javascript:void(0)"
+                >
                   <span>Header Dark</span>
                 </a>
               </div>
             </div>
-            <a class="d-lg-none btn btn-sm btn-alt-secondary ms-1" data-toggle="layout" data-action="sidebar_close" href="javascript:void(0)">
+            <a
+              class="d-lg-none btn btn-sm btn-alt-secondary ms-1"
+              data-toggle="layout"
+              data-action="sidebar_close"
+              href="javascript:void(0)"
+            >
               <i class="fa fa-fw fa-times"></i>
             </a>
           </div>
@@ -217,21 +303,46 @@
         <div class="content-header">
           <!-- Left Section -->
           <div class="d-flex align-items-center">
-            <button type="button" class="btn btn-sm btn-alt-secondary me-2 d-lg-none" data-toggle="layout" data-action="sidebar_toggle">
+            <button
+              type="button"
+              class="btn btn-sm btn-alt-secondary me-2 d-lg-none"
+              data-toggle="layout"
+              data-action="sidebar_toggle"
+            >
               <i class="fa fa-fw fa-bars"></i>
             </button>
 
-            <button type="button" class="btn btn-sm btn-alt-secondary me-2 d-none d-lg-inline-block" data-toggle="layout" data-action="sidebar_mini_toggle">
+            <button
+              type="button"
+              class="btn btn-sm btn-alt-secondary me-2 d-none d-lg-inline-block"
+              data-toggle="layout"
+              data-action="sidebar_mini_toggle"
+            >
               <i class="fa fa-fw fa-ellipsis-v"></i>
             </button>
 
-            <button type="button" class="btn btn-sm btn-alt-secondary d-md-none" data-toggle="layout" data-action="header_search_on">
+            <button
+              type="button"
+              class="btn btn-sm btn-alt-secondary d-md-none"
+              data-toggle="layout"
+              data-action="header_search_on"
+            >
               <i class="fa fa-fw fa-search"></i>
             </button>
 
-            <form class="d-none d-md-inline-block" action="be_pages_generic_search.html" method="POST">
+            <form
+              class="d-none d-md-inline-block"
+              action="be_pages_generic_search.html"
+              method="POST"
+            >
               <div class="input-group input-group-sm">
-                <input type="text" class="form-control form-control-alt" placeholder="Search.." id="page-header-search-input2" name="page-header-search-input2">
+                <input
+                  type="text"
+                  class="form-control form-control-alt"
+                  placeholder="Search.."
+                  id="page-header-search-input2"
+                  name="page-header-search-input2"
+                />
                 <span class="input-group-text border-0">
                   <i class="fa fa-fw fa-search"></i>
                 </span>
@@ -243,33 +354,68 @@
           <!-- Right Section -->
           <div class="d-flex align-items-center">
             <div class="dropdown d-inline-block ms-2">
-              <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="rounded-circle" src="assets/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
+              <button
+                type="button"
+                class="btn btn-sm btn-alt-secondary d-flex align-items-center"
+                id="page-header-user-dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <img
+                  class="rounded-circle"
+                  src="assets/media/avatars/avatar10.jpg"
+                  alt="Header Avatar"
+                  style="width: 21px"
+                />
                 <span class="d-none d-sm-inline-block ms-2">John</span>
-                <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+                <i
+                  class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"
+                ></i>
               </button>
-              <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
-                <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                  <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/media/avatars/avatar10.jpg" alt="">
+              <div
+                class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"
+                aria-labelledby="page-header-user-dropdown"
+              >
+                <div
+                  class="p-3 text-center bg-body-light border-bottom rounded-top"
+                >
+                  <img
+                    class="img-avatar img-avatar48 img-avatar-thumb"
+                    src="assets/media/avatars/avatar10.jpg"
+                    alt=""
+                  />
                   <p class="mt-2 mb-0 fw-medium">John Smith</p>
                   <p class="mb-0 text-muted fs-sm fw-medium">Administrator</p>
                 </div>
                 <div class="p-2">
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="inbox.html">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-between"
+                    href="inbox.html"
+                  >
                     <span class="fs-sm fw-medium">Inbox</span>
                     <span class="badge rounded-pill bg-primary ms-2">3</span>
                   </a>
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="security.html">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-between"
+                    href="security.html"
+                  >
                     <span class="fs-sm fw-medium">Security</span>
                     <span class="badge rounded-pill bg-primary ms-2">1</span>
                   </a>
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="plans.html">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-between"
+                    href="plans.html"
+                  >
                     <span class="fs-sm fw-medium">Plans</span>
                   </a>
                 </div>
                 <div role="separator" class="dropdown-divider m-0"></div>
                 <div class="p-2">
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
+                  <a
+                    class="dropdown-item d-flex align-items-center justify-content-between"
+                    href="op_auth_signin.html"
+                  >
                     <span class="fs-sm fw-medium">Log Out</span>
                   </a>
                 </div>
@@ -277,12 +423,24 @@
             </div>
 
             <div class="dropdown d-inline-block ms-2">
-              <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button
+                type="button"
+                class="btn btn-sm btn-alt-secondary"
+                id="page-header-notifications-dropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fa fa-fw fa-bell"></i>
                 <span class="text-primary">•</span>
               </button>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm" aria-labelledby="page-header-notifications-dropdown">
-                <div class="p-2 bg-body-light border-bottom text-center rounded-top">
+              <div
+                class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm"
+                aria-labelledby="page-header-notifications-dropdown"
+              >
+                <div
+                  class="p-2 bg-body-light border-bottom text-center rounded-top"
+                >
                   <h5 class="dropdown-header text-uppercase">Notifications</h5>
                 </div>
                 <ul class="nav-items mb-0">
@@ -314,7 +472,9 @@
                         <i class="fa fa-fw fa-times-circle text-danger"></i>
                       </div>
                       <div class="flex-grow-1 pe-2">
-                        <div class="fw-semibold">Update failed, restart server</div>
+                        <div class="fw-semibold">
+                          Update failed, restart server
+                        </div>
                         <span class="fw-medium text-muted">26 min ago</span>
                       </div>
                     </a>
@@ -355,12 +515,12 @@
                 </ul>
                 <div class="p-2 border-top text-center">
                   <a class="d-inline-block fw-medium" href="javascript:void(0)">
-                    <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
+                    <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load
+                    More..
                   </a>
                 </div>
               </div>
             </div>
-
           </div>
           <!-- END Right Section -->
         </div>
@@ -369,13 +529,28 @@
         <!-- Header Search -->
         <div id="page-header-search" class="overlay-header bg-body-extra-light">
           <div class="content-header">
-            <form class="w-100" action="be_pages_generic_search.html" method="POST">
+            <form
+              class="w-100"
+              action="be_pages_generic_search.html"
+              method="POST"
+            >
               <div class="input-group">
                 <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-                <button type="button" class="btn btn-alt-danger" data-toggle="layout" data-action="header_search_off">
+                <button
+                  type="button"
+                  class="btn btn-alt-danger"
+                  data-toggle="layout"
+                  data-action="header_search_off"
+                >
                   <i class="fa fa-fw fa-times-circle"></i>
                 </button>
-                <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search or hit ESC.."
+                  id="page-header-search-input"
+                  name="page-header-search-input"
+                />
               </div>
             </form>
           </div>
@@ -400,23 +575,25 @@
         <!-- Hero -->
         <div class="bg-body-light">
           <div class="content content-full">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
+            <div
+              class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2"
+            >
               <div class="flex-grow-1">
-                <h1 class="h3 fw-bold mb-2">
-                  Sender Profiles
-                </h1>
+                <h1 class="h3 fw-bold mb-2">Sender Profiles</h1>
                 <h2 class="fs-base lh-base fw-medium text-muted mb-0">
-                  Senders are shown in your recipients' inbox when they receive your email. It helps your subscribers to recognize you.
+                  Senders are shown in your recipients' inbox when they receive
+                  your email. It helps your subscribers to recognize you.
                 </h2>
               </div>
-              <nav class="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3" aria-label="breadcrumb">
+              <nav
+                class="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3"
+                aria-label="breadcrumb"
+              >
                 <ol class="breadcrumb breadcrumb-alt">
                   <li class="breadcrumb-item">
                     <a class="link-fx" href="javascript:void(0)">Senders</a>
                   </li>
-                  <li class="breadcrumb-item" aria-current="page">
-                    Manage
-                  </li>
+                  <li class="breadcrumb-item" aria-current="page">Manage</li>
                 </ol>
               </nav>
             </div>
@@ -431,14 +608,16 @@
             <div class="block-header block-header-default">
               <h3 class="block-title">Senders</h3>
               <div class="block-options">
-                <button type="button" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i> Create new sender</button>
+                <button type="button" class="btn btn-sm btn-secondary">
+                  <i class="fa fa-plus"></i> Create new sender
+                </button>
               </div>
             </div>
             <div class="block-content">
               <table class="table table-hover table-vcenter">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width: 50px;">#</th>
+                    <th class="text-center" style="width: 50px">#</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Status</th>
@@ -448,19 +627,30 @@
                 <tbody>
                   <tr>
                     <th class="text-center" scope="row">1</th>
-                    <td class="fw-semibold fs-sm">
-                      Jesse Fisher
-                    </td>
+                    <td class="fw-semibold fs-sm">Jesse Fisher</td>
                     <td>noreply@domain.com</td>
                     <td class="d-none d-sm-table-cell">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Verified</span>
+                      <span
+                        class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"
+                        >Verified</span
+                      >
                     </td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Edit Client"
+                        >
                           <i class="fa fa-fw fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Remove Client"
+                        >
                           <i class="fa fa-fw fa-times"></i>
                         </button>
                       </div>
@@ -468,19 +658,30 @@
                   </tr>
                   <tr>
                     <th class="text-center" scope="row">2</th>
-                    <td class="fw-semibold fs-sm">
-                      Amanda Powell
-                    </td>
+                    <td class="fw-semibold fs-sm">Amanda Powell</td>
                     <td>notifications@domain.com</td>
                     <td class="d-none d-sm-table-cell">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Verification Pending</span>
+                      <span
+                        class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"
+                        >Verification Pending</span
+                      >
                     </td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Edit Client"
+                        >
                           <i class="fa fa-fw fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Remove Client"
+                        >
                           <i class="fa fa-fw fa-times"></i>
                         </button>
                       </div>
@@ -488,19 +689,30 @@
                   </tr>
                   <tr>
                     <th class="text-center" scope="row">3</th>
-                    <td class="fw-semibold fs-sm">
-                      Megan Fuller
-                    </td>
+                    <td class="fw-semibold fs-sm">Megan Fuller</td>
                     <td>admin@domain.com</td>
                     <td class="d-none d-sm-table-cell">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Disabled</span>
+                      <span
+                        class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger"
+                        >Disabled</span
+                      >
                     </td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Edit Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Edit Client"
+                        >
                           <i class="fa fa-fw fa-pencil-alt"></i>
                         </button>
-                        <button type="button" class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip" title="Remove Client">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-alt-secondary"
+                          data-bs-toggle="tooltip"
+                          title="Remove Client"
+                        >
                           <i class="fa fa-fw fa-times"></i>
                         </button>
                       </div>
@@ -524,7 +736,13 @@
               Made on Earth <i class="fa fa-earth text-info"></i> by Humans.
             </div>
             <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
-              <a class="fw-semibold" href="https://1.envato.market/AVD6j" target="_blank">MailMort</a> &copy; <span data-toggle="year-copy"></span>
+              <a
+                class="fw-semibold"
+                href="https://1.envato.market/AVD6j"
+                target="_blank"
+                >MailMort</a
+              >
+              &copy; <span data-toggle="year-copy"></span>
             </div>
           </div>
         </div>

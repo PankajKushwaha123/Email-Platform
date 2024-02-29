@@ -12,6 +12,12 @@ import Statistics from "./components/Statistics";
 import Setting from "./components/Setting";
 import Transactional from "./components/Transactional";
 import TransactionalStats from "./components/TransactionalStats";
+import Transactionalsetting from "./components/Transactionalsetting";
+import Senders from "./components/Senders";
+import Domain from "./components/Domain";
+import Security from "./components/Security";
+import Plans from "./components/Plans";
+import Logout from "./components/Logout";
 function App() {
   return (
     <div className="App">
@@ -31,6 +37,15 @@ function App() {
             path="/transactionalstats"
             element={<TransactionalStats />}
           ></Route>
+          <Route
+            path="/transactionalsetting"
+            element={<Transactionalsetting />}
+          ></Route>
+          <Route path="/senders" element={<Senders />}></Route>
+          <Route path="/domain" element={<Domain />}></Route>
+          <Route path="/security" element={<Security />}></Route>
+          <Route path="/myplan" element={<Plans />}></Route>
+          <Route path="/logout" element={<Logout />}></Route>
         </Routes>
       </Router>
     </div>

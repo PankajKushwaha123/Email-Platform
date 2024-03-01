@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import bg1 from "../assets/media/photos/photo7.jpg";
 import img1 from "../assets/media/avatars/avatar10.jpg";
 import img2 from "../assets/media/avatars/avatar4.jpg";
@@ -13,13 +13,28 @@ import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 function Inbox() {
+  const [mode, setMode] = useState(
+    "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+  );
+
+  const toggle = () => {
+    if (
+      mode ==
+      "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+    ) {
+      setMode(
+        "sidebar-o sidebar-light side-scroll page-header-fixed main-content-narrow"
+      );
+    } else {
+      setMode(
+        "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+      );
+    }
+  };
   return (
     <>
-      <div
-        id="page-container"
-        className="sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
-      >
-        <Navigationbar />
+      <div id="page-container" className={mode}>
+        <Navigationbar onClickHandler={toggle} />
 
         <Header />
 

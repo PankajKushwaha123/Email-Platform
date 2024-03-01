@@ -3,7 +3,8 @@ import Sidebar from "./Sidebar";
 /* import s1 from "../assets/js/oneui.app.min.js";
 import s2 from "../assets/js/lib/jquery.min.js";
 import s3 from "../assets/js/plugins/easy-pie-chart/jquery.easypiechart.min.js"; */
-function Navigationbar() {
+function Navigationbar(props) {
+  const { onClickHandler } = props;
   return (
     <>
       <nav id="sidebar" aria-label="Main Navigation">
@@ -23,6 +24,7 @@ function Navigationbar() {
               className="btn btn-sm btn-alt-secondary"
               data-toggle="layout"
               data-action="dark_mode_toggle"
+              onClick={onClickHandler}
             >
               <i className="far fa-moon"></i>
             </button>

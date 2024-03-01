@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
 function Contacts() {
+  const [mode, setMode] = useState(
+    "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+  );
+
+  const toggle = () => {
+    if (
+      mode ==
+      "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+    ) {
+      setMode(
+        "sidebar-o sidebar-light side-scroll page-header-fixed main-content-narrow"
+      );
+    } else {
+      setMode(
+        "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+      );
+    }
+  };
   return (
     <>
-      <div
-        id="page-container"
-        className="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow"
-      >
-        <Navigationbar />
+      <div id="page-container" className={mode}>
+        <Navigationbar onClickHandler={toggle} />
         <Header />
 
         <main id="main-container">

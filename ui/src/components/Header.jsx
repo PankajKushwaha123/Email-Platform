@@ -1,5 +1,6 @@
 import React from "react";
 import img1 from "../assets/media/avatars/avatar10.jpg";
+import Dropdown1 from "./Dropdown1";
 
 function Header() {
   return (
@@ -63,14 +64,7 @@ function Header() {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img
-                className="rounded-circle"
-                src={img1}
-                alt="Header Avatar"
-                style={{ width: "21px" }}
-              />
-              <span className="d-none d-sm-inline-block ms-2">John</span>
-              <i className="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
+              <Dropdown1 />
             </button>
             <div
               className="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"

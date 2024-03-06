@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import bg1 from "../assets/media/photos/photo7.jpg";
 import img1 from "../assets/media/avatars/avatar10.jpg";
 import img2 from "../assets/media/avatars/avatar4.jpg";
@@ -17,7 +17,7 @@ function Inbox() {
     "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
   );
 
-  const toggle = () => {
+  const toggle = (e) => {
     if (
       mode ==
       "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"

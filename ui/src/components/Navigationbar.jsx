@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
 /* import s1 from "../assets/js/oneui.app.min.js";
 import s2 from "../assets/js/lib/jquery.min.js";
 import s3 from "../assets/js/plugins/easy-pie-chart/jquery.easypiechart.min.js"; */
 function Navigationbar(props) {
   const { onClickHandler } = props;
+
   return (
     <>
       <nav id="sidebar" aria-label="Main Navigation">

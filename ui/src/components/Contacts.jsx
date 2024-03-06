@@ -8,7 +8,7 @@ function Contacts() {
     "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
   );
 
-  const toggle = () => {
+  const toggle = (e) => {
     if (
       mode ==
       "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"

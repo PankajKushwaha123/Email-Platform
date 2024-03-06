@@ -16,46 +16,51 @@ function Dropdown1() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">
-          <div className="p-3 text-center bg-body-light border-bottom rounded-top">
-            <img
-              className="img-avatar img-avatar48 img-avatar-thumb"
-              src={img1}
-              alt=""
-            />
-            <p className="mt-2 mb-0 fw-medium">John Smith</p>
-            <p className="mb-0 text-muted fs-sm fw-medium">Administrator</p>
-          </div>
-          <div className="p-2">
+        <div className="p-3 text-center bg-body-light border-bottom rounded-top">
+          <img
+            className="img-avatar img-avatar48 img-avatar-thumb"
+            src={img1}
+            alt=""
+          />
+          <p className="mt-2 mb-0 fw-medium">John Smith</p>
+          <p className="mb-0 text-muted fs-sm fw-medium">Administrator</p>
+        </div>
+        <div className="p-2">
+          <Dropdown.Item href="#/action-1">
             <Link to="/inbox">
               <span className="dropdown-item d-flex align-items-center justify-content-between">
                 <span className="fs-sm fw-medium">Inbox</span>
                 <span className="badge rounded-pill bg-primary ms-2">3</span>
               </span>
             </Link>
-
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-2">
             <Link to="/security">
               <span className="dropdown-item d-flex align-items-center justify-content-between">
                 <span className="fs-sm fw-medium">Security</span>
                 <span className="badge rounded-pill bg-primary ms-2">1</span>
               </span>
             </Link>
+          </Dropdown.Item>
 
+          <Dropdown.Item href="#/action-3">
             <Link to="/myplan">
               <span className="dropdown-item d-flex align-items-center justify-content-between">
                 <span className="fs-sm fw-medium">Plans</span>
               </span>
             </Link>
-          </div>
-          <div role="separator" className="dropdown-divider m-0"></div>
-          <div className="p-2">
+          </Dropdown.Item>
+        </div>
+        <div role="separator" className="dropdown-divider m-0"></div>
+        <div className="p-2">
+          <Dropdown.Item href="#/action-1">
             <Link to="/logout">
               <span className="dropdown-item d-flex align-items-center justify-content-between">
                 <span className="fs-sm fw-medium">logout</span>
               </span>
             </Link>
-          </div>
-        </Dropdown.Item>
+          </Dropdown.Item>
+        </div>
       </Dropdown.Menu>
     </Dropdown>
   );

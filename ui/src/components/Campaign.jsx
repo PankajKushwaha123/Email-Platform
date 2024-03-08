@@ -2,13 +2,12 @@ import React from "react";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
-function Campaign() {
+function Campaign(props) {
+  const toggle = props.toggle;
+  const mode = props.mode;
   return (
-    <div
-      id="page-container"
-      className="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow"
-    >
-      <Navigationbar />
+    <div id="page-container" className={mode}>
+      <Navigationbar onClickHandler={toggle} />
 
       <Header />
 

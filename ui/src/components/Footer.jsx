@@ -11,7 +11,8 @@ function Footer() {
           <div className="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
             <a
               className="fw-semibold"
-              href="https://1.envato.market/AVD6j"
+              /*  href="https://1.envato.market/AVD6j" */
+              href="https://webkiosk.juet.ac.in"
               target="_blank"
             >
               MailMort

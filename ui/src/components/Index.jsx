@@ -119,7 +119,7 @@ function Indx() {
                               </a>
                             </div>
                             <div>
-                              <Link to="Inbox">
+                              <Link to="/Inbox">
                                 <button
                                   type="button"
                                   className="btn btn-lg btn-alt-primary"

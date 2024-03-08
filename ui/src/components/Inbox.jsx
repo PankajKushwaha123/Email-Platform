@@ -12,25 +12,28 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
-function Inbox() {
-  const [mode, setMode] = useState(
-    "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+function Inbox(props) {
+  const toggle = props.toggle;
+  const mode = props.mode;
+  /*   const [mode, setMode] = useState(
+    "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled "
   );
 
   const toggle = (e) => {
     if (
       mode ==
-      "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+      "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark page-header-dark dark-mode"
     ) {
       setMode(
         "sidebar-o sidebar-light side-scroll page-header-fixed main-content-narrow"
       );
     } else {
       setMode(
-        "sidebar-o sidebar-dark side-scroll page-header-fixed main-content-narrow"
+        "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark page-header-dark dark-mode"
       );
     }
-  };
+  }; */
+  /* { sidebar-dark page-header-dark dark-mode} */
   return (
     <>
       <div id="page-container" className={mode}>
@@ -165,7 +168,9 @@ function Inbox() {
                       <h3 className="block-title">Manage Inbox Access</h3>
                       <div className="block-options">
                         <button type="button" className="btn-block-option">
-                          <i className="si si-settings"></i>
+                          <Link to="/settings">
+                            <i className="si si-settings"></i>
+                          </Link>
                         </button>
                       </div>
                     </div>
@@ -1000,7 +1005,7 @@ function Inbox() {
                       </div>
                       <div className="block-content">
                         <div className="mb-4">
-                          <label className="form-label" for="message-email">
+                          <label className="form-label" htmlFor="message-email">
                             Email
                           </label>
                           <input
@@ -1011,7 +1016,10 @@ function Inbox() {
                           />
                         </div>
                         <div className="mb-4">
-                          <label className="form-label" for="message-subject">
+                          <label
+                            className="form-label"
+                            htmlFor="message-subject"
+                          >
                             Subject
                           </label>
                           <input
@@ -1022,7 +1030,7 @@ function Inbox() {
                           />
                         </div>
                         <div className="mb-4">
-                          <label className="form-label" for="message-msg">
+                          <label className="form-label" htmlFor="message-msg">
                             Message
                           </label>
                           <textarea

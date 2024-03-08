@@ -1,6 +1,7 @@
 import React from "react";
-import img1 from "../assets/media/avatars/avatar10.jpg";
+/* import img1 from "../assets/media/avatars/avatar10.jpg"; */
 import Dropdown1 from "./Dropdown1";
+import Dropdown2 from "./Dropdown2";
 
 function Header() {
   return (
@@ -54,19 +55,19 @@ function Header() {
           </form>
         </div>
 
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center h-10">
           <div className="dropdown d-inline-block ms-2">
-            <button
+            {/*  <button
               type="button"
               className="btn btn-sm btn-alt-secondary d-flex align-items-center"
               id="page-header-user-dropdown"
               data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >
-              <Dropdown1 />
-            </button>
-            <div
+            > */}
+            <Dropdown1 />
+            {/*  </button> */}
+            {/* <div
               className="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0"
               aria-labelledby="page-header-user-dropdown"
             >
@@ -110,10 +111,10 @@ function Header() {
                   <span className="fs-sm fw-medium">Log Out</span>
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
-
-          <div className="dropdown d-inline-block ms-2">
+          <Dropdown2 />
+          {/* <div className="dropdown d-inline-block ms-2">
             <button
               type="button"
               className="btn btn-sm btn-alt-secondary"
@@ -234,7 +235,7 @@ function Header() {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 

@@ -2,10 +2,13 @@ import React from "react";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
+import Graph1 from "./Graph1";
 
+import { useState } from "react";
 function Statistics(props) {
   const toggle = props.toggle;
   const mode = props.mode;
+
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -188,6 +191,7 @@ function Statistics(props) {
                             </a>
                           </div>
                         </div>
+                        {/* <Graph1 chartData={userdata} /> */}
                       </div>
 
                       <div classname="table-responsive">

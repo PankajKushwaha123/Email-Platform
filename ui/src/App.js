@@ -1,11 +1,6 @@
 import "./App.css";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  isRouteErrorResponse,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Index from "./components/Index";
 import Inbox from "./components/Inbox";
@@ -24,15 +19,16 @@ import Domain from "./components/Domain";
 import Security from "./components/Security";
 import Plans from "./components/Plans";
 import Logout from "./components/Logout";
+import Graph1 from "./components/Graph1";
 
 function App() {
   const [mode, setMode] = useState(
-    "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled "
+    "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark "
   );
 
   const toggle = (e) => {
     if (
-      mode ==
+      mode ===
       "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark page-header-dark dark-mode"
     ) {
       setMode(

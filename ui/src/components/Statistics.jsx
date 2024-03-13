@@ -2,8 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
-import Graph1 from "./Graph1";
-
+import LineChart from "./LineChart";
 import { useState } from "react";
 function Statistics(props) {
   const toggle = props.toggle;
@@ -192,6 +191,7 @@ function Statistics(props) {
                           </div>
                         </div>
                         {/* <Graph1 chartData={userdata} /> */}
+                        <LineChart />
                       </div>
 
                       <div classname="table-responsive">

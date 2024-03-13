@@ -19,7 +19,6 @@ import Domain from "./components/Domain";
 import Security from "./components/Security";
 import Plans from "./components/Plans";
 import Logout from "./components/Logout";
-import Graph1 from "./components/Graph1";
 
 function App() {
   const [mode, setMode] = useState(

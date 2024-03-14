@@ -54,7 +54,7 @@ function Campaign(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>See Below</span>
                     <i className="fa fa-arrow-alt-circle-down ms-1 opacity-25 fs-base"></i>
@@ -78,7 +78,7 @@ function Campaign(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View all Contacts</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -102,7 +102,7 @@ function Campaign(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View all messages</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -126,7 +126,7 @@ function Campaign(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View statistics</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -145,7 +145,7 @@ function Campaign(props) {
                   className="btn btn-sm btn-alt-secondary"
                   data-toggle="class-toggle"
                   data-target="#one-dashboard-search-orders"
-                  data-className="d-none"
+                  data-classname="d-none"
                 >
                   <i className="fa fa-search"></i>
                 </button>
@@ -168,28 +168,28 @@ function Campaign(props) {
                   >
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Pending
                       <span className="badge bg-primary rounded-pill">20</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Active
                       <span className="badge bg-primary rounded-pill">72</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Completed
                       <span className="badge bg-primary rounded-pill">890</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       All
                       <span className="badge bg-primary rounded-pill">997</span>
@@ -205,7 +205,7 @@ function Campaign(props) {
               <form
                 action="be_pages_dashboard.html"
                 method="POST"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="push">
                   <div className="input-group">
@@ -245,7 +245,7 @@ function Campaign(props) {
                   <tbody className="fs-sm">
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00925{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -253,7 +253,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Thomas Riley
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -290,7 +290,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00924{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -298,7 +298,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Barbara Scott
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -311,10 +311,7 @@ function Campaign(props) {
                         </span>
                       </td>
                       <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5p;" }}
-                        >
+                        <div className="progress mb-1" style={{ height: "5p" }}>
                           <div
                             className="progress-bar bg-success"
                             role="progressbar"
@@ -335,7 +332,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00923{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -343,7 +340,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Carol Ray
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -380,7 +377,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00922{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -388,7 +385,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Wayne Garcia
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -425,7 +422,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00921{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -433,7 +430,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Betty Kelley
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -470,7 +467,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00920{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -478,7 +475,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Marie Duncan
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -515,7 +512,7 @@ function Campaign(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00919{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -523,7 +520,7 @@ function Campaign(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Jose Mills
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -568,39 +565,35 @@ function Campaign(props) {
                   <li className="page-item">
                     <a
                       className="page-link"
-                      href="javascript:void(0)"
-                      tabindex="-1"
+                      href="#"
+                      tabIndex="-1"
                       aria-label="Previous"
                     >
                       Prev
                     </a>
                   </li>
                   <li className="page-item active">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       1
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       2
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       3
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       4
                     </a>
                   </li>
                   <li className="page-item">
-                    <a
-                      className="page-link"
-                      href="javascript:void(0)"
-                      aria-label="Next"
-                    >
+                    <a className="page-link" href="#" aria-label="Next">
                       Next
                     </a>
                   </li>

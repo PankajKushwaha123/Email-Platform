@@ -95,7 +95,7 @@ function Inbox(props) {
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
-                            href="javascript:void(0)"
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-star me-1 opacity-50"></i>{" "}
@@ -109,7 +109,7 @@ function Inbox(props) {
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
-                            href="javascript:void(0)"
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-paper-plane me-1 opacity-50"></i>{" "}
@@ -123,7 +123,7 @@ function Inbox(props) {
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
-                            href="javascript:void(0)"
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-pencil-alt me-1 opacity-50"></i>{" "}
@@ -137,7 +137,7 @@ function Inbox(props) {
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
-                            href="javascript:void(0)"
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-folder me-1 opacity-50"></i>{" "}
@@ -151,7 +151,7 @@ function Inbox(props) {
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
-                            href="javascript:void(0)"
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-trash-alt me-1 opacity-50"></i>{" "}
@@ -180,7 +180,7 @@ function Inbox(props) {
                     <div className="block-content">
                       <ul className="nav-items fs-sm">
                         <li>
-                          <a className="d-flex py-2" href="javascript:void(0)">
+                          <a className="d-flex py-2" href="#">
                             <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
                               <img
                                 className="img-avatar img-avatar48"
@@ -198,7 +198,7 @@ function Inbox(props) {
                           </a>
                         </li>
                         <li>
-                          <a className="d-flex py-2" href="javascript:void(0)">
+                          <a className="d-flex py-2" href="#">
                             <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
                               <img
                                 className="img-avatar img-avatar48"
@@ -219,7 +219,7 @@ function Inbox(props) {
                           </a>
                         </li>
                         <li>
-                          <a className="d-flex py-2" href="javascript:void(0)">
+                          <a className="d-flex py-2" href="#">
                             <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
                               <img
                                 className="img-avatar img-avatar48"
@@ -237,7 +237,7 @@ function Inbox(props) {
                           </a>
                         </li>
                         <li>
-                          <a className="d-flex py-2" href="javascript:void(0)">
+                          <a className="d-flex py-2" href="#">
                             <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
                               <img
                                 className="img-avatar img-avatar48"
@@ -255,7 +255,7 @@ function Inbox(props) {
                           </a>
                         </li>
                         <li>
-                          <a className="d-flex py-2" href="javascript:void(0)">
+                          <a className="d-flex py-2" href="#">
                             <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
                               <img
                                 className="img-avatar img-avatar48"
@@ -336,11 +336,11 @@ function Inbox(props) {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for="inbox-msg-all"
+                                  htmlFor="inbox-msg-all"
                                 ></label>
                               </div>
                             </td>
-                            <td colspan="4">
+                            <td colSpan="4">
                               <div className="d-flex justify-content-between">
                                 <div className="btn-group">
                                   <button
@@ -398,7 +398,7 @@ function Inbox(props) {
             <div
               className="modal fade"
               id="one-inbox-new-message"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="one-inbox-new-message"
               aria-hidden="true"
@@ -408,7 +408,7 @@ function Inbox(props) {
                   <form
                     action="be_pages_generic_inbox.html"
                     method="POST"
-                    onSubmit="return false;"
+                    onSubmit={() => {}}
                   >
                     <div className="block block-rounded block-transparent mb-0">
                       <div className="block-header block-header-default">
@@ -499,7 +499,7 @@ function Inbox(props) {
             <div
               className="modal fade"
               id="one-inbox-message"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="one-inbox-message"
               aria-hidden="true"
@@ -546,7 +546,7 @@ function Inbox(props) {
                       />
                     </div>
                     <div className="block-content block-content-full fs-sm d-flex justify-content-between bg-body-light">
-                      <a href="javascript:void(0)">user@example.com</a>
+                      <a href="#">user@example.com</a>
                       <span className="text-muted">
                         <em>2 min ago</em>
                       </span>
@@ -583,10 +583,7 @@ function Inbox(props) {
                             />
                             <div className="options-overlay bg-black-75">
                               <div className="options-overlay-content">
-                                <a
-                                  className="btn btn-sm btn-light"
-                                  href="javascript:void(0)"
-                                >
+                                <a className="btn btn-sm btn-light" href="#">
                                   <i className="fa fa-download me-1"></i>{" "}
                                   Download
                                 </a>
@@ -604,10 +601,7 @@ function Inbox(props) {
                             />
                             <div className="options-overlay bg-black-75">
                               <div className="options-overlay-content">
-                                <a
-                                  className="btn btn-sm btn-light"
-                                  href="javascript:void(0)"
-                                >
+                                <a className="btn btn-sm btn-light" href="#">
                                   <i className="fa fa-download me-1"></i>{" "}
                                   Download
                                 </a>
@@ -625,10 +619,7 @@ function Inbox(props) {
                             />
                             <div className="options-overlay bg-black-75">
                               <div className="options-overlay-content">
-                                <a
-                                  className="btn btn-sm btn-light"
-                                  href="javascript:void(0)"
-                                >
+                                <a className="btn btn-sm btn-light" href="#">
                                   <i className="fa fa-download me-1"></i>{" "}
                                   Download
                                 </a>

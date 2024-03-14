@@ -13,7 +13,7 @@ function Dropdown2() {
         </div>
 
         <Dropdown.Item href="#/action-1">
-          <a className="text-dark d-flex py-1" href="javascript:void(0)">
+          <a className="text-dark d-flex py-1" href="#">
             <div className="flex-shrink-0 me-2 ms-3">
               <i className="fa fa-fw fa-check-circle text-success"></i>
             </div>
@@ -26,7 +26,7 @@ function Dropdown2() {
 
         <Dropdown.Item href="#/action-2">
           {" "}
-          <a className="text-dark d-flex py-1" href="javascript:void(0)">
+          <a className="text-dark d-flex py-1" href="#">
             <div className="flex-shrink-0 me-2 ms-3">
               <i className="fa fa-fw fa-plus-circle text-primary"></i>
             </div>
@@ -38,7 +38,7 @@ function Dropdown2() {
         </Dropdown.Item>
         <Dropdown.Item href="#/action-3">
           {" "}
-          <a className="text-dark d-flex py-1" href="javascript:void(0)">
+          <a className="text-dark d-flex py-1" href="#">
             <div className="flex-shrink-0 me-2 ms-3">
               <i className="fa fa-fw fa-times-circle text-danger"></i>
             </div>

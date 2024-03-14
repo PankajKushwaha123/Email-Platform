@@ -30,7 +30,7 @@ function Statistics(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Campaigns
                     </a>
                   </li>
@@ -53,7 +53,7 @@ function Statistics(props) {
               <form
                 action="be_forms_plugins.html"
                 method="POST"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <h2 className="content-heading border-bottom mb-4 pb-2">
                   Date Range
@@ -122,20 +122,16 @@ function Statistics(props) {
                   </div>
                 </div>
                 <div className="block-content block-content-full text-center">
-                  <div classname="col-xxl-9 d-flex">
-                    <div
-                      classname="card border-0 flex-fill w-100"
-                      data-list='{"valueNames": ["name", "price", "quantity", "amount", {"name": "sales", "attr": "data-sales"}], "page": 5}'
-                      id="topSellingProducts"
-                    >
-                      <div classname="card-header border-0 card-header-space-between">
-                        <h2 classname="card-header-title h4 text-uppercase">
-                          Top selling products
+                  <div className="col-xxl-9 d-flex">
+                    <div className="card border-0 flex-fill w-100 ">
+                      <div className="card-header border-0 card-header-space-between ">
+                        <h2 className="card-header-title h4 text-uppercase">
+                          heading
                         </h2>
-                        <div classname="dropdown">
+                        {/* <div className="dropdown">
                           <a
                             href="javascript: void(0);"
-                            classname="dropdown-toggle no-arrow text-secondary"
+                            className="dropdown-toggle no-arrow text-secondary"
                             role="button"
                             data-bs-toggle="dropdown"
                             aria-haspopup="true"
@@ -169,193 +165,29 @@ function Statistics(props) {
                               </g>
                             </svg>
                           </a>
-                          <div classname="dropdown-menu">
+                          <div className="dropdown-menu">
                             <a
                               href="javascript: void(0);"
-                              classname="dropdown-item"
+                              className="dropdown-item"
                             >
                               Action
                             </a>
                             <a
                               href="javascript: void(0);"
-                              classname="dropdown-item"
+                              className="dropdown-item"
                             >
                               Another action
                             </a>
                             <a
                               href="javascript: void(0);"
-                              classname="dropdown-item"
+                              className="dropdown-item"
                             >
                               Something else here
                             </a>
                           </div>
-                        </div>
+                        </div> */}
                         {/* <Graph1 chartData={userdata} /> */}
                         <LineChart />
-                      </div>
-
-                      <div classname="table-responsive">
-                        <table classname="table align-middle table-edge table-nowrap mb-0">
-                          <thead classname="thead-light">
-                            <tr>
-                              <th>
-                                <a
-                                  href="javascript: void(0);"
-                                  classname="text-muted list-sort"
-                                  data-sort="name"
-                                >
-                                  Name
-                                </a>
-                              </th>
-                              <th classname="text-end">
-                                <a
-                                  href="javascript: void(0);"
-                                  classname="text-muted list-sort"
-                                  data-sort="price"
-                                >
-                                  Price
-                                </a>
-                              </th>
-                              <th classname="text-end">
-                                <a
-                                  href="javascript: void(0);"
-                                  classname="text-muted list-sort"
-                                  data-sort="quantity"
-                                >
-                                  Quantity
-                                </a>
-                              </th>
-                              <th classname="text-end">
-                                <a
-                                  href="javascript: void(0);"
-                                  classname="text-muted list-sort"
-                                  data-sort="amount"
-                                >
-                                  Amount
-                                </a>
-                              </th>
-                              <th classname="text-end pe-7 min-w-200px">
-                                <a
-                                  href="javascript: void(0);"
-                                  classname="text-muted list-sort"
-                                  data-sort="sales"
-                                >
-                                  Sales
-                                </a>
-                              </th>
-                            </tr>
-                          </thead>
-
-                          <tbody classname="list">
-                            <tr>
-                              <td classname="name fw-bold">iPad Air</td>
-                              <td classname="price text-end">$599</td>
-                              <td classname="quantity text-end">135</td>
-                              <td classname="amount text-end">$80,865</td>
-                              <td classname="sales" data-sales="81">
-                                <div classname="d-flex justify-content-between align-items-center">
-                                  <div classname="progress d-flex flex-grow-1">
-                                    <div
-                                      classname="progress-bar"
-                                      role="progressbar"
-                                      style={{ width: "81%" }}
-                                      aria-valuenow="81"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                  <span classname="ms-3 text-muted">81%</span>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td classname="name fw-bold">iPhone SE</td>
-                              <td classname="price text-end">$499</td>
-                              <td classname="quantity text-end">127</td>
-                              <td classname="amount text-end">$63,373</td>
-                              <td classname="sales" data-sales="25">
-                                <div classname="d-flex justify-content-between align-items-center">
-                                  <div classname="progress w-100">
-                                    <div
-                                      classname="progress-bar bg-dark"
-                                      role="progressbar"
-                                      style={{ width: "25%" }}
-                                      aria-valuenow="25"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                  <span classname="ms-3 text-muted">25%</span>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td classname="name fw-bold">Nexus 3</td>
-                              <td classname="price text-end">$349</td>
-                              <td classname="quantity text-end">98</td>
-                              <td classname="amount text-end">$34,202</td>
-                              <td classname="sales" data-sales="41">
-                                <div classname="d-flex justify-content-between align-items-center">
-                                  <div classname="progress w-100">
-                                    <div
-                                      classname="progress-bar bg-dark"
-                                      role="progressbar"
-                                      style={{ width: "41%" }}
-                                      aria-valuenow="41"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                  <span classname="ms-3 text-muted">41%</span>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td classname="name fw-bold">
-                                Apple watch series-6
-                              </td>
-                              <td classname="price text-end">$599</td>
-                              <td classname="quantity text-end">214</td>
-                              <td classname="amount text-end">$128,186</td>
-                              <td classname="sales" data-sales="62">
-                                <div classname="d-flex justify-content-between align-items-center">
-                                  <div classname="progress w-100">
-                                    <div
-                                      classname="progress-bar"
-                                      role="progressbar"
-                                      style={{ width: "62%" }}
-                                      aria-valuenow="62"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                  <span classname="ms-3 text-muted">62%</span>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td classname="name fw-bold">Apple TV 4K</td>
-                              <td classname="price text-end">$1200</td>
-                              <td classname="quantity text-end">51</td>
-                              <td classname="amount text-end">$61,200</td>
-                              <td classname="sales" data-sales="36">
-                                <div classname="d-flex justify-content-between align-items-center">
-                                  <div classname="progress w-100">
-                                    <div
-                                      classname="progress-bar bg-dark"
-                                      role="progressbar"
-                                      style={{ width: "36%" }}
-                                      aria-valuenow="36"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                    ></div>
-                                  </div>
-                                  <span classname="ms-3 text-muted">36%</span>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </div>
                   </div>
@@ -378,7 +210,7 @@ function Statistics(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>See Below</span>
                     <i className="fa fa-arrow-alt-circle-down ms-1 opacity-25 fs-base"></i>
@@ -400,7 +232,7 @@ function Statistics(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View all Contacts</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -422,7 +254,7 @@ function Statistics(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View all messages</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -444,7 +276,7 @@ function Statistics(props) {
                 <div className="bg-body-light rounded-bottom">
                   <a
                     className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <span>View statistics</span>
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
@@ -486,28 +318,28 @@ function Statistics(props) {
                   >
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Pending
                       <span className="badge bg-primary rounded-pill">20</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Active
                       <span className="badge bg-primary rounded-pill">72</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       Completed
                       <span className="badge bg-primary rounded-pill">890</span>
                     </a>
                     <a
                       className="dropdown-item fw-medium d-flex align-items-center justify-content-between"
-                      href="javascript:void(0)"
+                      href="#"
                     >
                       All
                       <span className="badge bg-primary rounded-pill">997</span>
@@ -523,7 +355,7 @@ function Statistics(props) {
               <form
                 action="be_pages_dashboard.html"
                 method="POST"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="push">
                   <div className="input-group">
@@ -563,7 +395,7 @@ function Statistics(props) {
                   <tbody className="fs-sm">
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00925{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -571,7 +403,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Thomas Riley
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -608,7 +440,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00924{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -616,7 +448,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Barbara Scott
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -653,7 +485,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00923{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -661,7 +493,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Carol Ray
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -698,7 +530,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00922{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -706,7 +538,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Wayne Garcia
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -743,7 +575,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00921{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -751,7 +583,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Betty Kelley
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -788,7 +620,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00920{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -796,7 +628,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Marie Duncan
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -833,7 +665,7 @@ function Statistics(props) {
                     </tr>
                     <tr>
                       <td>
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           ORD.00919{" "}
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -841,7 +673,7 @@ function Statistics(props) {
                         </p>
                       </td>
                       <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="javascript:void(0)">
+                        <a className="fw-semibold" href="#">
                           Jose Mills
                         </a>
                         <p className="fs-sm fw-medium text-muted mb-0">
@@ -886,39 +718,35 @@ function Statistics(props) {
                   <li className="page-item">
                     <a
                       className="page-link"
-                      href="javascript:void(0)"
-                      tabindex="-1"
+                      href="#"
+                      tabIndex="-1"
                       aria-label="Previous"
                     >
                       Prev
                     </a>
                   </li>
                   <li className="page-item active">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       1
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       2
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       3
                     </a>
                   </li>
                   <li className="page-item">
-                    <a className="page-link" href="javascript:void(0)">
+                    <a className="page-link" href="#">
                       4
                     </a>
                   </li>
                   <li className="page-item">
-                    <a
-                      className="page-link"
-                      href="javascript:void(0)"
-                      aria-label="Next"
-                    >
+                    <a className="page-link" href="#" aria-label="Next">
                       Next
                     </a>
                   </li>

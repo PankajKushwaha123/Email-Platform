@@ -27,7 +27,7 @@ function Transactional(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Tables
                     </a>
                   </li>

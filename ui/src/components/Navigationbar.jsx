@@ -8,9 +8,9 @@ function Navigationbar(props) {
 
   return (
     <>
-      <nav id="sidebar" aria-label="Main Navigation">
+      <nav id="sidebar" aria-label="Main Navigation" className="">
         <div className="content-header">
-          <a className="fw-semibold text-dual" href="index.html">
+          <a className="fw-semibold text-dual" href="#">
             <span className="smini-visible">
               <i className="fa fa-circle-notch text-primary"></i>
             </span>
@@ -106,7 +106,7 @@ function Navigationbar(props) {
                   className="dropdown-item fw-medium"
                   data-toggle="layout"
                   data-action="sidebar_style_light"
-                  href="javascript:void(0)"
+                  href="#"
                 >
                   <span>Sidebar Light</span>
                 </a>
@@ -114,7 +114,7 @@ function Navigationbar(props) {
                   className="dropdown-item fw-medium"
                   data-toggle="layout"
                   data-action="sidebar_style_dark"
-                  href="javascript:void(0)"
+                  href="#"
                 >
                   <span>Sidebar Dark</span>
                 </a>
@@ -125,7 +125,7 @@ function Navigationbar(props) {
                   className="dropdown-item fw-medium"
                   data-toggle="layout"
                   data-action="header_style_light"
-                  href="javascript:void(0)"
+                  href="#"
                 >
                   <span>Header Light</span>
                 </a>
@@ -133,7 +133,7 @@ function Navigationbar(props) {
                   className="dropdown-item fw-medium"
                   data-toggle="layout"
                   data-action="header_style_dark"
-                  href="javascript:void(0)"
+                  href="#"
                 >
                   <span>Header Dark</span>
                 </a>
@@ -143,7 +143,7 @@ function Navigationbar(props) {
               className="d-lg-none btn btn-sm btn-alt-secondary ms-1"
               data-toggle="layout"
               data-action="sidebar_close"
-              href="javascript:void(0)"
+              href="#"
             >
               <i className="fa fa-fw fa-times"></i>
             </a>

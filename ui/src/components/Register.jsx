@@ -30,26 +30,17 @@ function Register() {
                   </p>
                   <ul className="list list-inline mb-0 py-2">
                     <li className="list-inline-item">
-                      <a
-                        className="text-white-75 fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-white-75 fw-medium" href="#">
                         Legal
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a
-                        className="text-white-75 fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-white-75 fw-medium" href="#">
                         Contact
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a
-                        className="text-white-75 fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-white-75 fw-medium" href="#">
                         Terms
                       </a>
                     </li>
@@ -142,7 +133,7 @@ function Register() {
                                 />
                                 <label
                                   className="form-check-label"
-                                  for="signup-terms"
+                                  htmlFor="signup-terms"
                                 >
                                   I agree to Terms &amp; Conditions
                                 </label>
@@ -150,7 +141,7 @@ function Register() {
                               <div className="py-2">
                                 <a
                                   className="fs-sm fw-medium"
-                                  href="javascript:void(0)"
+                                  href="#"
                                   data-bs-toggle="modal"
                                   data-bs-target="#one-signup-terms"
                                 >
@@ -182,26 +173,17 @@ function Register() {
                   </p>
                   <ul className="list list-inline py-2 mb-0">
                     <li className="list-inline-item">
-                      <a
-                        className="text-muted fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-muted fw-medium" href="#">
                         Legal
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a
-                        className="text-muted fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-muted fw-medium" href="#">
                         Contact
                       </a>
                     </li>
                     <li className="list-inline-item">
-                      <a
-                        className="text-muted fw-medium"
-                        href="javascript:void(0)"
-                      >
+                      <a className="text-muted fw-medium" href="#">
                         Terms
                       </a>
                     </li>
@@ -213,7 +195,7 @@ function Register() {
             <div
               className="modal fade"
               id="one-signup-terms"
-              tabindex="-1"
+              tabIndex="-1"
               role="dialog"
               aria-labelledby="one-signup-terms"
               aria-hidden="true"

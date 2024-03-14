@@ -28,7 +28,7 @@ function Transactionalsetting(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Transactional
                     </a>
                   </li>
@@ -243,7 +243,7 @@ function Transactionalsetting(props) {
                     action="be_forms_elements.html"
                     method="POST"
                     enctype="multipart/form-data"
-                    onsubmit="return false;"
+                    onSubmit={() => {}}
                   >
                     <div className="row push">
                       <div className="col-lg-4">
@@ -251,7 +251,10 @@ function Transactionalsetting(props) {
                       </div>
                       <div className="col-lg-8 col-xl-5">
                         <div className="mb-4">
-                          <label className="form-label" for="example-select">
+                          <label
+                            className="form-label"
+                            htmlFor="example-select"
+                          >
                             Timezone
                           </label>
                           <select
@@ -283,7 +286,10 @@ function Transactionalsetting(props) {
                                 value="24hr"
                                 checked
                               />
-                              <label className="form-check-label" for="24hour">
+                              <label
+                                className="form-check-label"
+                                htmlFor="24hour"
+                              >
                                 24 Hours
                               </label>
                             </div>
@@ -295,7 +301,10 @@ function Transactionalsetting(props) {
                                 name="timeFormat"
                                 value="12hr"
                               />
-                              <label className="form-check-label" for="12hour">
+                              <label
+                                className="form-check-label"
+                                htmlFor="12hour"
+                              >
                                 12 Hours{" "}
                               </label>
                             </div>
@@ -313,7 +322,10 @@ function Transactionalsetting(props) {
                                 value="24hr"
                                 checked
                               />
-                              <label className="form-check-label" for="date1">
+                              <label
+                                className="form-check-label"
+                                htmlFor="date1"
+                              >
                                 DD-MM-YYYY
                               </label>
                             </div>
@@ -325,7 +337,10 @@ function Transactionalsetting(props) {
                                 name="dateFormat"
                                 value="12hr"
                               />
-                              <label className="form-check-label" for="date2">
+                              <label
+                                className="form-check-label"
+                                htmlFor="date2"
+                              >
                                 MM-DD-YYYY
                               </label>
                             </div>
@@ -352,7 +367,10 @@ function Transactionalsetting(props) {
                                 value="enabled"
                                 checked
                               />
-                              <label className="form-check-label" for="24hour">
+                              <label
+                                className="form-check-label"
+                                htmlFor="24hour"
+                              >
                                 Enabled
                               </label>
                             </div>
@@ -364,7 +382,10 @@ function Transactionalsetting(props) {
                                 name="anonymousTracking"
                                 value="disabled"
                               />
-                              <label className="form-check-label" for="12hour">
+                              <label
+                                className="form-check-label"
+                                htmlFor="12hour"
+                              >
                                 Disabled{" "}
                               </label>
                             </div>
@@ -392,7 +413,7 @@ function Transactionalsetting(props) {
                     action="be_forms_elements.html"
                     method="POST"
                     enctype="multipart/form-data"
-                    onsubmit="return false;"
+                    onSubmit={() => {}}
                   >
                     <div className="row push">
                       <div className="col-lg-4">
@@ -405,7 +426,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label
                             className="form-label"
-                            for="example-text-input"
+                            htmlFor="example-text-input"
                           >
                             Sender Name
                           </label>
@@ -420,7 +441,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label
                             className="form-label"
-                            for="example-email-input"
+                            htmlFor="example-email-input"
                           >
                             Sender Email
                           </label>
@@ -435,7 +456,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label
                             className="form-label"
-                            for="example-password-input"
+                            htmlFor="example-password-input"
                           >
                             Reply To
                           </label>
@@ -450,7 +471,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label
                             className="form-label"
-                            for="example-textarea-input"
+                            htmlFor="example-textarea-input"
                           >
                             Email Header
                           </label>
@@ -467,7 +488,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label
                             className="form-label"
-                            for="example-textarea-input"
+                            htmlFor="example-textarea-input"
                           >
                             Email Footer
                           </label>

@@ -29,7 +29,7 @@ function Createcampaign(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Forms
                     </a>
                   </li>
@@ -54,7 +54,7 @@ function Createcampaign(props) {
                 action="be_forms_elements.html"
                 method="POST"
                 enctype="multipart/form-data"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="row push">
                   <div className="col-lg-4">
@@ -64,7 +64,10 @@ function Createcampaign(props) {
                   </div>
                   <div className="col-lg-8 col-xl-5">
                     <div className="mb-4">
-                      <label className="form-label" for="example-text-input">
+                      <label
+                        className="form-label"
+                        htmlFor="example-text-input"
+                      >
                         Campaign name
                       </label>
                       <input
@@ -90,7 +93,7 @@ function Createcampaign(props) {
                 action="be_forms_elements.html"
                 method="POST"
                 enctype="multipart/form-data"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="row push">
                   <div className="col-lg-4">
@@ -100,7 +103,10 @@ function Createcampaign(props) {
                   </div>
                   <div className="col-lg-8 col-xl-5">
                     <div className="mb-4">
-                      <label className="form-label" for="example-text-input">
+                      <label
+                        className="form-label"
+                        htmlFor="example-text-input"
+                      >
                         Sender Name
                       </label>
                       <input
@@ -112,7 +118,7 @@ function Createcampaign(props) {
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="form-label" for="example-select">
+                      <label className="form-label" htmlFor="example-select">
                         Sender Email
                       </label>
                       <select
@@ -149,7 +155,7 @@ function Createcampaign(props) {
                 action="be_forms_elements.html"
                 method="POST"
                 enctype="multipart/form-data"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="row push">
                   <div className="col-lg-4">
@@ -161,7 +167,7 @@ function Createcampaign(props) {
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-select-multiple"
+                        htmlFor="example-select-multiple"
                       >
                         Select mailing list(s)
                       </label>
@@ -187,7 +193,7 @@ function Createcampaign(props) {
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-textarea-input"
+                        htmlFor="example-textarea-input"
                       >
                         Other recipients
                       </label>
@@ -214,7 +220,7 @@ function Createcampaign(props) {
                 action="be_forms_elements.html"
                 method="POST"
                 enctype="multipart/form-data"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="row push">
                   <div className="col-lg-4">
@@ -224,7 +230,10 @@ function Createcampaign(props) {
                   </div>
                   <div className="col-lg-8 col-xl-5">
                     <div className="mb-4">
-                      <label className="form-label" for="example-text-input">
+                      <label
+                        className="form-label"
+                        htmlFor="example-text-input"
+                      >
                         Subject line
                       </label>
                       <input
@@ -236,7 +245,10 @@ function Createcampaign(props) {
                       />
                     </div>
                     <div className="mb-4">
-                      <label className="form-label" for="example-email-input">
+                      <label
+                        className="form-label"
+                        htmlFor="example-email-input"
+                      >
                         Preview text
                       </label>
                       <input
@@ -261,7 +273,7 @@ function Createcampaign(props) {
               <form
                 action="be_forms_editors.html"
                 method="POST"
-                onsubmit="return false;"
+                onSubmit={() => {}}
               >
                 <div className="mb-4">
                   <textarea id="js-ckeditor" name="ckeditor">

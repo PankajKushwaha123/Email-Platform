@@ -27,26 +27,17 @@ function Logout() {
                 </p>
                 <ul className="list list-inline mb-0 py-2">
                   <li className="list-inline-item">
-                    <a
-                      className="text-white-75 fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-white-75 fw-medium" href="#">
                       Legal
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a
-                      className="text-white-75 fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-white-75 fw-medium" href="#">
                       Contact
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a
-                      className="text-white-75 fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-white-75 fw-medium" href="#">
                       Terms
                     </a>
                   </li>
@@ -91,26 +82,17 @@ function Logout() {
                 </p>
                 <ul className="list list-inline py-2 mb-0">
                   <li className="list-inline-item">
-                    <a
-                      className="text-muted fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-muted fw-medium" href="#">
                       Legal
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a
-                      className="text-muted fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-muted fw-medium" href="#">
                       Contact
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a
-                      className="text-muted fw-medium"
-                      href="javascript:void(0)"
-                    >
+                    <a className="text-muted fw-medium" href="#">
                       Terms
                     </a>
                   </li>

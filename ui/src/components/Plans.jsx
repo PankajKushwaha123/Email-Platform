@@ -25,7 +25,7 @@ function Plans(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Plans
                     </a>
                   </li>
@@ -49,7 +49,7 @@ function Plans(props) {
               </div>
             </div>
             <div className="block-content block-content-full">
-              <form action="#" method="POST" onsubmit="return false;">
+              <form action="#" method="POST" onSubmit={() => {}}>
                 <div className="row items-push">
                   <div className="col-md-4">
                     <div className="form-check form-block">
@@ -61,7 +61,7 @@ function Plans(props) {
                       />
                       <label
                         className="form-check-label"
-                        for="example-radio-block1"
+                        htmlFor="example-radio-block1"
                       >
                         <span className="d-block fw-normal text-center my-3">
                           <span className="fs-4 fw-semibold">Free</span>
@@ -91,7 +91,7 @@ function Plans(props) {
                       />
                       <label
                         className="form-check-label"
-                        for="example-radio-block2"
+                        htmlFor="example-radio-block2"
                       >
                         <span className="d-block fw-normal text-center my-3">
                           <span className="fs-4 fw-semibold">Pro</span>
@@ -120,7 +120,7 @@ function Plans(props) {
                       />
                       <label
                         className="form-check-label"
-                        for="example-radio-block3"
+                        htmlFor="example-radio-block3"
                       >
                         <span className="d-block fw-normal text-center my-3">
                           <span className="fs-4 fw-semibold">Team</span>

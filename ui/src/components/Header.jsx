@@ -139,7 +139,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-check-circle text-success"></i>
@@ -153,7 +153,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-plus-circle text-primary"></i>
@@ -167,7 +167,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-times-circle text-danger"></i>
@@ -183,7 +183,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-plus-circle text-primary"></i>
@@ -197,7 +197,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-user-plus text-success"></i>
@@ -213,7 +213,7 @@ function Header() {
                 <li>
                   <a
                     className="text-dark d-flex py-2"
-                    href="javascript:void(0)"
+                    href="#"
                   >
                     <div className="flex-shrink-0 me-2 ms-3">
                       <i className="fa fa-fw fa-check-circle text-success"></i>
@@ -228,7 +228,7 @@ function Header() {
               <div className="p-2 border-top text-center">
                 <a
                   className="d-inline-block fw-medium"
-                  href="javascript:void(0)"
+                  href="#"
                 >
                   <i className="fa fa-fw fa-arrow-down me-1 opacity-50"></i>{" "}
                   Load More..

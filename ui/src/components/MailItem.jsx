@@ -16,7 +16,7 @@ function MailItem(props) {
             id="inbox-msg15"
             name="inbox-msg15"
           />
-          <label className="form-check-label" for="inbox-msg15"></label>
+          <label className="form-check-label" htmlFor="inbox-msg15"></label>
         </div>
       </td>
       <td

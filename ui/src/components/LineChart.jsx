@@ -20,7 +20,7 @@ import Chart from "chart.js/auto";
   PointElement,
   LineElement
 ); */
-function LineChart() {
+function LineChart(props) {
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May"],
     datasets: [
@@ -52,7 +52,7 @@ function LineChart() {
         ticks: {
           min: 0,
           max: 20,
-          stepSize: 4,
+          stepSize: 2,
         },
       },
     },

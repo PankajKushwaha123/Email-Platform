@@ -65,8 +65,8 @@ function Sidebar() {
   }
 
   return (
-    <div className="js-sidebar-scroll">
-      <div className="content-side">
+    <div className="js-sidebar-scroll ">
+      <div className="content-side ">
         <ul className="nav-main">
           <li className="nav-main-heading">Inbox</li>
           <li className="nav-main-item">

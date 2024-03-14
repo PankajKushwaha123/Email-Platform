@@ -26,7 +26,7 @@ function Security(props) {
               >
                 <ol className="breadcrumb breadcrumb-alt">
                   <li className="breadcrumb-item">
-                    <a className="link-fx" href="javascript:void(0)">
+                    <a className="link-fx" href="#">
                       Security
                     </a>
                   </li>
@@ -51,12 +51,12 @@ function Security(props) {
                     action="be_forms_elements.html"
                     method="POST"
                     enctype="multipart/form-data"
-                    onsubmit="return false;"
+                    onSubmit={() => {}}
                   >
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-password-input"
+                        htmlFor="example-password-input"
                       >
                         Current Password
                       </label>
@@ -71,7 +71,7 @@ function Security(props) {
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-password-input"
+                        htmlFor="example-password-input"
                       >
                         New Password
                       </label>
@@ -86,7 +86,7 @@ function Security(props) {
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-password-input"
+                        htmlFor="example-password-input"
                       >
                         Confirm New Password
                       </label>
@@ -113,12 +113,12 @@ function Security(props) {
                     action="be_forms_elements.html"
                     method="POST"
                     enctype="multipart/form-data"
-                    onsubmit="return false;"
+                    onSubmit={() => {}}
                   >
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-password-input"
+                        htmlFor="example-password-input"
                       >
                         Authenticator app
                       </label>
@@ -147,7 +147,7 @@ function Security(props) {
                     <div className="mb-4">
                       <label
                         className="form-label"
-                        for="example-password-input"
+                        htmlFor="example-password-input"
                       >
                         Email OTP
                       </label>

@@ -70,132 +70,103 @@ function Sidebar() {
         <ul className="nav-main">
           <li className="nav-main-heading">Inbox</li>
           <li className="nav-main-item">
-            <Link to="/inbox">
+            <Link to="/inbox" className={c1}>
               {/* error */}
-              <a className={c1} href="#">
-                <i className="nav-main-link-icon si si-envelope-letter"></i>
-                <span className="nav-main-link-name">Admin Inbox </span>
-              </a>
+
+              <i className="nav-main-link-icon si si-envelope-letter"></i>
+              <span className="nav-main-link-name">Admin Inbox </span>
             </Link>
           </li>
 
           <li className="nav-main-heading">Contacts</li>
           <li className="nav-main-item">
-            <Link to="/contacts">
-              <a className={c2}>
-                <i className="nav-main-link-icon si si-users"></i>
-                <span className="nav-main-link-name">All Contacts</span>
-              </a>
+            <Link to="/contacts" className={c2}>
+              <i className="nav-main-link-icon si si-users"></i>
+              <span className="nav-main-link-name">All Contacts</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/lists">
-              <a className={c3}>
-                <i className="nav-main-link-icon si si-list"></i>
-                <span className="nav-main-link-name">Lists</span>
-              </a>
+            <Link to="/lists" className={c3}>
+              <i className="nav-main-link-icon si si-list"></i>
+              <span className="nav-main-link-name">Lists</span>
             </Link>
           </li>
 
           <li className="nav-main-heading">Campaigns</li>
           <li className="nav-main-item">
-            <Link to="/Createcampaign">
-              <a className={c4}>
-                <i className="nav-main-link-icon si si-plus"></i>
-                <span className="nav-main-link-name">Create Campaign</span>
-              </a>
+            <Link to="/Createcampaign" className={c4}>
+              <i className="nav-main-link-icon si si-plus"></i>
+              <span className="nav-main-link-name">Create Campaign</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/campaigns">
-              <a className={c5}>
-                <i className="nav-main-link-icon si si-energy"></i>
-                <span className="nav-main-link-name">Dashboard</span>
-              </a>
+            <Link to="/campaigns" className={c5}>
+              <i className="nav-main-link-icon si si-energy"></i>
+              <span className="nav-main-link-name">Dashboard</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/statistics">
-              <a className={c6} href="">
-                <i className="nav-main-link-icon si si-graph"></i>
-                <span className="nav-main-link-name">Statistics</span>
-              </a>
+            <Link to="/statistics" className={c6}>
+              <i className="nav-main-link-icon si si-graph"></i>
+              <span className="nav-main-link-name">Statistics</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/settings">
-              <a className={c7} href="">
-                <i className="nav-main-link-icon si si-settings"></i>
-                <span className="nav-main-link-name">Settings</span>
-              </a>
+            <Link to="/settings" className={c7}>
+              <i className="nav-main-link-icon si si-settings"></i>
+              <span className="nav-main-link-name">Settings</span>
             </Link>
           </li>
 
           <li className="nav-main-heading">Transactional</li>
           <li className="nav-main-item">
-            <Link to="/transactional">
-              <a className={c8} href="#">
-                <i className="nav-main-link-icon si si-vector"></i>
-                <span className="nav-main-link-name">Configurations</span>
-              </a>
+            <Link to="/transactional" className={c8}>
+              <i className="nav-main-link-icon si si-vector"></i>
+              <span className="nav-main-link-name">Configurations</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/transactionalstats">
-              <a className={c9} href="#">
-                <i className="nav-main-link-icon si si-bar-chart"></i>
-                <span className="nav-main-link-name">Statistics</span>
-              </a>
+            <Link to="/transactionalstats" className={c9}>
+              <i className="nav-main-link-icon si si-bar-chart"></i>
+              <span className="nav-main-link-name">Statistics</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/transactionalsetting">
-              <a className={c10} href="#">
-                <i className="nav-main-link-icon si si-settings"></i>
-                <span className="nav-main-link-name">Settings</span>
-              </a>
+            <Link to="/transactionalsetting" className={c10}>
+              <i className="nav-main-link-icon si si-settings"></i>
+              <span className="nav-main-link-name">Settings</span>
             </Link>
           </li>
 
           <li className="nav-main-heading">Account</li>
           <li className="nav-main-item">
-            <Link to="/senders">
-              <a className={c11} href="#">
-                <i className="nav-main-link-icon si si-users"></i>
-                <span className="nav-main-link-name">Senders</span>
-              </a>
+            <Link to="/senders" className={c11}>
+              <i className="nav-main-link-icon si si-users"></i>
+              <span className="nav-main-link-name">Senders</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/domain">
-              <a className={c12} href="#">
-                <i className="nav-main-link-icon si si-globe-alt"></i>
-                <span className="nav-main-link-name">Domains</span>
-              </a>
+            <Link to="/domain" className={c12}>
+              <i className="nav-main-link-icon si si-globe-alt"></i>
+              <span className="nav-main-link-name">Domains</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/security">
-              <a className={c13} href="#">
-                <i className="nav-main-link-icon si si-lock"></i>
-                <span className="nav-main-link-name">Security</span>
-              </a>
+            <Link to="/security" className={c13}>
+              <i className="nav-main-link-icon si si-lock"></i>
+              <span className="nav-main-link-name">Security</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/myplan">
-              <a className={c14} href="#">
-                <i className="nav-main-link-icon si si-wallet"></i>
-                <span className="nav-main-link-name">My Plan</span>
-              </a>
+            <Link to="/myplan" className={c14}>
+              <i className="nav-main-link-icon si si-wallet"></i>
+              <span className="nav-main-link-name">My Plan</span>
             </Link>
           </li>
           <li className="nav-main-item">
-            <Link to="/logout">
-              <a className={c15} href="#">
-                <i className="nav-main-link-icon si si-logout"></i>
-                <span className="nav-main-link-name">Log out</span>
-              </a>
+            <Link to="/logout" className={c15}>
+              <i className="nav-main-link-icon si si-logout"></i>
+              <span className="nav-main-link-name">Log out</span>
             </Link>
           </li>
         </ul>

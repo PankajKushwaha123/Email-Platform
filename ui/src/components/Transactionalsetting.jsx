@@ -242,7 +242,7 @@ function Transactionalsetting(props) {
                   <form
                     action="be_forms_elements.html"
                     method="POST"
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                     onSubmit={() => {}}
                   >
                     <div className="row push">
@@ -277,7 +277,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label className="form-label">Time Format</label>
                           <div className="space-x-2">
-                            <div className="form-check form-check-inline">
+                            <div className="form-check form-check-inline ms-2">
                               <input
                                 className="form-check-input"
                                 type="radio"
@@ -293,7 +293,7 @@ function Transactionalsetting(props) {
                                 24 Hours
                               </label>
                             </div>
-                            <div className="form-check form-check-inline">
+                            <div className="form-check form-check-inline ">
                               <input
                                 className="form-check-input"
                                 type="radio"
@@ -313,7 +313,7 @@ function Transactionalsetting(props) {
                         <div className="mb-4">
                           <label className="form-label">Date Format</label>
                           <div className="space-x-2">
-                            <div className="form-check form-check-inline">
+                            <div className="form-check form-check-inline ms-2">
                               <input
                                 className="form-check-input"
                                 type="radio"
@@ -412,7 +412,7 @@ function Transactionalsetting(props) {
                   <form
                     action="be_forms_elements.html"
                     method="POST"
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                     onSubmit={() => {}}
                   >
                     <div className="row push">

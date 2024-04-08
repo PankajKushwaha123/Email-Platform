@@ -58,6 +58,11 @@ function Contacts(props) {
                 </h3>
                 <div className="block-options">
                   <button type="button" className="btn btn-sm btn-secondary">
+                    <input
+                      type="file"
+                      name=" import contacts"
+                      placeholder="import contacts"
+                    />
                     <i className="fa fa-floppy-disk"></i> Import Contacts
                   </button>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Sidebar from "./Sidebar";
+import ThemeDropdown from "./ThemeDropdown";
 /* import s1 from "../assets/js/oneui.app.min.js";
 import s2 from "../assets/js/lib/jquery.min.js";
 import s3 from "../assets/js/plugins/easy-pie-chart/jquery.easypiechart.min.js"; */
@@ -29,8 +30,8 @@ function Navigationbar(props) {
             >
               <i className="far fa-moon"></i>
             </button>
-
-            <div className="dropdown d-inline-block ms-1">
+            <ThemeDropdown />
+            {/* <div className="dropdown d-inline-block ms-1">
               <button
                 type="button"
                 className="btn btn-sm btn-alt-secondary"
@@ -138,14 +139,14 @@ function Navigationbar(props) {
                   <span>Header Dark</span>
                 </a>
               </div>
-            </div>
+            </div> */}
             <a
               className="d-lg-none btn btn-sm btn-alt-secondary ms-1"
               data-toggle="layout"
               data-action="sidebar_close"
               href="#"
             >
-              <i className="fa fa-fw fa-times"></i>
+              <i className="fa fa-fw fa-times"> </i>
             </a>
           </div>
         </div>

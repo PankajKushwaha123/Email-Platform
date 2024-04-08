@@ -2,7 +2,13 @@ import React from "react";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
+import tsd from "./module/Tstats.json";
+import LineChart from "./LineChart";
+import SendinLogs from "./SendinLogs";
+import d from "./module/sendingLogsdata.json";
+import InfoCard from "./InfoCard";
 function TransactionalStats(props) {
+  const arr = d.rows;
   /* One.onLoad(
     class {
       static initChartsChartJS() {
@@ -203,6 +209,7 @@ function TransactionalStats(props) {
                     </button>
                   </div>
                 </div>
+                <LineChart data={tsd.data} options={tsd.options} />
                 <div className="block-content block-content-full text-center">
                   <div className="py-3">
                     <canvas id="js-chartjs-lines"></canvas>
@@ -211,94 +218,30 @@ function TransactionalStats(props) {
               </div>
             </div>
             <div className="col-xl-4">
-              <div className="block block-rounded d-flex flex-column">
-                <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl className="mb-0">
-                    <dt className="fs-3 fw-bold">32</dt>
-                    <dd className="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                      Emails Sent
-                    </dd>
-                  </dl>
-                  <div className="item item-rounded-lg bg-body-light">
-                    <i className="far fa-gem fs-3 text-primary"></i>
-                  </div>
-                </div>
-                <div className="bg-body-light rounded-bottom">
-                  <a
-                    className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="#"
-                  >
-                    <span>See Below</span>
-                    <i className="fa fa-arrow-alt-circle-down ms-1 opacity-25 fs-base"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="block block-rounded d-flex flex-column">
-                <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl className="mb-0">
-                    <dt className="fs-3 fw-bold">1254</dt>
-                    <dd className="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                      Recipients
-                    </dd>
-                  </dl>
-                  <div className="item item-rounded-lg bg-body-light">
-                    <i className="far fa-user-circle fs-3 text-primary"></i>
-                  </div>
-                </div>
-                <div className="bg-body-light rounded-bottom">
-                  <a
-                    className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="#"
-                  >
-                    <span>View all Contacts</span>
-                    <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="block block-rounded d-flex flex-column">
-                <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl className="mb-0">
-                    <dt className="fs-3 fw-bold">65.7%</dt>
-                    <dd className="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                      Opened
-                    </dd>
-                  </dl>
-                  <div className="item item-rounded-lg bg-body-light">
-                    <i className="far fa-paper-plane fs-3 text-primary"></i>
-                  </div>
-                </div>
-                <div className="bg-body-light rounded-bottom">
-                  <a
-                    className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="#"
-                  >
-                    <span>View all messages</span>
-                    <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-                </div>
-              </div>
-              <div className="block block-rounded d-flex flex-column">
-                <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl className="mb-0">
-                    <dt className="fs-3 fw-bold">4.9%</dt>
-                    <dd className="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">
-                      Clicked
-                    </dd>
-                  </dl>
-                  <div className="item item-rounded-lg bg-body-light">
-                    <i className="fa fa-chart-bar fs-3 text-primary"></i>
-                  </div>
-                </div>
-                <div className="bg-body-light rounded-bottom">
-                  <a
-                    className="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                    href="#"
-                  >
-                    <span>View statistics</span>
-                    <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-                </div>
-              </div>
+              <InfoCard
+                num="32"
+                des="Emails Sent"
+                li="See Below"
+                symbol="far fa-gem fs-3 text-primary"
+              />
+              <InfoCard
+                num="1254"
+                des="Recipients"
+                li="View all Contacts"
+                symbol="far fa-user-circle fs-3 text-primary"
+              />
+              <InfoCard
+                num="65.7%"
+                des="Opened"
+                li="View all messages"
+                symbol="far fa-paper-plane fs-3 text-primary"
+              />
+              <InfoCard
+                num="4.9%"
+                des="Clicked"
+                li="View statistics"
+                symbol="fa fa-chart-bar fs-3 text-primary"
+              />
             </div>
           </div>
 
@@ -315,7 +258,7 @@ function TransactionalStats(props) {
                 >
                   <i className="fa fa-search"></i>
                 </button>
-                <div className="dropdown d-inline-block">
+                {/*  <div className="dropdown d-inline-block">
                   <button
                     type="button"
                     className="btn btn-sm btn-alt-secondary"
@@ -354,7 +297,7 @@ function TransactionalStats(props) {
                       <span className="badge bg-primary rounded-pill">997</span>
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
             <div
@@ -400,171 +343,27 @@ function TransactionalStats(props) {
                     </tr>
                   </thead>
                   <tbody className="fs-sm">
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00925{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Thomas Riley
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Product Designer
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
-                          API
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell text-center">
-                        <strong>Purchase</strong>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        22 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1589,75</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00924{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Barbara Scott
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Web developer
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          SMTP
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell text-center">
-                        <strong>Register</strong>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        28 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$2121,92</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00923{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Carol Ray
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Application Manager
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          SMTP
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell text-center">
-                        <strong>Login</strong>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        22 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1337,26</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00922{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Wayne Garcia
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Digital Nomad
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          SMTP
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell text-center">
-                        <strong>Login</strong>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        3 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1578,98</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00921{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Betty Kelley
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Application Manager
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
-                          API
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell text-center">
-                        <strong>Purchase</strong>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        16 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$567,80</strong>
-                      </td>
-                    </tr>
+                    {arr.map((x) => {
+                      return (
+                        <SendinLogs
+                          key={x.id}
+                          id={x.id}
+                          type={x.type}
+                          recipients={x.recipients}
+                          dgnr={x.dgnr}
+                          medium={x.medium}
+                          event={x.event}
+                          time={x.time}
+                          invested={x.invested}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
             </div>
-            <div className="block-content block-content-full bg-body-light">
+
+            {/* <div className="block-content block-content-full bg-body-light">
               <nav aria-label="Photos Search Navigation">
                 <ul className="pagination pagination-sm justify-content-end mb-0">
                   <li className="page-item">
@@ -604,7 +403,7 @@ function TransactionalStats(props) {
                   </li>
                 </ul>
               </nav>
-            </div>
+            </div> */}
           </div>
         </div>
       </main>

@@ -8,16 +8,21 @@ import img5 from "../assets/media/avatars/avatar12.jpg";
 import img6 from "../assets/media/photos/photo1.jpg";
 import img7 from "../assets/media/photos/photo2.jpg";
 import img8 from "../assets/media/photos/photo3.jpg";
+
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import MailItem from "./MailItem";
 import Mails from "./module/inboxData.json";
+import TempHeader from "./TempHeader";
 function Inbox(props) {
   const toggle = props.toggle;
   const mode = props.mode;
-
+  const [screen, setScreen] = useState("actual");
+  const changeScreenSize = () => {
+    screen == "actual" ? setScreen("fullscreen") : setScreen("actual");
+  };
   /*   const [mode, setMode] = useState(
     "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled "
   );
@@ -43,6 +48,7 @@ function Inbox(props) {
         <Navigationbar onClickHandler={toggle} />
 
         <Header />
+        {/*  <TempHeader /> */}
 
         <main id="main-container">
           <div className="content">
@@ -61,7 +67,7 @@ function Inbox(props) {
                 </div>
 
                 <div id="one-inbox-side-nav" className="d-none d-md-block push">
-                  <div className="block block-rounded">
+                  <div className={`block block-rounded block-mode-actual`}>
                     <div className="block-header block-header-default">
                       <h3 className="block-title">Inbox</h3>
                       <div className="block-options">
@@ -76,12 +82,13 @@ function Inbox(props) {
                         </button>
                       </div>
                     </div>
+
                     <div className="block-content">
                       <ul className="nav nav-pills flex-column fs-sm push">
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center active"
-                            href=""
+                            href="#"
                           >
                             <span>
                               <i className="fa fa-fw fa-inbox me-1 opacity-50"></i>{" "}
@@ -92,6 +99,11 @@ function Inbox(props) {
                             </span>
                           </a>
                         </li>
+                        {/*   <li>
+                          <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full  border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:ring-2">
+                            hi
+                          </button>
+                        </li> */}
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
@@ -190,84 +202,9 @@ function Inbox(props) {
                               <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
                             </div>
                             <div className="flex-grow-1">
-                              <div className="fw-semibold">Carol White</div>
+                              <div className="fw-semibold">Hrishikesh</div>
                               <div className="fw-normal text-muted">
-                                sales@domain.com
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex py-2" href="#">
-                            <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
-                              <img
-                                className="img-avatar img-avatar48"
-                                src={img1}
-                                alt=""
-                              />
-                              <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold">Jesse Fisher</div>
-                              <div className="fw-normal text-muted">
-                                *@domain.com{" "}
-                                <span className="fst-italic">
-                                  (FULL ACCESS)
-                                </span>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex py-2" href="#">
-                            <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
-                              <img
-                                className="img-avatar img-avatar48"
-                                src={img3}
-                                alt=""
-                              />
-                              <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold">Amber Harvey</div>
-                              <div className="fw-normal text-muted">
-                                legal@domain.com
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex py-2" href="#">
-                            <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
-                              <img
-                                className="img-avatar img-avatar48"
-                                src={img4}
-                                alt=""
-                              />
-                              <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-warning"></span>
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold">Brian Cruz</div>
-                              <div className="fw-normal text-muted">
-                                support@domain.com
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li>
-                          <a className="d-flex py-2" href="#">
-                            <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
-                              <img
-                                className="img-avatar img-avatar48"
-                                src={img5}
-                                alt=""
-                              />
-                              <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-danger"></span>
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold">David Fuller</div>
-                              <div className="fw-normal text-muted">
-                                tech@domain.com
+                                email addr
                               </div>
                             </div>
                           </a>
@@ -278,7 +215,8 @@ function Inbox(props) {
                 </div>
               </div>
               <div className="col-md-7 col-xl-9">
-                <div className="block block-rounded">
+                {/* to toogle to full screen block-mode-fullscreen */}
+                <div className={`block block-rounded block-mode-${screen} `}>
                   <div className="block-header block-header-default">
                     <h3 className="block-title">
                       15-30{" "}
@@ -314,10 +252,17 @@ function Inbox(props) {
                       </button>
                       <button
                         type="button"
+                        onClick={changeScreenSize}
                         className="btn-block-option"
-                        data-toggle="block-option"
-                        data-action="fullscreen_toggle"
-                      ></button>
+                        /* data-toggle="block-option"
+                        data-action="fullscreen_toggle" */
+                      >
+                        <i
+                          className={`si si-size-${
+                            screen == "fullscreen" ? "actual" : "fullscreen"
+                          }`}
+                        ></i>
+                      </button>
                     </div>
                   </div>
                   <div className="block-content py-0">

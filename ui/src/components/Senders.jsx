@@ -54,7 +54,7 @@ function Senders(props) {
                 <thead>
                   <tr>
                     <th className="text-center" style={{ width: "50px" }}>
-                      #
+                      no.
                     </th>
                     <th>Name</th>
                     <th>Email</th>
@@ -67,8 +67,8 @@ function Senders(props) {
                     <th className="text-center" scope="row">
                       1
                     </th>
-                    <td className="fw-semibold fs-sm">Jesse Fisher</td>
-                    <td>noreply@domain.com</td>
+                    <td className="fw-semibold fs-sm">Shivam Tripathi</td>
+                    <td>211B293@juetguna.in</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
                         Verified
@@ -99,8 +99,8 @@ function Senders(props) {
                     <th className="text-center" scope="row">
                       2
                     </th>
-                    <td className="fw-semibold fs-sm">Amanda Powell</td>
-                    <td>notifications@domain.com</td>
+                    <td className="fw-semibold fs-sm">pankaj</td>
+                    <td>211B201@juetguna.com</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
                         Verification Pending
@@ -131,8 +131,8 @@ function Senders(props) {
                     <th className="text-center" scope="row">
                       3
                     </th>
-                    <td className="fw-semibold fs-sm">Megan Fuller</td>
-                    <td>admin@domain.com</td>
+                    <td className="fw-semibold fs-sm">Hrishikesh bhatt</td>
+                    <td>211B139@juetguna.in</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">
                         Disabled

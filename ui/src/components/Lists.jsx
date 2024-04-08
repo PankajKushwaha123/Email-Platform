@@ -466,7 +466,7 @@ function Lists(props) {
             <div className="block-header block-header-default">
               <h3 className="block-title">
                 Contacts in the list{" "}
-                <small className="fst-italic">(401 contacts)</small>
+                <small className="fst-italic">({arr.length} contacts)</small>
               </h3>
             </div>
             <div className="block-content block-content-full">

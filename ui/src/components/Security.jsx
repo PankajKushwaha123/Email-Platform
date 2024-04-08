@@ -50,7 +50,7 @@ function Security(props) {
                   <form
                     action="be_forms_elements.html"
                     method="POST"
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                     onSubmit={() => {}}
                   >
                     <div className="mb-4">
@@ -112,7 +112,7 @@ function Security(props) {
                   <form
                     action="be_forms_elements.html"
                     method="POST"
-                    enctype="multipart/form-data"
+                    encType="multipart/form-data"
                     onSubmit={() => {}}
                   >
                     <div className="mb-4">
@@ -211,66 +211,6 @@ function Security(props) {
                       <td className="fw-semibold">192.168.1.1</td>
                       <td className="fw-semibold">12-01-2023</td>
                       <td className="fw-semibold">21-10-2023</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary"
-                            data-bs-toggle="tooltip"
-                            title="Revoke Authorization"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold">192.168.1.2</td>
-                      <td className="fw-semibold">24-01-2023</td>
-                      <td className="fw-semibold">08-10-2023</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary"
-                            data-bs-toggle="tooltip"
-                            title="Revoke Authorization"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold">192.168.1.3</td>
-                      <td className="fw-semibold">19-01-2023</td>
-                      <td className="fw-semibold">31-10-2023</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary"
-                            data-bs-toggle="tooltip"
-                            title="Revoke Authorization"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold">192.168.1.4</td>
-                      <td className="fw-semibold">07-01-2023</td>
-                      <td className="fw-semibold">28-10-2023</td>
                       <td className="text-center">
                         <div className="btn-group">
                           <button

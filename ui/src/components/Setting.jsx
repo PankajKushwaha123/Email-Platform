@@ -56,7 +56,7 @@ function Setting(props) {
                 <form
                   action="be_forms_elements.html"
                   method="POST"
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                   onSubmit={() => {}}
                 >
                   <div className="row push">
@@ -217,7 +217,7 @@ function Setting(props) {
                 <form
                   action="be_forms_elements.html"
                   method="POST"
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                   onSubmit={() => {}}
                 >
                   <div className="row push">
@@ -266,7 +266,7 @@ function Setting(props) {
                 <form
                   action="be_forms_elements.html"
                   method="POST"
-                  enctype="multipart/form-data"
+                  encType="multipart/form-data"
                   onSubmit={() => {}}
                 >
                   <div className="row push">

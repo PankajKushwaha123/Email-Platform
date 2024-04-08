@@ -2,9 +2,14 @@ import React from "react";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
+import InfoCard from "./InfoCard";
+import CampaignItem from "./CampaignItem";
+import data from "./module/dashbord.json";
+import { Link } from "react-router-dom";
 function Campaign(props) {
   const toggle = props.toggle;
   const mode = props.mode;
+  const arr = data.rows;
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -18,20 +23,20 @@ function Campaign(props) {
               <h1 className="h3 fw-bold mb-2">Campaign Dashboard</h1>
               <h2 className="h6 fw-medium fw-medium text-muted mb-0">
                 Welcome{" "}
-                <a className="fw-semibold" href="be_pages_generic_profile.html">
+                <a className="fw-semibold" href="#">
                   John
                 </a>
                 , everything looks great.
               </h2>
             </div>
             <div className="mt-3 mt-md-0 ms-md-3 space-x-1">
-              <a
+              <Link
                 className="btn btn-sm btn-alt-secondary space-x-1"
-                href="be_pages_generic_profile_edit.html"
+                to="/Createcampaign"
               >
                 <i className="fa fa-add opacity-50"></i>
                 <span>Create a campaign</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -39,7 +44,13 @@ function Campaign(props) {
         <div className="content">
           <div className="row items-push">
             <div className="col-sm-6 col-xxl-3">
-              <div className="block block-rounded d-flex flex-column h-100 mb-0">
+              <InfoCard
+                num="32"
+                des="Campaigns"
+                li="See Below"
+                symbol="far fa-gem fs-3 text-primary"
+              />
+              {/* <div className="block block-rounded d-flex flex-column h-100 mb-0">
                 <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                   <dl className="mb-0">
                     <dt className="fs-3 fw-bold">32</dt>
@@ -60,10 +71,17 @@ function Campaign(props) {
                     <i className="fa fa-arrow-alt-circle-down ms-1 opacity-25 fs-base"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
+
             <div className="col-sm-6 col-xxl-3">
-              <div className="block block-rounded d-flex flex-column h-100 mb-0">
+              <InfoCard
+                num="124"
+                des="Contacts"
+                li="View all Contacts"
+                symbol="far fa-user-circle fs-3 text-primary"
+              />
+              {/*  <div className="block block-rounded d-flex flex-column h-100 mb-0">
                 <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                   <dl className="mb-0">
                     <dt className="fs-3 fw-bold">124</dt>
@@ -84,10 +102,16 @@ function Campaign(props) {
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="col-sm-6 col-xxl-3">
-              <div className="block block-rounded d-flex flex-column h-100 mb-0">
+              <InfoCard
+                num="65.7%"
+                des="Avg. Opening Rate"
+                li="View all messages"
+                symbol="far fa-paper-plane fs-3 text-primary"
+              />
+              {/*  <div className="block block-rounded d-flex flex-column h-100 mb-0">
                 <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                   <dl className="mb-0">
                     <dt className="fs-3 fw-bold">65.7%</dt>
@@ -108,10 +132,16 @@ function Campaign(props) {
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="col-sm-6 col-xxl-3">
-              <div className="block block-rounded d-flex flex-column h-100 mb-0">
+              <InfoCard
+                num="4.9%"
+                des=" Avg. Click Rate"
+                li="View statistics"
+                symbol="fa fa-chart-bar fs-3 text-primary"
+              />
+              {/* <div className="block block-rounded d-flex flex-column h-100 mb-0">
                 <div className="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                   <dl className="mb-0">
                     <dt className="fs-3 fw-bold">4.9%</dt>
@@ -132,7 +162,7 @@ function Campaign(props) {
                     <i className="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -243,318 +273,21 @@ function Campaign(props) {
                     </tr>
                   </thead>
                   <tbody className="fs-sm">
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00925{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Thomas Riley
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Product Designer
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
-                          Pending
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: " 5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "24%" }}
-                            aria-valuenow="24"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">24%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        22 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1589,75</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00924{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Barbara Scott
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Web developer
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          Active
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div className="progress mb-1" style={{ height: "5p" }}>
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "6%" }}
-                            aria-valuenow="6"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">6%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        28 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$2121,92</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00923{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Carol Ray
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Application Manager
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          Active
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "23%" }}
-                            aria-valuenow="23"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">23%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        22 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1337,26</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00922{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Wayne Garcia
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Digital Nomad
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
-                          Active
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "20%" }}
-                            aria-valuenow="20"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">20%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        3 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1578,98</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00921{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Betty Kelley
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Application Manager
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
-                          Pending
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "23%" }}
-                            aria-valuenow="23"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">23%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        16 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$567,80</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00920{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Marie Duncan
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Photographer
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                          Completed
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "5%" }}
-                            aria-valuenow="5"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">5%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        13 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$2051,12</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a className="fw-semibold" href="#">
-                          ORD.00919{" "}
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Premium
-                        </p>
-                      </td>
-                      <td className="d-none d-xl-table-cell">
-                        <a className="fw-semibold" href="#">
-                          Jose Mills
-                        </a>
-                        <p className="fs-sm fw-medium text-muted mb-0">
-                          Application Manager
-                        </p>
-                      </td>
-                      <td>
-                        <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                          Completed
-                        </span>
-                      </td>
-                      <td className="d-none d-sm-table-cell">
-                        <div
-                          className="progress mb-1"
-                          style={{ height: "5px" }}
-                        >
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "10%" }}
-                            aria-valuenow="10"
-                            aria-valuemin="0"
-                            aria-valuemax="100"
-                          ></div>
-                        </div>
-                        <p className="fs-xs fw-semibold mb-0">10%</p>
-                      </td>
-                      <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
-                        17 min ago
-                      </td>
-                      <td className="d-none d-sm-table-cell text-end">
-                        <strong>$1353,24</strong>
-                      </td>
-                    </tr>
+                    {arr.map((x) => {
+                      return (
+                        <CampaignItem
+                          key={x.id}
+                          id={x.id}
+                          type={x.type}
+                          recipients={x.recipients}
+                          dgnr={x.dgnr}
+                          status={x.status}
+                          rate={x.rate}
+                          time={x.time}
+                          actions={x.actions}
+                        />
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

@@ -54,7 +54,7 @@ function Domain(props) {
                 <thead>
                   <tr>
                     <th className="text-center" style={{ width: "50px" }}>
-                      #
+                      no
                     </th>
                     <th>Domain</th>
                     <th>Added On</th>
@@ -67,7 +67,7 @@ function Domain(props) {
                     <th className="text-center" scope="row">
                       1
                     </th>
-                    <td className="fw-semibold fs-sm">Jesse Fisher</td>
+                    <td className="fw-semibold fs-sm">Hrishikesh bhatt</td>
                     <td>11-12-2023</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
@@ -99,7 +99,7 @@ function Domain(props) {
                     <th className="text-center" scope="row">
                       2
                     </th>
-                    <td className="fw-semibold fs-sm">Amanda Powell</td>
+                    <td className="fw-semibold fs-sm">Shivam </td>
                     <td>26-12-2023</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
@@ -131,7 +131,7 @@ function Domain(props) {
                     <th className="text-center" scope="row">
                       3
                     </th>
-                    <td className="fw-semibold fs-sm">Megan Fuller</td>
+                    <td className="fw-semibold fs-sm">Pankaj kushwaha</td>
                     <td>31-01-2024</td>
                     <td className="d-none d-sm-table-cell">
                       <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">

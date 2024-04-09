@@ -103,21 +103,6 @@ function Createcampaign(props) {
                   </div>
                   <div className="col-lg-8 col-xl-5">
                     <div className="mb-4">
-                      <label
-                        className="form-label"
-                        htmlFor="example-text-input"
-                      >
-                        Sender Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="example-text-input"
-                        name="example-text-input"
-                        placeholder="Text Input"
-                      />
-                    </div>
-                    <div className="mb-4">
                       <label className="form-label" htmlFor="example-select">
                         Sender Email
                       </label>
@@ -190,21 +175,6 @@ function Createcampaign(props) {
                         <option value="10">List10</option>
                       </select>
                     </div>
-                    <div className="mb-4">
-                      <label
-                        className="form-label"
-                        htmlFor="example-textarea-input"
-                      >
-                        Other recipients
-                      </label>
-                      <textarea
-                        className="form-control"
-                        id="example-textarea-input"
-                        name="example-textarea-input"
-                        rows="4"
-                        placeholder="Textarea content.."
-                      ></textarea>
-                    </div>
                   </div>
                 </div>
               </form>
@@ -276,7 +246,11 @@ function Createcampaign(props) {
                 onSubmit={() => {}}
               >
                 <div className="mb-4">
-                  <textarea id="js-ckeditor" name="ckeditor">
+                  <textarea
+                    id="js-ckeditor"
+                    name="ckeditor"
+                    className="w-[100%] shadow-lg shadow-orange-500"
+                  >
                     Hello CKEditor!
                   </textarea>
                 </div>

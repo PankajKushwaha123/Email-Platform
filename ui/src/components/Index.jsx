@@ -1,8 +1,27 @@
 import React from "react";
+import { useState } from "react";
+import Cookies from "js-cookie";
 import "../assets/css/oneui.min.css";
 import img1 from "../assets/media/photos/photo28@2x.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 function Indx() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    console.log(" inde xpage ");
+    const email = username;
+    axios
+      .post("https://apis.mailmort.co/users/login", { email, password })
+      .then((res) => {
+        Cookies.set("token", res.data.token, { expires: 7 }); // expires in 7 days
+        navigate("/inbox");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div id="page-container">
@@ -89,6 +108,10 @@ function Indx() {
                               id="login-username"
                               name="login-username"
                               placeholder="Username"
+                              value={username}
+                              onChange={(e) => {
+                                setUsername(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="mb-4">
@@ -98,6 +121,10 @@ function Indx() {
                               id="login-password"
                               name="login-password"
                               placeholder="Password"
+                              value={password}
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="d-flex justify-content-between align-items-center mb-4">
@@ -110,15 +137,14 @@ function Indx() {
                               </a>
                             </div>
                             <div>
-                              <Link to="/Inbox">
-                                <button
-                                  type="button"
-                                  className="btn btn-lg btn-alt-primary"
-                                >
-                                  <i className="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>{" "}
-                                  Sign In
-                                </button>
-                              </Link>
+                              <button
+                                type="button"
+                                className="btn btn-lg btn-alt-primary"
+                                onClick={handleSubmit}
+                              >
+                                <i className="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>{" "}
+                                Sign In
+                              </button>
                             </div>
                           </div>
                         </form>

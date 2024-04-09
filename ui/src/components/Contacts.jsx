@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
+import axios from "axios";
 import contactsData from "./module/contactsData.json";
 import ContactItem from "./ContactItem";
+
 function Contacts(props) {
   const toggle = props.toggle;
   const mode = props.mode;
-  let id = 0;
+  let id = 1;
   const arr = contactsData.contacts;
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const response = await axios.get(
+          "https://apis.mailmort.co/contacts/all",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        setContacts(response.data.contacts);
+        console.log(response.data.contacts);
+      } catch (error) {
+        console.error("Error fetching contacts:", error);
+      }
+    };
+
+    fetchContacts();
+  }, []);
+
   return (
     <>
       <div id="page-container" className={mode}>
@@ -85,21 +109,21 @@ function Contacts(props) {
                         className="d-none d-sm-table-cell"
                         style={{ width: "15%" }}
                       >
-                        Type
+                        Lists
                       </th>
-                      <th style={{ width: "15%" }}>Registered</th>
+                      <th style={{ width: "15%" }}>Phone Number</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {arr.map((x) => {
+                    {contacts.map((x) => {
                       return (
                         <ContactItem
-                          key={x.id}
-                          id={x.id}
-                          name={x.name}
+                          key={id}
+                          id={id++}
+                          name={x.first_name + " " + x.last_name}
                           email={x.email}
-                          type={x.type}
-                          registered={x.registered}
+                          lists={x.mailing_lists}
+                          phone={x.phone}
                         />
                       );
                     })}

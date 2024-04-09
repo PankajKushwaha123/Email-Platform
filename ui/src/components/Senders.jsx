@@ -1,10 +1,102 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import Cookies from "js-cookie";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
+import axios from "axios";
+import Input from "./Input";
 function Senders(props) {
+  const [em, setEm] = useState("");
+  const [sn, setSn] = useState("");
   const toggle = props.toggle;
   const mode = props.mode;
+  const [senders, setSenders] = useState([]);
+  const addSender = () => {
+    console.log("inside add sender");
+    const addSenders = async () => {
+      console.log("sending post");
+      try {
+        const response = await axios.post(
+          "https://apis.mailmort.co/users/senders",
+          {
+            sender_name: sn,
+            sender_email: em,
+            reply_to: "211B293@gmail.com",
+          },
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        const fetchSenders = async () => {
+          try {
+            const response = await axios.get(
+              "https://apis.mailmort.co/users/senders",
+              {
+                headers: { Authorization: "Bearer " + Cookies.get("token") },
+              }
+            );
+
+            setSenders(response.data.senders);
+          } catch (error) {
+            console.log("errror while fetching ", error);
+          }
+        };
+        fetchSenders();
+        //console.log(response);
+      } catch (error) {
+        console.log("COULD NOT post ", error);
+      }
+    };
+    addSenders();
+  };
+
+  useEffect(() => {
+    const fetchSenders = async () => {
+      try {
+        const response = await axios.get(
+          "https://apis.mailmort.co/users/senders",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+
+        setSenders(response.data.senders);
+      } catch (error) {
+        console.log("errror while fetching ", error);
+      }
+    };
+    fetchSenders();
+  }, []);
+  // Delete function
+  const handleDelete = (index) => {
+    const deleteSenders = async () => {
+      try {
+        const response = await axios.delete(
+          "https://apis.mailmort.co/users/senders",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+            data: { email: senders[index].sender_email },
+          }
+        );
+      } catch (error) {
+        console.log("COULD NOT DELETE SENDER ", error);
+      }
+    };
+    deleteSenders();
+    // Create a new array without the sender at the specified index
+    const updatedSenders = senders.filter((_, i) => i !== index);
+
+    // Check if updatedSenders is empty
+    if (updatedSenders.length === 0) {
+      // If updatedSenders is empty, initialize senders with an empty array
+      setSenders([]);
+    } else {
+      // Otherwise, update the senders state with the new array
+      setSenders(updatedSenders);
+    }
+    // Create a copy of the senders array
+  };
+
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -43,8 +135,28 @@ function Senders(props) {
           <div className="block block-rounded">
             <div className="block-header block-header-default">
               <h3 className="block-title">Senders</h3>
+              <Input
+                name="Email"
+                type="text"
+                value={em}
+                set={setEm}
+                placeholder="Email"
+              />
+              <Input
+                name="Name"
+                type="text"
+                value={sn}
+                set={setSn}
+                placeholder="name"
+              />
               <div className="block-options">
-                <button type="button" className="btn btn-sm btn-secondary">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-secondary"
+                  onClick={() => {
+                    addSender();
+                  }}
+                >
                   <i className="fa fa-plus"></i> Create new sender
                 </button>
               </div>
@@ -63,102 +175,43 @@ function Senders(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th className="text-center" scope="row">
-                      1
-                    </th>
-                    <td className="fw-semibold fs-sm">Shivam Tripathi</td>
-                    <td>211B293@juetguna.in</td>
-                    <td className="d-none d-sm-table-cell">
-                      <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                        Verified
-                      </span>
-                    </td>
-                    <td className="text-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Edit Client"
-                        >
-                          <i className="fa fa-fw fa-pencil-alt"></i>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Remove Client"
-                        >
-                          <i className="fa fa-fw fa-times"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="text-center" scope="row">
-                      2
-                    </th>
-                    <td className="fw-semibold fs-sm">pankaj</td>
-                    <td>211B201@juetguna.com</td>
-                    <td className="d-none d-sm-table-cell">
-                      <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">
-                        Verification Pending
-                      </span>
-                    </td>
-                    <td className="text-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Edit Client"
-                        >
-                          <i className="fa fa-fw fa-pencil-alt"></i>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Remove Client"
-                        >
-                          <i className="fa fa-fw fa-times"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th className="text-center" scope="row">
-                      3
-                    </th>
-                    <td className="fw-semibold fs-sm">Hrishikesh bhatt</td>
-                    <td>211B139@juetguna.in</td>
-                    <td className="d-none d-sm-table-cell">
-                      <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">
-                        Disabled
-                      </span>
-                    </td>
-                    <td className="text-center">
-                      <div className="btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Edit Client"
-                        >
-                          <i className="fa fa-fw fa-pencil-alt"></i>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-secondary"
-                          data-bs-toggle="tooltip"
-                          title="Remove Client"
-                        >
-                          <i className="fa fa-fw fa-times"></i>
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                  {senders.map((x, index) => {
+                    return (
+                      <tr key={index}>
+                        <th className="text-center" scope="row">
+                          {index + 1}
+                        </th>
+                        <td className="fw-semibold fs-sm">{x.sender_name}</td>
+                        <td>{x.sender_email}</td>
+                        <td className="d-none d-sm-table-cell">
+                          <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
+                            Verified
+                          </span>
+                        </td>
+                        <td className="text-center">
+                          <div className="btn-group">
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-alt-secondary"
+                              data-bs-toggle="tooltip"
+                              title="Edit Client"
+                            >
+                              <i className="fa fa-fw fa-pencil-alt"></i>
+                            </button>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-alt-secondary"
+                              data-bs-toggle="tooltip"
+                              title="Remove Client"
+                              onClick={() => handleDelete(index)}
+                            >
+                              <i className="fa fa-fw fa-times"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>

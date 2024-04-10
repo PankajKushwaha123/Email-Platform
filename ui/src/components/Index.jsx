@@ -10,7 +10,6 @@ function Indx() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const handleSubmit = () => {
-    console.log(" inde xpage ");
     const email = username;
     axios
       .post("https://apis.mailmort.co/users/login", { email, password })
@@ -19,6 +18,7 @@ function Indx() {
         navigate("/inbox");
       })
       .catch((err) => {
+        alert("incorrect credentials");
         console.log(err);
       });
   };

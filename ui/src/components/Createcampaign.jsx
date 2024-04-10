@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
+import axios from "axios";
+import Cookies from "js-cookie";
 function Createcampaign(props) {
   const toggle = props.toggle;
   const mode = props.mode;
+  const [cname, setCname] = useState("");
+  const [senderEmail, setSenderEmail] = useState(""); // Assuming '1' is the default value
+  const [senders, setSenders] = useState([]);
+  const [mailList, setMailList] = useState([]);
+  // Event handler for when the select value changes
+  const handleSelectChange = (event) => {
+    setSenderEmail(event.target.value);
+  };
+  useEffect(() => {
+    const fetchSenders = async () => {
+      try {
+        const response = await axios.get(
+          "https://apis.mailmort.co/users/senders",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+
+        setSenders(response.data.senders);
+        const response2 = await axios.get(
+          "https://apis.mailmort.co/contacts/lists",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        setMailList(response2.data.mailing_lists);
+      } catch (error) {
+        console.log("errror while fetching ", error);
+      }
+    };
+    fetchSenders();
+    //console.log(senders);
+  }, []);
+  const [list, setList] = useState([]);
+
+  // Event handler for when the select value changes
+  const handleListSelectChange = (event) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setList(selectedOptions);
+  };
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -50,37 +95,31 @@ function Createcampaign(props) {
               <h3 className="block-title">Campaign Settings</h3>
             </div>
             <div className="block-content block-content-full">
-              <form
-                action="be_forms_elements.html"
-                method="POST"
-                encType="multipart/form-data"
-                onSubmit={() => {}}
-              >
-                <div className="row push">
-                  <div className="col-lg-4">
-                    <p className="fs-sm text-muted">
-                      The most basic details for the all-new campaign
-                    </p>
-                  </div>
-                  <div className="col-lg-8 col-xl-5">
-                    <div className="mb-4">
-                      <label
-                        className="form-label"
-                        htmlFor="example-text-input"
-                      >
-                        Campaign name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="example-text-input"
-                        name="example-text-input"
-                        placeholder="Text Input"
-                      />
-                    </div>
+              <div className="row push">
+                <div className="col-lg-4">
+                  <p className="fs-sm text-muted">
+                    The most basic details for the all-new campaign
+                  </p>
+                </div>
+                <div className="col-lg-8 col-xl-5">
+                  <div className="mb-4">
+                    <label className="form-label" htmlFor="example-text-input">
+                      Campaign name
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="example-text-input"
+                      name="Cname"
+                      value={cname}
+                      placeholder="campaign name"
+                      onChange={(e) => {
+                        setCname(e.target.value);
+                      }}
+                    />
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
@@ -110,19 +149,16 @@ function Createcampaign(props) {
                         className="form-select"
                         id="example-select"
                         name="example-select"
+                        value={senderEmail}
+                        onChange={handleSelectChange}
                       >
-                        <option value="1" selected>
-                          default@domain.com
-                        </option>
-                        <option value="2">sender2@domain.com</option>
-                        <option value="3">sender3@domain.com</option>
-                        <option value="4">sender4@domain.com</option>
-                        <option value="5">sender5@domain.com</option>
-                        <option value="6">sender6@domain.com</option>
-                        <option value="7">sender7@domain.com</option>
-                        <option value="8">sender8@domain.com</option>
-                        <option value="9">sender9@domain.com</option>
-                        <option value="10">sender10@domain.com</option>
+                        {senders.map((x, index) => {
+                          return (
+                            <option key={index} value={x.sender_email}>
+                              {x.sender_email}
+                            </option>
+                          );
+                        })}
                       </select>
                     </div>
                   </div>
@@ -162,17 +198,12 @@ function Createcampaign(props) {
                         name="example-select-multiple"
                         size="5"
                         multiple
+                        value={list}
+                        onChange={handleListSelectChange}
                       >
-                        <option value="1">List1</option>
-                        <option value="2">List2</option>
-                        <option value="3">List3</option>
-                        <option value="4">List4</option>
-                        <option value="5">List5</option>
-                        <option value="6">List6</option>
-                        <option value="7">List7</option>
-                        <option value="8">List8</option>
-                        <option value="9">List9</option>
-                        <option value="10">List10</option>
+                        {mailList.map((x) => {
+                          return <option value={x}>{x}</option>;
+                        })}
                       </select>
                     </div>
                   </div>

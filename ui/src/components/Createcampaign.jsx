@@ -15,7 +15,7 @@ function Createcampaign(props) {
   const [previewText, setPreviewText] = useState("");
   const [text, setText] = useState("Hello CKEditor!");
   const [loading, setLoading] = useState(false);
-  const handleSaveDraft = async () => {
+  const handleSaveDraft = async (p) => {
     try {
       setLoading(true);
       const response = await axios.post(
@@ -27,7 +27,7 @@ function Createcampaign(props) {
           subject: subjectLine,
           preview_text: previewText,
           email_content: text,
-          action: "draft",
+          action: p,
         },
         {
           headers: { Authorization: "Bearer " + Cookies.get("token") },
@@ -343,7 +343,9 @@ function Createcampaign(props) {
                 <button
                   type="button"
                   className="btn btn-outline-success me-1 mb-3"
-                  onClick={handleSaveDraft}
+                  onClick={() => {
+                    handleSaveDraft("draft");
+                  }}
                   disabled={loading}
                 >
                   <i className="fa fa-fw fa-save me-1"></i> Save as draft
@@ -361,10 +363,23 @@ function Createcampaign(props) {
                 <p className="fs-sm text-muted">
                   Send test-mails to preview the campaign.
                 </p>
-                <button type="button" className="btn btn-alt-success me-1 mb-3">
+                <button
+                  type="button"
+                  className="btn btn-alt-success me-1 mb-3"
+                  onClick={() => {
+                    handleSaveDraft("send");
+                  }}
+                >
                   <i className="fa fa-fw fa-paper-plane me-1"></i> Send test
                   mails
                 </button>
+                {loading && (
+                  <div className="flex items-center justify-center">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="mb-4">

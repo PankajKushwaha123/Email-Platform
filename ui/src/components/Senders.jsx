@@ -11,6 +11,7 @@ function Senders(props) {
   const toggle = props.toggle;
   const mode = props.mode;
   const [senders, setSenders] = useState([]);
+  const [loading, setLoading] = useState(true);
   const addSender = () => {
     console.log("inside add sender");
     const addSenders = async () => {
@@ -39,6 +40,8 @@ function Senders(props) {
             setSenders(response.data.senders);
           } catch (error) {
             console.log("errror while fetching ", error);
+          } finally {
+            setLoading(false); // Set loading state to false after the request completes
           }
         };
         fetchSenders();
@@ -63,6 +66,8 @@ function Senders(props) {
         setSenders(response.data.senders);
       } catch (error) {
         console.log("errror while fetching ", error);
+      } finally {
+        setLoading(false); // Set loading state to false after the request completes
       }
     };
     fetchSenders();
@@ -162,6 +167,11 @@ function Senders(props) {
               </div>
             </div>
             <div className="block-content">
+              {loading && (
+                <div className="spinner-border " role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
               <table className="table table-hover table-vcenter">
                 <thead>
                   <tr>
@@ -174,6 +184,7 @@ function Senders(props) {
                     <th className="text-center">Actions</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {senders.map((x, index) => {
                     return (

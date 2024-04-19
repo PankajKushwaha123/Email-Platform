@@ -10,6 +10,7 @@ import ContactItem from "./ContactItem";
 
 function Contacts(props) {
   const toggle = props.toggle;
+  const [loading, setLoading] = useState(true);
   const mode = props.mode;
   let id = 1;
   const arr = contactsData.contacts;
@@ -28,6 +29,8 @@ function Contacts(props) {
         console.log(response.data.contacts);
       } catch (error) {
         console.error("Error fetching contacts:", error);
+      } finally {
+        setLoading(false); // Set loading state to false after the request completes
       }
     };
 
@@ -91,7 +94,13 @@ function Contacts(props) {
                   </button>
                 </div>
               </div>
+
               <div className="block-content block-content-full">
+                {loading && (
+                  <div className="spinner-border " role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                )}
                 <table className="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                   <thead>
                     <tr>

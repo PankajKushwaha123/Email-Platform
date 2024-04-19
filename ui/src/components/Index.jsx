@@ -8,18 +8,22 @@ import axios from "axios";
 function Indx() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = () => {
+    setLoading(true);
     const email = username;
     axios
       .post("https://apis.mailmort.co/users/login", { email, password })
       .then((res) => {
         Cookies.set("token", res.data.token, { expires: 7 }); // expires in 7 days
         navigate("/inbox");
+        setLoading(false);
       })
       .catch((err) => {
         alert("incorrect credentials");
         console.log(err);
+        setLoading(false);
       });
   };
   return (
@@ -141,10 +145,23 @@ function Indx() {
                                 type="button"
                                 className="btn btn-lg btn-alt-primary"
                                 onClick={handleSubmit}
+                                disabled={loading}
                               >
                                 <i className="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>{" "}
                                 Sign In
                               </button>
+                              {loading && (
+                                <div className="flex items-center justify-center">
+                                  <div
+                                    className="spinner-border text-primary"
+                                    role="status"
+                                  >
+                                    <span className="visually-hidden">
+                                      Loading...
+                                    </span>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </div>
                         </form>

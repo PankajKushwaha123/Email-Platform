@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
+import Cookies from "js-cookie";
 import Navigationbar from "./Navigationbar";
+import axios from "axios";
 import Footer from "./Footer";
+
 function Transactionalsetting(props) {
   const toggle = props.toggle;
   const mode = props.mode;
+  const [apiKeys, setApiKeys] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const handleApiDelete = async (index) => {
+    try {
+      const response = await axios.delete(
+        "https://apis.mailmort.co/transactional/deleteAPI",
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+          data: { key_name: apiKeys[index].key_name },
+        }
+      );
+      setCounter(counter + 1);
+    } catch (error) {
+      console.log("error while deleting api keys", error);
+    }
+  };
+  useEffect(() => {
+    const fetchApi = async () => {
+      try {
+        const response = await axios.get(
+          "https://apis.mailmort.co/transactional/api_keys",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        setApiKeys(response.data.api_keys);
+        console.log(response.data.api_keys);
+      } catch (error) {
+        console.log("error while getting api keys");
+      }
+    };
+    fetchApi();
+  }, [counter]);
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -159,69 +195,32 @@ function Transactionalsetting(props) {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td className="fst-italic">Login Page</td>
-                        <td className="text-primary">******4t953g</td>
-                        <td className="d-none d-sm-table-cell">
-                          <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                            ACTIVE
-                          </span>
-                        </td>
-                        <td className="text-center">
-                          <div className="btn-group">
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-alt-secondary"
-                              data-bs-toggle="tooltip"
-                              title="Delete Key"
-                            >
-                              <i className="fa fa-fw fa-trash"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="fst-italic">Checkout Page</td>
-                        <td className="text-primary">******adf43f</td>
-                        <td className="d-none d-sm-table-cell">
-                          <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                            ACTIVE
-                          </span>
-                        </td>
-                        <td className="text-center">
-                          <div className="btn-group">
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-alt-secondary"
-                              data-bs-toggle="tooltip"
-                              title="Delete Key"
-                            >
-                              <i className="fa fa-fw fa-trash"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="fst-italic">Admin OTP</td>
-                        <td className="text-primary">******dvsfvz</td>
-                        <td className="d-none d-sm-table-cell">
-                          <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">
-                            INACTIVE
-                          </span>
-                        </td>
-                        <td className="text-center">
-                          <div className="btn-group">
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-alt-secondary"
-                              data-bs-toggle="tooltip"
-                              title="Delete Key"
-                            >
-                              <i className="fa fa-fw fa-trash"></i>
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
+                      {apiKeys.map((x, index) => {
+                        return (
+                          <tr key={index}>
+                            <td className="fst-italic">{x.key_name}</td>
+                            <td className="text-primary">{x.key_value}</td>
+                            <td className="d-none d-sm-table-cell">
+                              <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
+                                ACTIVE
+                              </span>
+                            </td>
+                            <td className="text-center">
+                              <div className="btn-group">
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-alt-secondary"
+                                  data-bs-toggle="tooltip"
+                                  title="Delete Key"
+                                  onClick={() => handleApiDelete(index)}
+                                >
+                                  <i className="fa fa-fw fa-trash"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>

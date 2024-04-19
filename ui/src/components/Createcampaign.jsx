@@ -11,10 +11,51 @@ function Createcampaign(props) {
   const [senderEmail, setSenderEmail] = useState(""); // Assuming '1' is the default value
   const [senders, setSenders] = useState([]);
   const [mailList, setMailList] = useState([]);
+  const [subjectLine, setSubjectLine] = useState("");
+  const [previewText, setPreviewText] = useState("");
+  const [text, setText] = useState("Hello CKEditor!");
+  const [loading, setLoading] = useState(false);
+  const handleSaveDraft = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "https://apis.mailmort.co/campaigns",
+        {
+          campaign_name: cname,
+          sender_email: senderEmail,
+          mailing_lists: mailList,
+          subject: subjectLine,
+          preview_text: previewText,
+          email_content: text,
+          action: "draft",
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      console.log("response send successfully from create campign");
+    } catch (error) {
+      console.log("error while sending create caimpaign", error);
+    } finally {
+      setLoading(false); // Set loading state to false after the request completes
+    }
+  };
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+  const handleSubjectLineChange = (event) => {
+    setSubjectLine(event.target.value);
+  };
+
+  // Event handler for preview text input change
+  const handlePreviewTextChange = (event) => {
+    setPreviewText(event.target.value);
+  };
   // Event handler for when the select value changes
   const handleSelectChange = (event) => {
     setSenderEmail(event.target.value);
   };
+
   useEffect(() => {
     const fetchSenders = async () => {
       try {
@@ -243,6 +284,8 @@ function Createcampaign(props) {
                         id="example-text-input"
                         name="example-text-input"
                         placeholder="Text Input"
+                        value={subjectLine}
+                        onChange={handleSubjectLineChange}
                       />
                     </div>
                     <div className="mb-4">
@@ -258,6 +301,8 @@ function Createcampaign(props) {
                         id="example-text-input"
                         name="example-text-input"
                         placeholder="Text Input"
+                        value={previewText}
+                        onChange={handlePreviewTextChange}
                       />
                     </div>
                   </div>
@@ -271,21 +316,18 @@ function Createcampaign(props) {
               <h3 className="block-title">Email Content</h3>
             </div>
             <div className="block-content">
-              <form
-                action="be_forms_editors.html"
-                method="POST"
-                onSubmit={() => {}}
-              >
-                <div className="mb-4">
-                  <textarea
-                    id="js-ckeditor"
-                    name="ckeditor"
-                    className="w-[100%] shadow-lg shadow-orange-500"
-                  >
-                    Hello CKEditor!
-                  </textarea>
-                </div>
-              </form>
+              <div className="mb-4 ">
+                <textarea
+                  id="js-ckeditor"
+                  name="ckeditor"
+                  className="w-[100%] bg-slate-100 focus:bg-slate-50 "
+                  placeholder="Enter text here..."
+                  value={text}
+                  onChange={handleChange}
+                >
+                  Hello CKEditor!
+                </textarea>
+              </div>
             </div>
           </div>
 
@@ -301,9 +343,18 @@ function Createcampaign(props) {
                 <button
                   type="button"
                   className="btn btn-outline-success me-1 mb-3"
+                  onClick={handleSaveDraft}
+                  disabled={loading}
                 >
                   <i className="fa fa-fw fa-save me-1"></i> Save as draft
                 </button>
+                {loading && (
+                  <div className="flex items-center justify-center">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="mb-4">

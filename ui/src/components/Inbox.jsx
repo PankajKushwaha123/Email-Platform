@@ -53,7 +53,7 @@ function Inbox(props) {
         <main id="main-container">
           <div className="content">
             <div className="row">
-              <div className="col-md-5 col-xl-3">
+              <div className="col-md-5 col-xl-1">
                 <div className="d-md-none push">
                   <button
                     type="button"
@@ -66,7 +66,7 @@ function Inbox(props) {
                   </button>
                 </div>
 
-                <div id="one-inbox-side-nav" className="d-none d-md-block push">
+                {/*  <div id="one-inbox-side-nav" className="d-none d-md-block push">
                   <div className={`block block-rounded block-mode-actual`}>
                     <div className="block-header block-header-default">
                       <h3 className="block-title">Inbox</h3>
@@ -99,11 +99,7 @@ function Inbox(props) {
                             </span>
                           </a>
                         </li>
-                        {/*   <li>
-                          <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full  border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:ring-2">
-                            hi
-                          </button>
-                        </li> */}
+                       
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
@@ -212,7 +208,7 @@ function Inbox(props) {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="col-md-7 col-xl-9">
                 {/* to toogle to full screen block-mode-fullscreen */}

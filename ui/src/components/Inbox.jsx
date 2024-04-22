@@ -15,7 +15,7 @@ import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import MailItem from "./MailItem";
 import Mails from "./module/inboxData.json";
-import TempHeader from "./TempHeader";
+
 function Inbox(props) {
   const toggle = props.toggle;
   const mode = props.mode;

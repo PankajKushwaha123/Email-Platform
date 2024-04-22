@@ -107,7 +107,7 @@ function Indx() {
                         >
                           <div className="mb-4">
                             <input
-                              type="text"
+                              type="Email"
                               className="form-control form-control-lg form-control-alt py-3"
                               id="login-username"
                               name="login-username"

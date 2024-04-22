@@ -5,16 +5,23 @@ import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import axios from "axios";
 import Input from "./Input";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 function Senders(props) {
+  const [show, setShow] = useState(false);
   const [em, setEm] = useState("");
   const [sn, setSn] = useState("");
   const toggle = props.toggle;
   const mode = props.mode;
   const [senders, setSenders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const addSender = () => {
     console.log("inside add sender");
+
     const addSenders = async () => {
+      setLoading(true);
       console.log("sending post");
       try {
         const response = await axios.post(
@@ -41,6 +48,8 @@ function Senders(props) {
           } catch (error) {
             console.log("errror while fetching ", error);
           } finally {
+            setEm("");
+            setSn("");
             setLoading(false); // Set loading state to false after the request completes
           }
         };
@@ -107,6 +116,56 @@ function Senders(props) {
       <Navigationbar onClickHandler={toggle} />
       <Header />
       <main id="main-container">
+        {show && (
+          <>
+            {/* <Button variant="primary" onClick={handleShow}></Button>
+             */}
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <div className="flex flex-row justify-center ">
+                    <h className="justify-center">Add sender</h>
+                  </div>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Input
+                  name="Email"
+                  type="text"
+                  value={em}
+                  set={setEm}
+                  placeholder="Email"
+                />
+                <Input
+                  name="Name"
+                  type="text"
+                  value={sn}
+                  set={setSn}
+                  placeholder="name"
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Exit
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    addSender();
+                    handleClose();
+                  }}
+                >
+                  Add
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        )}
         <div className="bg-body-light">
           <div className="content content-full">
             <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -140,26 +199,13 @@ function Senders(props) {
           <div className="block block-rounded">
             <div className="block-header block-header-default">
               <h3 className="block-title">Senders</h3>
-              <Input
-                name="Email"
-                type="text"
-                value={em}
-                set={setEm}
-                placeholder="Email"
-              />
-              <Input
-                name="Name"
-                type="text"
-                value={sn}
-                set={setSn}
-                placeholder="name"
-              />
+
               <div className="block-options">
                 <button
                   type="button"
                   className="btn btn-sm btn-secondary"
                   onClick={() => {
-                    addSender();
+                    setShow(true);
                   }}
                 >
                   <i className="fa fa-plus"></i> Create new sender

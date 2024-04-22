@@ -24,7 +24,7 @@ function Campaign(props) {
               <h2 className="h6 fw-medium fw-medium text-muted mb-0">
                 Welcome{" "}
                 <a className="fw-semibold" href="#">
-                  John
+                  user...
                 </a>
                 , everything looks great.
               </h2>

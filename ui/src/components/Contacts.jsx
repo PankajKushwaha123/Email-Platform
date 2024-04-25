@@ -126,14 +126,22 @@ function Contacts(props) {
                   <tbody>
                     {contacts.map((x) => {
                       return (
-                        <ContactItem
-                          key={id}
-                          id={id++}
-                          name={x.first_name + " " + x.last_name}
-                          email={x.email}
-                          lists={x.mailing_lists}
-                          phone={x.phone}
-                        />
+                        <tr>
+                          <td className="text-center fs-sm">{id++}</td>
+                          <td className="fw-semibold fs-sm">
+                            {x.first_name + " " + x.last_name}
+                          </td>
+                          <td className="d-none d-sm-table-cell fs-sm">
+                            {x.email}
+                            <span className="text-muted"></span>
+                          </td>
+                          <td className="d-none d-sm-table-cell">
+                            {x.mailing_lists}
+                          </td>
+                          <td>
+                            <span className="text-muted fs-sm">{x.phone}</span>
+                          </td>
+                        </tr>
                       );
                     })}
                   </tbody>

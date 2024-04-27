@@ -26,7 +26,7 @@ function Createcampaign(props) {
           mailing_lists: mailList,
           subject: subjectLine,
           preview_text: previewText,
-          email_content: text,
+          email_content: Buffer.from(text).toString("base64"),
           action: p,
         },
         {
@@ -367,7 +367,7 @@ function Createcampaign(props) {
                   type="button"
                   className="btn btn-alt-success me-1 mb-3"
                   onClick={() => {
-                    handleSaveDraft("send");
+                    handleSaveDraft("test");
                   }}
                 >
                   <i className="fa fa-fw fa-paper-plane me-1"></i> Send test
@@ -386,8 +386,14 @@ function Createcampaign(props) {
                 <p className="fs-sm text-muted">
                   Schedule to campaign to be sent now or at a later time.
                 </p>
-                <button type="button" className="btn btn-success me-1 mb-3">
-                  <i className="fa fa-fw fa-hourglass me-1"></i> Schedule
+                <button
+                  type="button"
+                  className="btn btn-success me-1 mb-3"
+                  onClick={() => {
+                    handleSaveDraft("send");
+                  }}
+                >
+                  <i className="fa fa-fw fa-box me-1"></i> Send now
                 </button>
               </div>
             </div>

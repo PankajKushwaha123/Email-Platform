@@ -6,7 +6,7 @@ import contactsData from "./module/contactsData.json";
 import ContactItem from "./ContactItem";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { UUID } from "uuid";
+
 function Lists(props) {
   const toggle = props.toggle;
   const mode = props.mode;

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import LineChart from "./LineChart";
-import { useState } from "react";
+
 import slc from "./module/statsLinechart.json";
+import axios from "axios";
+import Cookies from "js-cookie";
 import InfoCard from "./InfoCard";
 import CampaignItem from "./CampaignItem";
 import data from "./module/dashbord.json";
@@ -12,6 +14,28 @@ function Statistics(props) {
   const toggle = props.toggle;
   const mode = props.mode;
   const arr = data.rows;
+  const [fdate, setFdate] = useState("");
+  const [tdate, setTdate] = useState("");
+  const [campaign, setCampaign] = useState([]);
+  const handleOnClick = async () => {
+    try {
+      const response = await axios.post(
+        "https://apis.mailmort.co/campaigns/campaignstats",
+        {
+          from_date: fdate,
+          to_date: tdate,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+
+      setCampaign(response.data.campaigns);
+    } catch (error) {
+      console.log("errror while fetching campaigns", error);
+    }
+  };
+
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -54,57 +78,68 @@ function Statistics(props) {
               <h3 className="block-title">Select Campaigns</h3>
             </div>
             <div className="block-content block-content-full">
-              <form
-                action="be_forms_plugins.html"
-                method="POST"
-                onSubmit={() => {}}
-              >
-                <h2 className="content-heading border-bottom mb-4 pb-2">
-                  Date Range
-                </h2>
-                <div className="row">
-                  <div className="col-lg-4">
-                    <p className="fs-sm text-muted">
-                      Select range of dates for which statistics to be generated
-                    </p>
-                  </div>
-                  <div className="col-lg-8 col-xl-6">
-                    <div className="mb-4">
-                      <div
-                        className="input-daterange input-group"
-                        data-date-format="mm/dd/yyyy"
+              <h2 className="content-heading border-bottom mb-4 pb-2">
+                Date Range
+              </h2>
+              <div className="row">
+                <div className="col-lg-4">
+                  <p className="fs-sm text-muted">
+                    Select range of dates for which statistics to be generated
+                  </p>
+                </div>
+                <div className="col-lg-8 col-xl-6">
+                  <div className="mb-4">
+                    <div
+                      className="input-daterange input-group"
+                      data-date-format="mm/dd/yyyy"
+                      data-week-start="1"
+                      data-autoclose="true"
+                      data-today-highlight="true"
+                    >
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="example-daterange1"
+                        name="from_date"
+                        value={fdate}
+                        placeholder="yyyy-mm-dd"
                         data-week-start="1"
                         data-autoclose="true"
                         data-today-highlight="true"
+                        onChange={(e) => {
+                          setFdate(e.target.value);
+                        }}
+                      />
+                      <span className="input-group-text fw-semibold">
+                        <i className="fa fa-fw fa-arrow-right"></i>
+                      </span>
+
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="example-daterange2"
+                        name="to_date"
+                        value={tdate}
+                        onChange={(e) => {
+                          setTdate(e.target.value);
+                        }}
+                        placeholder="yyyy-mm-dd"
+                        data-week-start="1"
+                        data-autoclose="true"
+                        data-today-highlight="true"
+                      />
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => {
+                          handleOnClick();
+                        }}
                       >
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="example-daterange1"
-                          name="example-daterange1"
-                          placeholder="From"
-                          data-week-start="1"
-                          data-autoclose="true"
-                          data-today-highlight="true"
-                        />
-                        <span className="input-group-text fw-semibold">
-                          <i className="fa fa-fw fa-arrow-right"></i>
-                        </span>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="example-daterange2"
-                          name="example-daterange2"
-                          placeholder="To"
-                          data-week-start="1"
-                          data-autoclose="true"
-                          data-today-highlight="true"
-                        />
-                      </div>
+                        get campiagn
+                      </button>
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
 
@@ -260,14 +295,14 @@ function Statistics(props) {
                 <table className="table table-hover table-vcenter">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th className="d-none d-xl-table-cell">Recipients</th>
+                      <th>#</th>
+                      <th className="d-none d-xl-table-cell">CAMPAIGN NAME</th>
                       <th>Status</th>
                       <th className="d-none d-sm-table-cell text-center">
-                        Opening Rate
+                        NO OF RECEPICIENTS
                       </th>
                       <th className="d-none d-sm-table-cell text-end">
-                        Created
+                        CREATED AT
                       </th>
                       <th className="d-none d-sm-table-cell text-end">
                         Actions
@@ -275,19 +310,63 @@ function Statistics(props) {
                     </tr>
                   </thead>
                   <tbody className="fs-sm">
-                    {arr.map((x) => {
+                    {campaign.map((x, index) => {
                       return (
-                        <CampaignItem
-                          key={x.id}
-                          id={x.id}
-                          type={x.type}
-                          recipients={x.recipients}
-                          dgnr={x.dgnr}
-                          status={x.status}
-                          rate={x.rate}
-                          time={x.time}
-                          actions={x.actions}
-                        />
+                        <tr key={index}>
+                          <td>
+                            <a className="fw-semibold" href="#">
+                              {index + 1}{" "}
+                            </a>
+                          </td>
+                          <td className="d-none d-xl-table-cell">
+                            <a className="fw-semibold" href="#">
+                              {x.campaign_name}
+                            </a>
+                            <p className="fs-sm fw-medium text-muted mb-0">
+                              <span className=" text-slate-900">
+                                Subject :{" "}
+                              </span>
+                              {x.subject}
+                            </p>
+                          </td>
+                          <td>
+                            <span
+                              className={`fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-${"success"}`}
+                            >
+                              {x.status}
+                            </span>
+                          </td>
+                          <td className="d-none d-sm-table-cell">
+                            <div className="flex flex-row justify-center">
+                              {x.mails.length}
+                            </div>
+                          </td>
+                          <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
+                            {x.createdAt.substring(0, 10)}
+                          </td>
+                          <td className="d-none d-sm-table-cell text-end">
+                            <div className="btn-group">
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-alt-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Edit Client"
+                                onClick={() => {}}
+                              >
+                                <i className="fa fa-fw fa-pencil-alt"></i>
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-alt-secondary"
+                                data-bs-toggle="tooltip"
+                                title="Remove Client"
+                                onClick={() => {}}
+                              >
+                                <i className="fa fa-fw fa-times"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
                       );
                     })}
                   </tbody>

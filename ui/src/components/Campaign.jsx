@@ -327,15 +327,29 @@ function Campaign(props) {
                           </td>
                           <td className="d-none d-sm-table-cell text-end">
                             <div className="btn-group">
-                              <button
-                                type="button"
-                                className="btn btn-sm btn-alt-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Edit Client"
-                                onClick={() => openModal(x)}
-                              >
-                                <i className="fa fa-fw fa-pencil-alt"></i>
-                              </button>
+                              {x.status == "Draft" && (
+                                <Link to={`/Createcampaign?id=${x._id}`}>
+                                  <button
+                                    type="button"
+                                    className="btn btn-sm btn-alt-secondary"
+                                    data-bs-toggle="tooltip"
+                                    title="Edit Client"
+                                  >
+                                    <i className="fa fa-fw fa-pencil-alt"></i>
+                                  </button>
+                                </Link>
+                              )}
+                              {x.status != "Draft" && (
+                                <button
+                                  type="button"
+                                  className="btn btn-sm btn-alt-secondary"
+                                  data-bs-toggle="tooltip"
+                                  title="View Details"
+                                  onClick={() => openModal(x)}
+                                >
+                                  <i className="fa fa-fw fa-search"></i>
+                                </button>
+                              )}
                               <button
                                 type="button"
                                 className="btn btn-sm btn-alt-secondary"
@@ -353,47 +367,6 @@ function Campaign(props) {
                   </tbody>
                 </table>
               </div>
-            </div>
-            <div className="block-content block-content-full bg-body-light">
-              <nav aria-label="Photos Search Navigation">
-                <ul className="pagination pagination-sm justify-content-end mb-0">
-                  <li className="page-item">
-                    <a
-                      className="page-link"
-                      href="#"
-                      tabIndex="-1"
-                      aria-label="Previous"
-                    >
-                      Prev
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      4
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
-                      Next
-                    </a>
-                  </li>
-                </ul>
-              </nav>
             </div>
           </div>
         </div>

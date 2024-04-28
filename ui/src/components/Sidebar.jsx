@@ -16,10 +16,26 @@ var c12 = c;
 var c13 = c;
 var c14 = c;
 var c15 = c;
+var c16 = c;
 function Sidebar() {
   let loc = useLocation().pathname;
-
-  c2 = c3 = c4 = c5 = c6 = c7 = c8 = c9 = c10 = c11 = c12 = c13 = c14 = c15 = c;
+  c1 =
+    c2 =
+    c3 =
+    c4 =
+    c5 =
+    c6 =
+    c7 =
+    c8 =
+    c9 =
+    c10 =
+    c11 =
+    c12 =
+    c13 =
+    c14 =
+    c15 =
+    c16 =
+      c;
   if (loc == "/inbox") {
     c1 = c + " active";
   } else if (loc == "/contacts") {
@@ -62,6 +78,8 @@ function Sidebar() {
     c14 = c + " active";
   } else if (loc == "/logout") {
     c15 = c + " active";
+  } else if (loc == "/inboxes") {
+    c16 = c + " active";
   }
 
   return (
@@ -75,6 +93,12 @@ function Sidebar() {
 
               <i className="nav-main-link-icon si si-envelope-letter"></i>
               <span className="nav-main-link-name">Admin Inbox </span>
+            </Link>
+          </li>
+          <li className="nav-main-item">
+            <Link to="/inboxes" className={c16}>
+              <i className="nav-main-link-icon si si-logout"></i>
+              <span className="nav-main-link-name">Inboxes</span>
             </Link>
           </li>
 

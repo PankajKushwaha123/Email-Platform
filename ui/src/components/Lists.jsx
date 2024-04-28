@@ -12,7 +12,56 @@ function Lists(props) {
   const mode = props.mode;
   const arr = contactsData.contacts;
   const [loading, setLoading] = useState(true);
+  const [c, setC] = useState(0);
   const [lists, setLists] = useState([]);
+  const [list_id, setList_id] = useState();
+  const [contactInList, setContactInList] = useState([]);
+  const getMailingListContacts = async () => {
+    try {
+      const response = await axios.post(
+        "https://apis.mailmort.co/contacts/listcontacts",
+        {
+          list_id,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+
+      setContactInList(response.data.contacts);
+    } catch (error) {
+      console.log("unabe to fetch contacts of that lists", error);
+    }
+  };
+  const deleteLists = (index) => {
+    const deleteList = async () => {
+      try {
+        const response = await axios.delete(
+          "https://apis.mailmort.co/contacts/deletelist",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+            data: { list_name: lists[index] },
+          }
+        );
+        setC(c + 1);
+      } catch (error) {
+        console.log("COULD NOT DELETE Lists ", error);
+      }
+    };
+    deleteList();
+    // Create a new array without the sender at the specified index
+    const updatedSenders = lists.filter((_, i) => i !== index);
+
+    // Check if updatedSenders is empty
+    if (updatedSenders.length === 0) {
+      // If updatedSenders is empty, initialize senders with an empty array
+      setLists([]);
+    } else {
+      // Otherwise, update the senders state with the new array
+      setLists(updatedSenders);
+    }
+    // Create a copy of the senders array
+  };
   useEffect(() => {
     const fetchLists = async () => {
       try {
@@ -31,7 +80,7 @@ function Lists(props) {
       }
     };
     fetchLists();
-  }, []);
+  }, [c]);
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -86,7 +135,7 @@ function Lists(props) {
                       </th>
                       <th>Name</th>
                       <th className="d-none d-sm-table-cell">Creation Date</th>
-                      <th className="d-none d-sm-table-cell">Contacts</th>
+
                       <th className="text-center" style={{ width: "100px" }}>
                         Actions
                       </th>
@@ -103,7 +152,7 @@ function Lists(props) {
                             <a href="#contactsTable">{x}</a>
                           </td>
                           <td className="d-none d-sm-table-cell">27-05-2023</td>
-                          <td className="d-none d-sm-table-cell">923</td>
+
                           <td className="text-center">
                             <div className="btn-group">
                               <button
@@ -112,6 +161,10 @@ function Lists(props) {
                                 data-bs-toggle="tooltip"
                                 title=""
                                 data-bs-original-title="View Contacts"
+                                onClick={() => {
+                                  setList_id(x);
+                                  getMailingListContacts();
+                                }}
                               >
                                 <i className="fa fa-fw fa-pencil"></i>
                               </button>
@@ -121,6 +174,9 @@ function Lists(props) {
                                 data-bs-toggle="tooltip"
                                 title=""
                                 data-bs-original-title="Delete List"
+                                onClick={() => {
+                                  deleteLists(index);
+                                }}
                               >
                                 <i className="fa fa-fw fa-trash"></i>
                               </button>
@@ -139,7 +195,9 @@ function Lists(props) {
             <div className="block-header block-header-default">
               <h3 className="block-title">
                 Contacts in the list{" "}
-                <small className="fst-italic">({arr.length} contacts)</small>
+                <small className="fst-italic">
+                  ({contactInList.length} contacts)
+                </small>
               </h3>
             </div>
             <div className="block-content block-content-full">
@@ -160,22 +218,30 @@ function Lists(props) {
                       className="d-none d-sm-table-cell"
                       style={{ width: "15%" }}
                     >
-                      Type
+                      Lists
                     </th>
-                    <th style={{ width: " 15%" }}>Registered</th>
+                    <th style={{ width: " 15%" }}>Phone No.</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {arr.map((x) => {
+                  {contactInList.map((x, index) => {
                     return (
-                      <ContactItem
-                        key={x.id}
-                        id={x.id}
-                        name={x.name}
-                        email={x.name}
-                        type={x.type}
-                        registered={x.registered}
-                      />
+                      <tr key={index}>
+                        <td className="text-center fs-sm">{index + 1}</td>
+                        <td className="fw-semibold fs-sm">
+                          {x.first_name + " " + x.last_name}
+                        </td>
+                        <td className="d-none d-sm-table-cell fs-sm">
+                          {x.email}
+                          <span className="text-muted"></span>
+                        </td>
+                        <td className="d-none d-sm-table-cell">
+                          {x.mailing_lists.join(",")}
+                        </td>
+                        <td>
+                          <span className="text-muted fs-sm">{x.phone}</span>
+                        </td>
+                      </tr>
                     );
                   })}
                 </tbody>

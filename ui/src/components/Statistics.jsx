@@ -17,6 +17,7 @@ function Statistics(props) {
   const [fdate, setFdate] = useState("");
   const [tdate, setTdate] = useState("");
   const [campaign, setCampaign] = useState([]);
+  const [stats, setStats] = useState({});
   const handleOnClick = async () => {
     try {
       const response = await axios.post(
@@ -31,6 +32,7 @@ function Statistics(props) {
       );
 
       setCampaign(response.data.campaigns);
+      setStats(response.data.statistics);
     } catch (error) {
       console.log("errror while fetching campaigns", error);
     }
@@ -177,26 +179,32 @@ function Statistics(props) {
             </div>
             <div className="col-xl-4">
               <InfoCard
-                num="32"
-                des="Emails Sent"
+                num={stats.recipients}
+                des="Recipients"
                 li="See Below"
                 symbol="far fa-gem fs-3 text-primary"
               />
               <InfoCard
-                num="1254"
-                des="Recipients"
+                num={stats.delivery_rate}
+                des="Delivery_rate"
                 li="View all Contacts"
                 symbol="far fa-user-circle fs-3 text-primary"
               />
               <InfoCard
-                num="65.7%"
-                des="Opened"
+                num={stats.opening_rate}
+                des="Opening Rate"
                 li="View all messages"
                 symbol="far fa-paper-plane fs-3 text-primary"
               />
               <InfoCard
-                num="4.9%"
-                des="Clicked"
+                num={stats.conversion_rate}
+                des="Conversion Rate"
+                li="View statistics"
+                symbol="fa fa-chart-bar fs-3 text-primary"
+              />
+              <InfoCard
+                num={stats.unsubscription_rate}
+                des="Unsubscription Rate"
                 li="View statistics"
                 symbol="fa fa-chart-bar fs-3 text-primary"
               />

@@ -2,7 +2,7 @@ import React from "react";
 
 function Input(props) {
   return (
-    <div className="relative  mt-6">
+    <div className="relative  mt-3">
       <input
         id={props.name}
         type={props.type}
@@ -10,7 +10,11 @@ function Input(props) {
         name={props.name}
         value={props.value}
         onChange={(e) => {
-          props.set(e.target.value);
+          if (props.set) {
+            props.set(e.target.value);
+          } else {
+            props.onChange(e);
+          }
         }}
         className="placeholder:text-white-0
       block   w-full 

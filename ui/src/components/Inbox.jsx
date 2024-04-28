@@ -78,10 +78,12 @@ function Inbox(props) {
                   <div className="modal-content">
                     <div className="block block-rounded block-transparent mb-0">
                       <div className="block-header block-header-default">
-                        <h3 className="block-title">Subject: </h3>
+                        <h3 className="block-title">Subject: {temp.subject}</h3>
                       </div>
 
-                      <div className="block-content">email body</div>
+                      <div className="block-content">
+                        <iframe srcdoc={temp.html}></iframe>
+                      </div>
                     </div>
                   </div>
                 </div>

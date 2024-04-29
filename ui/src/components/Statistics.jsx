@@ -3,14 +3,19 @@ import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import LineChart from "./LineChart";
-
-import slc from "./module/statsLinechart.json";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import InfoCard from "./InfoCard";
-import CampaignItem from "./CampaignItem";
-import data from "./module/dashbord.json";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 function Statistics(props) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
+  }, []);
   const chartData = {
     data: {
       labels: [], // Replace with indexes
@@ -33,23 +38,30 @@ function Statistics(props) {
           label: " conversionRates",
           data: [],
           borderColor: ["rgba(160,220,20,0.9)"],
-          pointBorderColor: ["rgba(215,206,86,0.2)"],
-          pointBackgroundColor: ["rgba(0,0,0,1)"],
+          pointBorderColor: ["rgba(255,255,86,0.2)"],
+          pointBackgroundColor: ["rgba(255,255,255,1)"],
         },
         {
           label: " Unsubscription Rates",
           data: [],
-          borderColor: ["rgba(120,220,20,0.9)"],
+          borderColor: ["rgba(255,255,255,0.9)"],
           pointBorderColor: ["rgba(175,206,86,0.2)"],
           pointBackgroundColor: ["rgba(0,0,0,1)"],
         },
       ],
     },
     options: {
+      legend: {
+        labels: {
+          fontColor: "blue",
+          fontSize: 18,
+        },
+      },
       plugins: {
         title: {
           display: true,
           text: "click through rate",
+          color: " ",
         },
       },
       scales: {
@@ -77,19 +89,29 @@ function Statistics(props) {
   const [loading, setLoading] = useState(false);
   const toggle = props.toggle;
   const mode = props.mode;
-  const arr = data.rows;
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [fdate, setFdate] = useState("");
   const [tdate, setTdate] = useState("");
   const [campaign, setCampaign] = useState([]);
   const [stats, setStats] = useState({});
-
+  const [temp, setTemp] = useState();
   if (campaign.length !== 0) {
     campaign.forEach((x, index) => {
       const statistics = x.campaign_statistics;
-      chartData.data.datasets[0].data.push(statistics.delivery_rate + 10);
-      chartData.data.datasets[1].data.push(statistics.opening_rate + 13);
-      chartData.data.datasets[2].data.push(statistics.conversion_rate + 99);
-      chartData.data.datasets[3].data.push(statistics.unsubscription_rate + 88);
+      chartData.data.datasets[0].data.push(
+        (statistics.delivery_rate * 10).toFixed(1)
+      );
+      chartData.data.datasets[1].data.push(
+        (statistics.opening_rate * 10).toFixed(1)
+      );
+      chartData.data.datasets[2].data.push(
+        (statistics.conversion_rate * 10).toFixed(1)
+      );
+      chartData.data.datasets[3].data.push(
+        (statistics.unsubscription_rate * 10).toFixed(1)
+      );
       chartData.data.labels.push(index + 1); // Adding 1 to index to start from 1
     });
   }
@@ -97,11 +119,16 @@ function Statistics(props) {
   const handleOnClick = async () => {
     try {
       setLoading(true);
+      let [day, month, year] = fdate.split("/");
+      let f_date = `${year}-${month}-${day}`;
+      [day, month, year] = tdate.split("/");
+      let t_date = `${year}-${month}-${day}`;
+
       const response = await axios.post(
         "https://apis.mailmort.co/campaigns/campaignstats",
         {
-          from_date: fdate,
-          to_date: tdate,
+          from_date: f_date,
+          to_date: t_date,
         },
         {
           headers: { Authorization: "Bearer " + Cookies.get("token") },
@@ -116,12 +143,120 @@ function Statistics(props) {
       setLoading(false);
     }
   };
+  const openModal = (x) => {
+    setTemp(x);
+    setShow(true);
+  };
 
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
 
       <Header />
+      {show && (
+        <>
+          {/* <Button variant="primary" onClick={handleShow}></Button>
+           */}
+          <Modal show={show} onHide={handleClose} dialogClassName="modal-lg">
+            <Modal.Header closeButton>
+              <Modal.Title>
+                <div className="flex flex-row justify-center ">
+                  <h className="justify-center">{temp.campaign_name}</h>
+                </div>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div>
+                <span className="text-slate-900 font-bold">Subject : </span>
+                {temp.subject}
+              </div>
+              <div>
+                <span className="text-slate-900 font-bold "> Status : </span>
+                {temp.status}
+              </div>
+              <div>
+                <span className="text-slate-900 font-bold ">
+                  {" "}
+                  preview_text :{" "}
+                </span>
+                {temp.preview_text}
+              </div>
+              <div>
+                <span className="text-slate-900 font-bold "> content : </span>
+                <iframe
+                  srcDoc={temp.content}
+                  title="Content Frame"
+                  width="100%"
+                  height="300"
+                ></iframe>
+              </div>
+              <div>
+                <span className="font-bold text-slate-950">Emails</span>
+                <div className="table-responsive">
+                  <table className="table table-hover table-vcenter">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th className="d-none d-xl-table-cell">Email id</th>
+                        <th>Delivered</th>
+                        <th className="d-none d-sm-table-cell text-center">
+                          Opened
+                        </th>
+                        <th className="d-none d-sm-table-cell text-end">
+                          Clicks
+                        </th>
+                        <th className="d-none d-sm-table-cell text-end">
+                          Unsubcribed
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="fs-sm">
+                      {temp.mails.map((x, index) => {
+                        return (
+                          <tr>
+                            <td>
+                              <a className="fw-semibold" href="#">
+                                {index + 1}{" "}
+                              </a>
+                            </td>
+                            <td className="d-none d-xl-table-cell">
+                              <a className="fw-semibold" href="#">
+                                {x.contact_id}
+                              </a>
+                            </td>
+                            <td>
+                              {x.statistics.delivery_status ? "true" : "false"}
+                            </td>
+                            <td className=" flex flex-row justify-center">
+                              {x.statistics.opening_status ? "true" : "false"}
+                            </td>
+                            <td className="d-none d-sm-table-cell fw-semibold text-muted text-end">
+                              {x.statistics.clicks}
+                            </td>
+                            <td className=" flex flex-row justify-center">
+                              {x.statistics.unsubscription ? "true" : "false"}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Exit
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      )}
       {loading && (
         <div
           className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
@@ -183,11 +318,12 @@ function Statistics(props) {
                       data-today-highlight="true"
                     >
                       <input
-                        type="text"
+                        type="date"
                         className="form-control"
                         id="example-daterange1"
                         name="from_date"
                         value={fdate}
+                        style={{ fontSize: "20px" }}
                         placeholder="yyyy-mm-dd"
                         data-week-start="1"
                         data-autoclose="true"
@@ -201,11 +337,12 @@ function Statistics(props) {
                       </span>
 
                       <input
-                        type="text"
+                        type="date"
                         className="form-control"
                         id="example-daterange2"
                         name="to_date"
                         value={tdate}
+                        style={{ fontSize: "20px" }}
                         onChange={(e) => {
                           setTdate(e.target.value);
                         }}
@@ -220,7 +357,7 @@ function Statistics(props) {
                           handleOnClick();
                         }}
                       >
-                        get campiagn
+                        Get campiagn
                       </button>
                     </div>
                   </div>
@@ -246,14 +383,15 @@ function Statistics(props) {
                     </button>
                   </div>
                 </div>
-                <div className="block-content block-content-full text-center ">
+                <div className=" group block-content block-content-full text-center ">
                   <div className="col-xxl-9 d-flex">
                     <div className="card border-0 flex-fill w-100  ">
-                      <div className=" group card-header border-4card-header-space-between ">
+                      <div className=" group  card-header border-4card-header-space-between space-y-4 ">
                         <h2 className="card-header-title h4 text-uppercase">
-                          heading
+                          Chart
                         </h2>
-                        <div className="top-0 chart-container bg-white  group-hover:mt-10 transition-all duration-300">
+
+                        <div className=" chart-container bg-[#d5c7cb]   transition-all duration-300">
                           <LineChart
                             data={chartData.data}
                             option={chartData.options}
@@ -273,19 +411,19 @@ function Statistics(props) {
                 symbol="far fa-gem fs-3 text-primary"
               />
               <InfoCard
-                num={stats.delivery_rate}
+                num={(stats.delivery_rate * 100).toFixed(2) + "%"}
                 des="Delivery_rate"
                 li="View all Contacts"
                 symbol="far fa-user-circle fs-3 text-primary"
               />
               <InfoCard
-                num={stats.opening_rate}
+                num={(stats.opening_rate * 100).toFixed(2) + "%"}
                 des="Opening Rate"
                 li="View all messages"
                 symbol="far fa-paper-plane fs-3 text-primary"
               />
               <InfoCard
-                num={stats.conversion_rate}
+                num={(stats.conversion_rate * 100).toFixed(2) + "%"}
                 des="Conversion Rate"
                 li="View statistics"
                 symbol="fa fa-chart-bar fs-3 text-primary"
@@ -447,18 +585,9 @@ function Statistics(props) {
                                 className="btn btn-sm btn-alt-secondary"
                                 data-bs-toggle="tooltip"
                                 title="Edit Client"
-                                onClick={() => {}}
+                                onClick={() => openModal(x)}
                               >
                                 <i className="fa fa-fw fa-pencil-alt"></i>
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-sm btn-alt-secondary"
-                                data-bs-toggle="tooltip"
-                                title="Remove Client"
-                                onClick={() => {}}
-                              >
-                                <i className="fa fa-fw fa-times"></i>
                               </button>
                             </div>
                           </td>

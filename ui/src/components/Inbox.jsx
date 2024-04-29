@@ -12,13 +12,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Cookies from "js-cookie";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
-import MailItem from "./MailItem";
-import Mails from "./module/inboxData.json";
 
 function Inbox(props) {
   const [loading, setLoading] = useState(false);
@@ -29,11 +26,15 @@ function Inbox(props) {
   const [temp, setTemp] = useState({});
   const toggle = props.toggle;
   const mode = props.mode;
+  const navigate = useNavigate();
   const [screen, setScreen] = useState("actual");
   const changeScreenSize = () => {
     screen == "actual" ? setScreen("fullscreen") : setScreen("actual");
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchMails = async () => {
       try {
         setLoading(true);

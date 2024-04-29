@@ -118,10 +118,13 @@ function Senders(props) {
       <Navigationbar onClickHandler={toggle} />
       <Header />
       {loading && (
-        <div
-          className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
-          role="status"
-        ></div>
+        <div className="relative">
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent z-[101]"></div>
+        </div>
       )}
       <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
         {show && (

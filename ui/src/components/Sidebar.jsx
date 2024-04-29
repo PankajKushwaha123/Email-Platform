@@ -143,12 +143,7 @@ function Sidebar() {
           </li>
 
           <li className="nav-main-heading">Transactional</li>
-          <li className="nav-main-item">
-            <Link to="/transactional" className={c8}>
-              <i className="nav-main-link-icon si si-vector"></i>
-              <span className="nav-main-link-name">Configurations</span>
-            </Link>
-          </li>
+
           <li className="nav-main-item">
             <Link to="/transactionalstats" className={c9}>
               <i className="nav-main-link-icon si si-bar-chart"></i>
@@ -181,12 +176,7 @@ function Sidebar() {
               <span className="nav-main-link-name">Security</span>
             </Link>
           </li>
-          <li className="nav-main-item">
-            <Link to="/myplan" className={c14}>
-              <i className="nav-main-link-icon si si-wallet"></i>
-              <span className="nav-main-link-name">My Plan</span>
-            </Link>
-          </li>
+
           <li className="nav-main-item">
             <Link to="/logout" className={c15}>
               <i className="nav-main-link-icon si si-logout"></i>

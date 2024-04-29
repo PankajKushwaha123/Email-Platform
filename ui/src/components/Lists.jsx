@@ -6,16 +6,59 @@ import contactsData from "./module/contactsData.json";
 import ContactItem from "./ContactItem";
 import axios from "axios";
 import Cookies from "js-cookie";
-
+import Input from "./Input";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { Link, useNavigate } from "react-router-dom";
 function Lists(props) {
+  const [show, setShow] = useState(false);
   const toggle = props.toggle;
   const mode = props.mode;
   const arr = contactsData.contacts;
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [c, setC] = useState(0);
   const [lists, setLists] = useState([]);
   const [list_id, setList_id] = useState();
+  const [list_name, setList_name] = useState("");
+  const [emails, setEmails] = useState([]);
+  const [options, setOptions] = useState([]);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [contactInList, setContactInList] = useState([]);
+  var num = [];
+  const navigate = useNavigate();
+  const createList = async () => {
+    try {
+      const response = await axios.post(
+        "https://apis.mailmort.co/contacts/createlist",
+        {
+          list_name,
+          emails: options,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      setC(c + 1);
+    } catch (error) {
+      alert("list not added");
+      console.log(" lists not addde", error);
+    }
+  };
+  const getContacts = async () => {
+    try {
+      const response = await axios.get(
+        "https://apis.mailmort.co/contacts/all",
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      setEmails(response.data.contacts);
+    } catch (error) {
+      alert("could not fetch all contacts");
+      console.log(error);
+    }
+  };
   const getMailingListContacts = async () => {
     try {
       setLoading(true);
@@ -69,9 +112,13 @@ function Lists(props) {
     // Create a copy of the senders array
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchLists = async () => {
       try {
         setLoading(true);
+        await getContacts();
         const response = await axios.get(
           "https://apis.mailmort.co/contacts/lists",
           {
@@ -88,13 +135,111 @@ function Lists(props) {
     };
     fetchLists();
   }, [c]);
+
+  const handleCheckboxChange = (event) => {
+    const { value, checked } = event.target;
+
+    // If checkbox is checked, add email to the array
+    if (checked) {
+      setOptions((prevOptions) => [...prevOptions, value]);
+    } else {
+      // If checkbox is unchecked, remove email from the array
+      setOptions((prevOptions) =>
+        prevOptions.filter((email) => email !== value)
+      );
+    }
+  };
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
 
       <Header />
+      {loading && (
+        <div className="relative">
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent z-[101]"></div>
+        </div>
+      )}
+      <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
+        {show && (
+          <>
+            {/* <Button variant="primary" onClick={handleShow}></Button>
+             */}
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <div className="flex flex-row justify-center ">
+                    <h className="justify-center">Add List</h>
+                  </div>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Input
+                  name="List Name"
+                  type="text"
+                  value={list_name}
+                  set={setList_name}
+                  placeholder="List Name"
+                />
+                <div className="flex flex-col space-y-1">
+                  {/* Checkbox to select all */}
+                  <label key={1000}>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          var nu = [];
+                          emails.forEach((x) => {
+                            nu.push(x.email);
+                          });
+                          setOptions(nu);
+                        } else {
+                          setOptions([]);
+                        }
+                      }}
+                    />
+                    Select All
+                  </label>
 
-      <main id="main-container">
+                  {emails.map((x, index) => {
+                    return (
+                      <label key={index + 1}>
+                        <input
+                          type="checkbox"
+                          value={x.email}
+                          onChange={handleCheckboxChange}
+                        />
+                        {x.email}
+                      </label>
+                    );
+                  })}
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Exit
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    createList();
+                    handleClose();
+                  }}
+                >
+                  Add
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        )}
         <div className="bg-body-light">
           <div className="content content-full">
             <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -123,23 +268,35 @@ function Lists(props) {
             </div>
           </div>
         </div>
-        {loading && (
-          <div
-            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
-            role="status"
-          ></div>
-        )}
-        <div className={`${loading ? "blur-md " : " "} content`}>
+
+        <div className={`content`}>
           <div className="block block-rounded g-0">
             <div className="tab-content">
+              <div className="block-header block-header-default">
+                <h3 className="block-title">
+                  Contact Lists
+                  <small className="fst-italic">
+                    (total {lists.length} contacts)
+                  </small>
+                </h3>
+                <div className="">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-secondary "
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  >
+                    Create List
+                  </button>
+                </div>
+              </div>
               <div
                 className="block-content tab-pane active"
                 id="btabs-vertical-home"
                 role="tabpanel"
                 aria-labelledby="btabs-vertical-home-tab"
               >
-                <h4 className="fw-semibold space-x-4">Contact List</h4>
-
                 <table className="table table-vcenter">
                   <thead>
                     <tr>
@@ -176,6 +333,7 @@ function Lists(props) {
                                 data-bs-original-title="View Contacts"
                                 onClick={() => {
                                   setList_id(x);
+                                  getMailingListContacts();
                                   getMailingListContacts();
                                 }}
                               >

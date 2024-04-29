@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,8 +12,8 @@ function Createcampaign(props) {
   console.log(location);
   const searchParams = new URLSearchParams(location.search);
   const id = searchParams.get("id");
+  const navigate = useNavigate();
 
-  console.log("id: ", id);
   const toggle = props.toggle;
   const mode = props.mode;
   const [cname, setCname] = useState("");
@@ -86,6 +87,9 @@ function Createcampaign(props) {
   };
 
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchSenders = async () => {
       try {
         const response = await axios.get(

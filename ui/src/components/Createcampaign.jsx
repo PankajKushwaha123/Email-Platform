@@ -1,20 +1,90 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Buffer } from "buffer";
 function Createcampaign(props) {
+  const location = useLocation();
+  console.log(location);
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get("id");
+
+  console.log("id: ", id);
   const toggle = props.toggle;
   const mode = props.mode;
   const [cname, setCname] = useState("");
   const [senderEmail, setSenderEmail] = useState(""); // Assuming '1' is the default value
   const [senders, setSenders] = useState([]);
   const [mailList, setMailList] = useState([]);
+  const [subjectLine, setSubjectLine] = useState("");
+  const [previewText, setPreviewText] = useState("");
+  const [text, setText] = useState("Hello CKEditor!");
+  const [loading, setLoading] = useState(false);
+  if (id) {
+    const handleEdit = async (id) => {
+      try {
+        const response = await axios.get(
+          "https://apis.mailmort.co/campaigns/" + id,
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        var t = response.data;
+        setCname(response.data.campaign_name);
+        setSenderEmail(response.data.sender_email);
+        setPreviewText(t.preview_text);
+        setSubjectLine(t.subject);
+        setText(t.content);
+      } catch (error) {
+        console.log("Error while fetching ", error);
+      }
+    };
+    handleEdit(id);
+  }
+  const handleSaveDraft = async (p) => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "https://apis.mailmort.co/campaigns",
+        {
+          campaign_name: cname,
+          sender_email: senderEmail,
+          mailing_lists: mailList,
+          subject: subjectLine,
+          preview_text: previewText,
+          email_content: Buffer.from(text).toString("base64"),
+          action: p,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      console.log("response send successfully from create campign");
+    } catch (error) {
+      console.log("error while sending create caimpaign", error);
+    } finally {
+      setLoading(false); // Set loading state to false after the request completes
+    }
+  };
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+  const handleSubjectLineChange = (event) => {
+    setSubjectLine(event.target.value);
+  };
+
+  // Event handler for preview text input change
+  const handlePreviewTextChange = (event) => {
+    setPreviewText(event.target.value);
+  };
   // Event handler for when the select value changes
   const handleSelectChange = (event) => {
     setSenderEmail(event.target.value);
   };
+
   useEffect(() => {
     const fetchSenders = async () => {
       try {
@@ -152,6 +222,7 @@ function Createcampaign(props) {
                         value={senderEmail}
                         onChange={handleSelectChange}
                       >
+                        <option key={11000}>select</option>
                         {senders.map((x, index) => {
                           return (
                             <option key={index} value={x.sender_email}>
@@ -172,12 +243,7 @@ function Createcampaign(props) {
               <h3 className="block-title">Recipients</h3>
             </div>
             <div className="block-content block-content-full">
-              <form
-                action="be_forms_elements.html"
-                method="POST"
-                encType="multipart/form-data"
-                onSubmit={() => {}}
-              >
+              <form onSubmit={() => {}}>
                 <div className="row push">
                   <div className="col-lg-4">
                     <p className="fs-sm text-muted">
@@ -201,8 +267,12 @@ function Createcampaign(props) {
                         value={list}
                         onChange={handleListSelectChange}
                       >
-                        {mailList.map((x) => {
-                          return <option value={x}>{x}</option>;
+                        {mailList.map((x, index) => {
+                          return (
+                            <option key={index + 1} value={x}>
+                              {x}
+                            </option>
+                          );
                         })}
                       </select>
                     </div>
@@ -243,6 +313,8 @@ function Createcampaign(props) {
                         id="example-text-input"
                         name="example-text-input"
                         placeholder="Text Input"
+                        value={subjectLine}
+                        onChange={handleSubjectLineChange}
                       />
                     </div>
                     <div className="mb-4">
@@ -258,6 +330,8 @@ function Createcampaign(props) {
                         id="example-text-input"
                         name="example-text-input"
                         placeholder="Text Input"
+                        value={previewText}
+                        onChange={handlePreviewTextChange}
                       />
                     </div>
                   </div>
@@ -271,21 +345,18 @@ function Createcampaign(props) {
               <h3 className="block-title">Email Content</h3>
             </div>
             <div className="block-content">
-              <form
-                action="be_forms_editors.html"
-                method="POST"
-                onSubmit={() => {}}
-              >
-                <div className="mb-4">
-                  <textarea
-                    id="js-ckeditor"
-                    name="ckeditor"
-                    className="w-[100%] shadow-lg shadow-orange-500"
-                  >
-                    Hello CKEditor!
-                  </textarea>
-                </div>
-              </form>
+              <div className="mb-4 ">
+                <textarea
+                  id="js-ckeditor"
+                  name="ckeditor"
+                  className="w-[100%] bg-slate-100 focus:bg-slate-50 "
+                  placeholder="Enter text here..."
+                  value={text}
+                  onChange={handleChange}
+                >
+                  Hello CKEditor!
+                </textarea>
+              </div>
             </div>
           </div>
 
@@ -301,6 +372,10 @@ function Createcampaign(props) {
                 <button
                   type="button"
                   className="btn btn-outline-success me-1 mb-3"
+                  onClick={() => {
+                    handleSaveDraft("draft");
+                  }}
+                  disabled={loading}
                 >
                   <i className="fa fa-fw fa-save me-1"></i> Save as draft
                 </button>
@@ -310,18 +385,37 @@ function Createcampaign(props) {
                 <p className="fs-sm text-muted">
                   Send test-mails to preview the campaign.
                 </p>
-                <button type="button" className="btn btn-alt-success me-1 mb-3">
+                <button
+                  type="button"
+                  className="btn btn-alt-success me-1 mb-3"
+                  onClick={() => {
+                    handleSaveDraft("test");
+                  }}
+                >
                   <i className="fa fa-fw fa-paper-plane me-1"></i> Send test
                   mails
                 </button>
+                {loading && (
+                  <div className="flex items-center justify-center">
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="mb-4">
                 <p className="fs-sm text-muted">
-                  Schedule to campaign to be sent now or at a later time.
+                  Schedule the campaign to be sent now.
                 </p>
-                <button type="button" className="btn btn-success me-1 mb-3">
-                  <i className="fa fa-fw fa-hourglass me-1"></i> Schedule
+                <button
+                  type="button"
+                  className="btn btn-success me-1 mb-3"
+                  onClick={() => {
+                    handleSaveDraft("send");
+                  }}
+                >
+                  <i className="fa fa-fw fa-box me-1"></i> Send now
                 </button>
               </div>
             </div>

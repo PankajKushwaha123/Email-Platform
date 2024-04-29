@@ -8,6 +8,10 @@ import img5 from "../assets/media/avatars/avatar12.jpg";
 import img6 from "../assets/media/photos/photo1.jpg";
 import img7 from "../assets/media/photos/photo2.jpg";
 import img8 from "../assets/media/photos/photo3.jpg";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 import { Link } from "react-router-dom";
 import Header from "./Header";
@@ -15,45 +19,93 @@ import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
 import MailItem from "./MailItem";
 import Mails from "./module/inboxData.json";
-import TempHeader from "./TempHeader";
+
 function Inbox(props) {
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [mails, setMails] = useState([]);
+  const [temp, setTemp] = useState({});
   const toggle = props.toggle;
   const mode = props.mode;
   const [screen, setScreen] = useState("actual");
   const changeScreenSize = () => {
     screen == "actual" ? setScreen("fullscreen") : setScreen("actual");
   };
-  /*   const [mode, setMode] = useState(
-    "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled "
-  );
+  useEffect(() => {
+    const fetchMails = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://apis.mailmort.co/inbox/fetch",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
 
-  const toggle = (e) => {
-    if (
-      mode ==
-      "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark page-header-dark dark-mode"
-    ) {
-      setMode(
-        "sidebar-o sidebar-light side-scroll page-header-fixed main-content-narrow"
-      );
-    } else {
-      setMode(
-        "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark page-header-dark dark-mode"
-      );
-    }
-  }; */
-  /* { sidebar-dark page-header-dark dark-mode} */
+        setMails(response.data);
+      } catch (error) {
+        console.log("errror while fetching mails", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMails();
+  }, []);
   return (
     <>
       <div id="page-container" className={mode}>
         <Navigationbar onClickHandler={toggle} />
 
         <Header />
-        {/*  <TempHeader /> */}
+        {show && (
+          <>
+            {/* <Button variant="primary" onClick={handleShow}></Button>
+             */}
+            <Modal show={show} onHide={handleClose} dialogClassName="modal-lg">
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <div className="flex flex-row justify-center ">
+                    <h className="justify-center">
+                      From: {temp.from.value[0].name} (
+                      {temp.from.value[0].address})
+                    </h>
+                  </div>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <div
+                  className="modal-dialog modal-lg modal-dialog-popout"
+                  role="document"
+                >
+                  <div className="modal-content">
+                    <div className="block block-rounded block-transparent mb-0">
+                      <div className="block-header block-header-default">
+                        <h3 className="block-title">Subject: {temp.subject}</h3>
+                      </div>
 
-        <main id="main-container">
+                      <div className="block-content">
+                        <iframe srcdoc={temp.html}></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Modal.Body>
+              <Modal.Footer>MailMort</Modal.Footer>
+            </Modal>
+          </>
+        )}
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
           <div className="content">
             <div className="row">
-              <div className="col-md-5 col-xl-3">
+              <div className="col-md-5 col-xl-1">
                 <div className="d-md-none push">
                   <button
                     type="button"
@@ -66,7 +118,7 @@ function Inbox(props) {
                   </button>
                 </div>
 
-                <div id="one-inbox-side-nav" className="d-none d-md-block push">
+                {/*  <div id="one-inbox-side-nav" className="d-none d-md-block push">
                   <div className={`block block-rounded block-mode-actual`}>
                     <div className="block-header block-header-default">
                       <h3 className="block-title">Inbox</h3>
@@ -99,11 +151,7 @@ function Inbox(props) {
                             </span>
                           </a>
                         </li>
-                        {/*   <li>
-                          <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full  border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:ring-2">
-                            hi
-                          </button>
-                        </li> */}
+                       
                         <li className="nav-item my-1">
                           <a
                             className="nav-link d-flex justify-content-between align-items-center"
@@ -212,7 +260,7 @@ function Inbox(props) {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="col-md-7 col-xl-9">
                 {/* to toogle to full screen block-mode-fullscreen */}
@@ -321,17 +369,113 @@ function Inbox(props) {
                           </tr>
                         </thead>
                         <tbody>
-                          {Mails.mails.map((x) => {
+                          {mails.map((x, index) => {
                             return (
-                              <MailItem
-                                key={x.name}
-                                name={x.name}
-                                subject={x.subject}
-                                description={x.description}
-                                time={x.time}
-                              />
+                              <tr
+                                onClick={() => {
+                                  setTemp(x);
+                                  setShow(true);
+                                }}
+                                key={index}
+                              >
+                                <td
+                                  className="text-center"
+                                  style={{ width: "60px" }}
+                                >
+                                  <div className="form-check d-inline-block">
+                                    <input
+                                      className="form-check-input"
+                                      type="checkbox"
+                                      value=""
+                                      id="inbox-msg15"
+                                      name="inbox-msg15"
+                                    />
+                                    <label
+                                      className="form-check-label"
+                                      htmlFor="inbox-msg15"
+                                    ></label>
+                                  </div>
+                                </td>
+                                <td
+                                  className="d-none d-sm-table-cell fw-semibold"
+                                  style={{ width: "140px" }}
+                                >
+                                  {x.from.value[0].name}
+                                </td>
+                                <td>
+                                  <span className="text-sky-700 font-semibold">
+                                    {x.subject}
+                                  </span>
+                                  <div className="text-muted mt-1"></div>
+                                </td>
+                                <td
+                                  className="d-none d-xl-table-cell text-muted"
+                                  style={{ width: "80px" }}
+                                >
+                                  <i className="fa fa-paperclip me-1"></i> (3)
+                                </td>
+                                <td
+                                  className="d-none d-xl-table-cell text-muted"
+                                  style={{ width: "120px" }}
+                                >
+                                  <span>{x.date.substr(0, 10)}</span>
+                                </td>
+                              </tr>
                             );
                           })}
+                          <tr
+                            onClick={() => {
+                              setShow(true);
+                            }}
+                          >
+                            <td
+                              className="text-center"
+                              style={{ width: "60px" }}
+                            >
+                              <div className="form-check d-inline-block">
+                                <input
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  value=""
+                                  id="inbox-msg15"
+                                  name="inbox-msg15"
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor="inbox-msg15"
+                                ></label>
+                              </div>
+                            </td>
+                            <td
+                              className="d-none d-sm-table-cell fw-semibold"
+                              style={{ width: "140px" }}
+                            >
+                              name
+                            </td>
+                            <td>
+                              <a
+                                className="fw-semibold"
+                                data-bs-toggle="modal"
+                                data-bs-target="#one-inbox-message"
+                                href="#"
+                              >
+                                subject
+                              </a>
+                              <div className="text-muted mt-1">description</div>
+                            </td>
+                            <td
+                              className="d-none d-xl-table-cell text-muted"
+                              style={{ width: "80px" }}
+                            >
+                              <i className="fa fa-paperclip me-1"></i> (3)
+                            </td>
+                            <td
+                              className="d-none d-xl-table-cell text-muted"
+                              style={{ width: "120px" }}
+                            >
+                              <em>time</em>
+                            </td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -340,7 +484,7 @@ function Inbox(props) {
               </div>
             </div>
 
-            <div
+            {/*  <div
               className="modal fade"
               id="one-inbox-new-message"
               tabIndex="-1"
@@ -439,146 +583,7 @@ function Inbox(props) {
                   </form>
                 </div>
               </div>
-            </div>
-
-            <div
-              className="modal fade"
-              id="one-inbox-message"
-              tabIndex="-1"
-              role="dialog"
-              aria-labelledby="one-inbox-message"
-              aria-hidden="true"
-            >
-              <div
-                className="modal-dialog modal-lg modal-dialog-popout"
-                role="document"
-              >
-                <div className="modal-content">
-                  <div className="block block-rounded block-transparent mb-0">
-                    <div className="block-header block-header-default">
-                      <h3 className="block-title">Welcome to our service</h3>
-                      <div className="block-options">
-                        <button
-                          type="button"
-                          className="btn-block-option"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="left"
-                          title="Reply"
-                          aria-label="Reply"
-                        >
-                          <i className="fa fa-fw fa-reply"></i>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn-block-option"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <i className="fa fa-fw fa-times"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div
-                      className="block-content block-content-full text-center bg-image"
-                      style={{
-                        backgroundImage: `url(${bg1})`,
-                      }}
-                    >
-                      <img
-                        className="img-avatar img-avatar96 img-avatar-thumb"
-                        src={img2}
-                        alt=""
-                      />
-                    </div>
-                    <div className="block-content block-content-full fs-sm d-flex justify-content-between bg-body-light">
-                      <a href="#">user@example.com</a>
-                      <span className="text-muted">
-                        <em>2 min ago</em>
-                      </span>
-                    </div>
-                    <div className="block-content">
-                      <p>Dear John,</p>
-                      <p>
-                        Dolor posuere proin blandit accumsan senectus netus
-                        nullam curae, ornare laoreet adipiscing luctus mauris
-                        adipiscing pretium eget fermentum, tristique lobortis
-                        est ut metus lobortis tortor tincidunt himenaeos
-                        habitant quis dictumst proin odio sagittis purus mi, nec
-                        taciti vestibulum quis in sit varius lorem sit metus mi.
-                      </p>
-                      <p>
-                        Dolor posuere proin blandit accumsan senectus netus
-                        nullam curae, ornare laoreet adipiscing luctus mauris
-                        adipiscing pretium eget fermentum, tristique lobortis
-                        est ut metus lobortis tortor tincidunt himenaeos
-                        habitant quis dictumst proin odio sagittis purus mi, nec
-                        taciti vestibulum quis in sit varius lorem sit metus mi.
-                      </p>
-                      <p>Best Regards,</p>
-                      <p>Amanda Powell</p>
-                    </div>
-                    <div className="block-content bg-body-light">
-                      <div className="row g-sm items-push fs-sm">
-                        <div className="col-md-4">
-                          <div className="options-container fx-item-zoom-in mb-2">
-                            <img
-                              className="img-fluid options-item"
-                              src={img6}
-                              alt=""
-                            />
-                            <div className="options-overlay bg-black-75">
-                              <div className="options-overlay-content">
-                                <a className="btn btn-sm btn-light" href="#">
-                                  <i className="fa fa-download me-1"></i>{" "}
-                                  Download
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-muted">01.jpg (350kb)</div>
-                        </div>
-                        <div className="col-md-4">
-                          <div className="options-container fx-item-zoom-in mb-2">
-                            <img
-                              className="img-fluid options-item"
-                              src={img7}
-                              alt=""
-                            />
-                            <div className="options-overlay bg-black-75">
-                              <div className="options-overlay-content">
-                                <a className="btn btn-sm btn-light" href="#">
-                                  <i className="fa fa-download me-1"></i>{" "}
-                                  Download
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-muted">02.jpg (480kb)</div>
-                        </div>
-                        <div className="col-md-4">
-                          <div className="options-container fx-item-zoom-in mb-2">
-                            <img
-                              className="img-fluid options-item"
-                              src={img8}
-                              alt=""
-                            />
-                            <div className="options-overlay bg-black-75">
-                              <div className="options-overlay-content">
-                                <a className="btn btn-sm btn-light" href="#">
-                                  <i className="fa fa-download me-1"></i>{" "}
-                                  Download
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-muted">03.jpg (652kb)</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </div> */}
           </div>
         </main>
 

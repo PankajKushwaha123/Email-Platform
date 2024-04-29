@@ -7,116 +7,191 @@ import axios from "axios";
 import Input from "./Input";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-function Senders(props) {
+
+function Inboxes(props) {
   const [show, setShow] = useState(false);
-  const [em, setEm] = useState("");
-  const [sn, setSn] = useState("");
-  const toggle = props.toggle;
-  const mode = props.mode;
-  const [senders, setSenders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [inboxes, setInboxes] = useState([]);
+  const [admin, setAdmin] = useState("");
+  const [domain, setDomain] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const addSender = () => {
+  const [senderEmail, setSenderEmail] = useState("");
+  const [senders, setSenders] = useState([]);
+  const handleSelectChange = (event) => {
+    setDomain(event.target.value);
+    console.log("inside change:" + domain);
+  };
+  const addInbox = () => {
     console.log("inside add sender");
 
-    const addSenders = async () => {
+    const addInb = async () => {
       setLoading(true);
-      console.log("sending post");
+
       try {
         const response = await axios.post(
-          "https://apis.mailmort.co/users/senders",
+          "https://apis.mailmort.co/users/inboxes",
           {
-            sender_name: sn,
-            sender_email: em,
-            reply_to: "211B293@gmail.com",
+            username: admin,
+            domain: domain,
           },
           {
             headers: { Authorization: "Bearer " + Cookies.get("token") },
           }
         );
-        const fetchSenders = async () => {
+        const fetchInboxes = async () => {
           try {
             const response = await axios.get(
-              "https://apis.mailmort.co/users/senders",
+              "https://apis.mailmort.co/users/inboxes",
               {
                 headers: { Authorization: "Bearer " + Cookies.get("token") },
               }
             );
 
-            setSenders(response.data.senders);
+            setInboxes(response.data.inboxes);
           } catch (error) {
-            console.log("errror while fetching ", error);
+            console.log("errror while fetching inboxes", error);
           } finally {
-            setEm("");
-            setSn("");
+            setAdmin("");
+            setDomain("");
             setLoading(false); // Set loading state to false after the request completes
           }
         };
-        fetchSenders();
+        fetchInboxes();
         //console.log(response);
       } catch (error) {
+        console.log(admin, domain);
         console.log("COULD NOT post ", error);
+      } finally {
+        setLoading(false);
       }
     };
-    addSenders();
+    addInb();
   };
-
   useEffect(() => {
     const fetchSenders = async () => {
       try {
-        const response = await axios.get(
-          "https://apis.mailmort.co/users/senders",
+        const response2 = await axios.get(
+          "https://apis.mailmort.co/users/domains",
           {
             headers: { Authorization: "Bearer " + Cookies.get("token") },
           }
         );
 
-        setSenders(response.data.senders);
+        setSenders(response2.data.domains);
+        const response = await axios.get(
+          "https://apis.mailmort.co/users/inboxes",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+
+        setInboxes(response.data.inboxes);
       } catch (error) {
-        console.log("errror while fetching ", error);
+        console.log("errror while fetching inboxes ", error);
       } finally {
         setLoading(false); // Set loading state to false after the request completes
       }
     };
     fetchSenders();
   }, []);
-  // Delete function
   const handleDelete = (index) => {
-    const deleteSenders = async () => {
-      setLoading(true);
+    const deleteInboxes = async () => {
       try {
         const response = await axios.delete(
-          "https://apis.mailmort.co/users/senders",
+          "https://apis.mailmort.co/users/inboxes",
           {
             headers: { Authorization: "Bearer " + Cookies.get("token") },
-            data: { email: senders[index].sender_email },
+            data: {
+              username: inboxes[index].username,
+              domain: inboxes[index].domain,
+            },
           }
         );
       } catch (error) {
-        console.log("COULD NOT DELETE SENDER ", error);
+        console.log("COULD NOT DELETE INBOXES ", error);
+        setLoading(false);
       }
+      setLoading(false);
     };
-    deleteSenders();
+    deleteInboxes();
     // Create a new array without the sender at the specified index
-    const updatedSenders = senders.filter((_, i) => i !== index);
+    const updatedInboxes = inboxes.filter((_, i) => i !== index);
 
     // Check if updatedSenders is empty
-    if (updatedSenders.length === 0) {
+    if (updatedInboxes.length === 0) {
       // If updatedSenders is empty, initialize senders with an empty array
-      setSenders([]);
+      setInboxes([]);
     } else {
       // Otherwise, update the senders state with the new array
-      setSenders(updatedSenders);
+      setInboxes(updatedInboxes);
     }
-    setLoading(false);
     // Create a copy of the senders array
   };
-
   return (
-    <div id="page-container" className={mode}>
-      <Navigationbar onClickHandler={toggle} />
+    <div id="page-container" className={props.mode}>
+      <Navigationbar onClickHandler={props.toggle} />
       <Header />
+      {show && (
+        <>
+          {/* <Button variant="primary" onClick={handleShow}></Button>
+           */}
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                <div className="flex flex-row justify-center ">
+                  <h className="justify-center">Create Inbox</h>
+                </div>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Input
+                name="Email"
+                type="text"
+                value={admin}
+                set={setAdmin}
+                placeholder="Username"
+              />
+
+              <select
+                className="form-select w-[90%] bg-slate-200 text-slate-700 font-bold"
+                id="example-select"
+                name="example-select"
+                value={domain}
+                onChange={handleSelectChange}
+              >
+                <option>Select</option>
+                {senders.map((x, index) => {
+                  return (
+                    <option key={index} value={x.domain_name}>
+                      {x.domain_name}
+                    </option>
+                  );
+                })}
+              </select>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Exit
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  addInbox();
+                  handleClose();
+                }}
+              >
+                Add
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
+      )}
       {loading && (
         <div
           className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
@@ -124,81 +199,15 @@ function Senders(props) {
         ></div>
       )}
       <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
-        {show && (
-          <>
-            {/* <Button variant="primary" onClick={handleShow}></Button>
-             */}
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>
-                  <div className="flex flex-row justify-center ">
-                    <h className="justify-center">Add sender</h>
-                  </div>
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Input
-                  name="Email"
-                  type="text"
-                  value={em}
-                  set={setEm}
-                  placeholder="Email"
-                />
-                <Input
-                  name="Name"
-                  type="text"
-                  value={sn}
-                  set={setSn}
-                  placeholder="name"
-                />
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    handleClose();
-                  }}
-                >
-                  Exit
-                </Button>
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    addSender();
-                    handleClose();
-                  }}
-                >
-                  Add
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          </>
-        )}
         <div className="bg-body-light">
           <div className="content content-full">
             <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
               <div className="flex-grow-1">
-                <h1 className="h3 fw-bold mb-2">Sender Profiles</h1>
+                <h1 className="h3 fw-bold mb-2">Inboxes</h1>
                 <h2 className="fs-base lh-base fw-medium text-muted mb-0">
-                  Senders are shown in your recipients' inbox when they receive
-                  your email. It helps your subscribers to recognize you.
+                  content for description/........
                 </h2>
               </div>
-              <nav
-                className="flex-shrink-0 mt-3 mt-sm-0 ms-sm-3"
-                aria-label="breadcrumb"
-              >
-                <ol className="breadcrumb breadcrumb-alt">
-                  <li className="breadcrumb-item">
-                    <a className="link-fx" href="#">
-                      Senders
-                    </a>
-                  </li>
-                  <li className="breadcrumb-item" aria-current="page">
-                    Manage
-                  </li>
-                </ol>
-              </nav>
             </div>
           </div>
         </div>
@@ -206,7 +215,7 @@ function Senders(props) {
         <div className="content">
           <div className="block block-rounded">
             <div className="block-header block-header-default">
-              <h3 className="block-title">Senders</h3>
+              <h3 className="block-title">Inboxes</h3>
 
               <div className="block-options">
                 <button
@@ -216,7 +225,7 @@ function Senders(props) {
                     setShow(true);
                   }}
                 >
-                  <i className="fa fa-plus"></i> Create new sender
+                  <i className="fa fa-plus"></i> Create New Inbox
                 </button>
               </div>
             </div>
@@ -227,7 +236,6 @@ function Senders(props) {
                     <th className="text-center" style={{ width: "50px" }}>
                       no.
                     </th>
-                    <th>Name</th>
                     <th>Email</th>
                     <th>Status</th>
                     <th className="text-center">Actions</th>
@@ -235,17 +243,24 @@ function Senders(props) {
                 </thead>
 
                 <tbody>
-                  {senders.map((x, index) => {
+                  {inboxes.map((x, index) => {
                     return (
                       <tr key={index}>
                         <th className="text-center" scope="row">
                           {index + 1}
                         </th>
-                        <td className="fw-semibold fs-sm">{x.sender_name}</td>
-                        <td>{x.sender_email}</td>
+                        <td>
+                          {x.username}@{x.domain}
+                        </td>
                         <td className="d-none d-sm-table-cell">
-                          <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                            Verified
+                          <span
+                            className={`fs-xs fw-semibold ${
+                              x.status[0] == "P"
+                                ? "bg-yellow-300"
+                                : "bg-green-600"
+                            } d-inline-block py-1 px-3 rounded-pill`}
+                          >
+                            {x.status}
                           </span>
                         </td>
                         <td className="text-center">
@@ -283,4 +298,4 @@ function Senders(props) {
   );
 }
 
-export default Senders;
+export default Inboxes;

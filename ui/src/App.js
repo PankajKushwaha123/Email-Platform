@@ -19,7 +19,7 @@ import Domain from "./components/Domain";
 import Security from "./components/Security";
 import Plans from "./components/Plans";
 import Logout from "./components/Logout";
-
+import Inboxes from "./components/Inboxes";
 function App() {
   const [mode, setMode] = useState(
     "sidebar-o enable-page-overlay side-scroll page-header-fixed main-content-narrow side-trans-enabled sidebar-dark "
@@ -104,6 +104,10 @@ function App() {
           <Route
             path="/logout"
             element={<Logout mode={mode} toggle={toggle} />}
+          ></Route>
+          <Route
+            path="/inboxes"
+            element={<Inboxes mode={mode} toggle={toggle} />}
           ></Route>
         </Routes>
       </Router>

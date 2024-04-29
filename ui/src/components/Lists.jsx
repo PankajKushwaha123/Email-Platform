@@ -1,13 +1,93 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
 import contactsData from "./module/contactsData.json";
 import ContactItem from "./ContactItem";
+import axios from "axios";
+import Cookies from "js-cookie";
+
 function Lists(props) {
   const toggle = props.toggle;
   const mode = props.mode;
   const arr = contactsData.contacts;
+  const [loading, setLoading] = useState(true);
+  const [c, setC] = useState(0);
+  const [lists, setLists] = useState([]);
+  const [list_id, setList_id] = useState();
+  const [contactInList, setContactInList] = useState([]);
+  const getMailingListContacts = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        "https://apis.mailmort.co/contacts/listcontacts",
+        {
+          list_id,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+
+      setContactInList(response.data.contacts);
+    } catch (error) {
+      console.log("unabe to fetch contacts of that lists", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const deleteLists = (index) => {
+    const deleteList = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.delete(
+          "https://apis.mailmort.co/contacts/deletelist",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+            data: { list_name: lists[index] },
+          }
+        );
+        setC(c + 1);
+      } catch (error) {
+        console.log("COULD NOT DELETE Lists ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    deleteList();
+    // Create a new array without the sender at the specified index
+    const updatedSenders = lists.filter((_, i) => i !== index);
+
+    // Check if updatedSenders is empty
+    if (updatedSenders.length === 0) {
+      // If updatedSenders is empty, initialize senders with an empty array
+      setLists([]);
+    } else {
+      // Otherwise, update the senders state with the new array
+      setLists(updatedSenders);
+    }
+    // Create a copy of the senders array
+  };
+  useEffect(() => {
+    const fetchLists = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://apis.mailmort.co/contacts/lists",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+
+        setLists(response.data.mailing_lists);
+      } catch (error) {
+        console.log("errror while fetching ", error);
+      } finally {
+        setLoading(false); // Set loading state to false after the request completes
+      }
+    };
+    fetchLists();
+  }, [c]);
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -43,66 +123,23 @@ function Lists(props) {
             </div>
           </div>
         </div>
-
-        <div className="content">
-          <h2 className="content-heading">Contact Lists</h2>
-
-          <div className="block block-rounded row g-0">
-            <ul
-              className="nav nav-tabs nav-tabs-block flex-md-column col-md-3"
-              role="tablist"
-            >
-              <li className="nav-item d-md-flex flex-md-column">
-                <button
-                  className="nav-link text-md-start active"
-                  id="btabs-vertical-home-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#btabs-vertical-home"
-                  role="tab"
-                  aria-controls="btabs-vertical-home"
-                  aria-selected="true"
-                >
-                  <i className="fa fa-fw fa-folder opacity-50 me-1 d-none d-sm-inline-block"></i>{" "}
-                  Folder 1
-                </button>
-              </li>
-              <li className="nav-item d-md-flex flex-md-column">
-                <button
-                  className="nav-link text-md-start"
-                  id="btabs-vertical-profile-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#btabs-vertical-profile"
-                  role="tab"
-                  aria-controls="btabs-vertical-profile"
-                  aria-selected="false"
-                >
-                  <i className="fa fa-fw fa-folder opacity-50 me-1 d-none d-sm-inline-block"></i>{" "}
-                  Folder 2
-                </button>
-              </li>
-              <li className="nav-item d-md-flex flex-md-column">
-                <button
-                  className="nav-link text-md-start"
-                  id="btabs-vertical-settings-tab"
-                  data-bs-toggle="tab"
-                  data-bs-target="#btabs-vertical-settings"
-                  role="tab"
-                  aria-controls="btabs-vertical-settings"
-                  aria-selected="false"
-                >
-                  <i className="fa fa-fw fa-folder opacity-50 me-1 d-none d-sm-inline-block"></i>{" "}
-                  Folder 3
-                </button>
-              </li>
-            </ul>
-            <div className="tab-content col-md-9">
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <div className={`${loading ? "blur-md " : " "} content`}>
+          <div className="block block-rounded g-0">
+            <div className="tab-content">
               <div
                 className="block-content tab-pane active"
                 id="btabs-vertical-home"
                 role="tabpanel"
                 aria-labelledby="btabs-vertical-home-tab"
               >
-                <h4 className="fw-semibold">Folder 1</h4>
+                <h4 className="fw-semibold space-x-4">Contact List</h4>
+
                 <table className="table table-vcenter">
                   <thead>
                     <tr>
@@ -111,351 +148,56 @@ function Lists(props) {
                       </th>
                       <th>Name</th>
                       <th className="d-none d-sm-table-cell">Creation Date</th>
-                      <th className="d-none d-sm-table-cell">Contacts</th>
+
                       <th className="text-center" style={{ width: "100px" }}>
                         Actions
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 1</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        2
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 2</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">12-04-2023</td>
-                      <td className="d-none d-sm-table-cell">878</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        3
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 3</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">27-05-2023</td>
-                      <td className="d-none d-sm-table-cell">923</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                className="block-content tab-pane"
-                id="btabs-vertical-profile"
-                role="tabpanel"
-                aria-labelledby="btabs-vertical-profile-tab"
-              >
-                <h4 className="fw-semibold">Folder 2</h4>
-                <table className="table table-vcenter">
-                  <thead>
-                    <tr>
-                      <th className="text-center" style={{ width: "50px" }}>
-                        #
-                      </th>
-                      <th>Name</th>
-                      <th className="d-none d-sm-table-cell">Creation Date</th>
-                      <th className="d-none d-sm-table-cell">Contacts</th>
-                      <th className="text-center" style={{ width: "100px" }}>
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 4</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        2
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 4</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                className="block-content tab-pane"
-                id="btabs-vertical-settings"
-                role="tabpanel"
-                aria-labelledby="btabs-vertical-settings-tab"
-              >
-                <h4 className="fw-semibold">Folder 3</h4>
-                <table className="table table-vcenter">
-                  <thead>
-                    <tr>
-                      <th className="text-center" style={{ width: "50px" }}>
-                        #
-                      </th>
-                      <th>Name</th>
-                      <th className="d-none d-sm-table-cell">Creation Date</th>
-                      <th className="d-none d-sm-table-cell">Contacts</th>
-                      <th className="text-center" style={{ width: "100px" }}>
-                        Actions
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        1
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 6</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        2
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 7</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        2
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 8</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="text-center" scope="row">
-                        2
-                      </th>
-                      <td className="fw-semibold fs-sm">
-                        <a href="#contactsTable">Mailing List 9</a>
-                      </td>
-                      <td className="d-none d-sm-table-cell">17-01-2023</td>
-                      <td className="d-none d-sm-table-cell">376</td>
-                      <td className="text-center">
-                        <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="View Contacts"
-                          >
-                            <i className="fa fa-fw fa-magnifying-glass"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
-                            data-bs-toggle="tooltip"
-                            title=""
-                            data-bs-original-title="Delete List"
-                          >
-                            <i className="fa fa-fw fa-trash"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                    {lists.map((x, index) => {
+                      return (
+                        <tr key={index}>
+                          <th className="text-center" scope="row">
+                            {index + 1}
+                          </th>
+                          <td className="fw-semibold fs-sm">
+                            <a href="#contactsTable">{x}</a>
+                          </td>
+                          <td className="d-none d-sm-table-cell">27-05-2023</td>
+
+                          <td className="text-center">
+                            <div className="btn-group">
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
+                                data-bs-toggle="tooltip"
+                                title=""
+                                data-bs-original-title="View Contacts"
+                                onClick={() => {
+                                  setList_id(x);
+                                  getMailingListContacts();
+                                }}
+                              >
+                                <i className="fa fa-fw fa-pencil"></i>
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
+                                data-bs-toggle="tooltip"
+                                title=""
+                                data-bs-original-title="Delete List"
+                                onClick={() => {
+                                  deleteLists(index);
+                                }}
+                              >
+                                <i className="fa fa-fw fa-trash"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -466,7 +208,9 @@ function Lists(props) {
             <div className="block-header block-header-default">
               <h3 className="block-title">
                 Contacts in the list{" "}
-                <small className="fst-italic">({arr.length} contacts)</small>
+                <small className="fst-italic">
+                  ({contactInList.length} contacts)
+                </small>
               </h3>
             </div>
             <div className="block-content block-content-full">
@@ -487,22 +231,30 @@ function Lists(props) {
                       className="d-none d-sm-table-cell"
                       style={{ width: "15%" }}
                     >
-                      Type
+                      Lists
                     </th>
-                    <th style={{ width: " 15%" }}>Registered</th>
+                    <th style={{ width: " 15%" }}>Phone No.</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {arr.map((x) => {
+                  {contactInList.map((x, index) => {
                     return (
-                      <ContactItem
-                        key={x.id}
-                        id={x.id}
-                        name={x.name}
-                        email={x.name}
-                        type={x.type}
-                        registered={x.registered}
-                      />
+                      <tr key={index}>
+                        <td className="text-center fs-sm">{index + 1}</td>
+                        <td className="fw-semibold fs-sm">
+                          {x.first_name + " " + x.last_name}
+                        </td>
+                        <td className="d-none d-sm-table-cell fs-sm">
+                          {x.email}
+                          <span className="text-muted"></span>
+                        </td>
+                        <td className="d-none d-sm-table-cell">
+                          {x.mailing_lists.join(",")}
+                        </td>
+                        <td>
+                          <span className="text-muted fs-sm">{x.phone}</span>
+                        </td>
+                      </tr>
                     );
                   })}
                 </tbody>

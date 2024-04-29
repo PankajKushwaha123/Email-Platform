@@ -1,6 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
+import Cookies from "js-cookie";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 function Register() {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate();
+  const handleCheckboxChange = (event) => {
+    setIsChecked(!isChecked);
+    console.log(!isChecked);
+  };
+  const addUser = async () => {
+    if (!isChecked) {
+      alert("select terms and condition");
+      throw new Error("terms and condition not selected");
+    }
+    console.log("adding user");
+    try {
+      if (cpassword !== password) {
+        alert("password not match");
+        throw new Error("Passwords do not match");
+      }
+
+      const response = await axios.post(
+        "https://apis.mailmort.co/users/register",
+        {
+          email: email,
+          name: name,
+          password: password,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      navigate("/");
+      console.log("posted user success");
+      //console.log(response);
+    } catch (error) {
+      console.log("COULD NOT post ", error);
+    }
+  };
+
   return (
     <>
       <div id="page-container">
@@ -92,6 +136,11 @@ function Register() {
                               id="signup-email"
                               name="signup-email"
                               placeholder="Personal Email"
+                              value={email}
+                              onChange={(e) => {
+                                console.log("email");
+                                setEmail(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="mb-4">
@@ -101,6 +150,10 @@ function Register() {
                               id="signup-username"
                               name="signup-username"
                               placeholder="Company Name"
+                              value={name}
+                              onChange={(e) => {
+                                setName(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="mb-4">
@@ -110,6 +163,10 @@ function Register() {
                               id="signup-password"
                               name="signup-password"
                               placeholder="Password"
+                              value={password}
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="mb-4">
@@ -119,6 +176,10 @@ function Register() {
                               id="signup-password-confirm"
                               name="signup-password-confirm"
                               placeholder="Confirm Password"
+                              value={cpassword}
+                              onChange={(e) => {
+                                setCpassword(e.target.value);
+                              }}
                             />
                           </div>
                           <div className="mb-4">
@@ -127,9 +188,10 @@ function Register() {
                                 <input
                                   className="form-check-input"
                                   type="checkbox"
-                                  value=""
                                   id="signup-terms"
                                   name="signup-terms"
+                                  checked={isChecked}
+                                  onChange={handleCheckboxChange}
                                 />
                                 <label
                                   className="form-check-label"
@@ -151,15 +213,14 @@ function Register() {
                             </div>
                           </div>
                           <div className="text-center">
-                            <Link to="/">
-                              <button
-                                type="button"
-                                className="btn btn-lg btn-alt-success"
-                              >
-                                <i className="fa fa-fw fa-plus me-1 opacity-50"></i>{" "}
-                                Sign Up
-                              </button>
-                            </Link>
+                            <button
+                              type="button"
+                              className="btn btn-lg btn-alt-success"
+                              onClick={addUser}
+                            >
+                              <i className="fa fa-fw fa-plus me-1 opacity-50"></i>{" "}
+                              Sign Up
+                            </button>
                           </div>
                         </form>
                       </div>

@@ -13,7 +13,7 @@ function Dropdown1() {
           alt="Header Avatar"
           style={{ width: "21px" }}
         />
-        <span className="d-none d-sm-inline-block ms-2">John</span>
+        <span className="d-none d-sm-inline-block ms-2">User</span>
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -23,7 +23,7 @@ function Dropdown1() {
             src={img1}
             alt=""
           />
-          <p className="mt-2 mb-0 fw-medium">John Smith</p>
+          <p className="mt-2 mb-0 fw-medium">User</p>
           <p className="mb-0 text-muted fs-sm fw-medium">Administrator</p>
         </div>
         <div className="p-2">

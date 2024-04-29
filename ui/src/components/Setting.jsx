@@ -1,11 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
+import Cookies from "js-cookie";
+import axios from "axios";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
+import moment from "moment-timezone";
+
 var here = 1;
 function Setting(props) {
   const toggle = props.toggle;
   const mode = props.mode;
+  const timezones = moment.tz.names();
+  const [setting, setSetting] = useState({});
+  const [testList, setTestList] = useState("");
+  const [id, setId] = useState("");
+  const [timezone, setTimezone] = useState("");
+  const [timeFormat, setTimeFormat] = useState(12);
+  const [anonymousTracking, setAnonymousTracking] = useState(false);
+  const [defaultSender, setDefaultSender] = useState([]);
+  var tz;
+  var tf;
+  var at;
+  var ds;
+  const findSenders = async () => {
+    try {
+      const response = await axios.get(
+        "https://apis.mailmort.co/users/senders",
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+      setDefaultSender(response.data.senders);
+    } catch (error) {
+      console.log("could not add senders lists");
+    }
+  };
+  const changeSettings = async () => {
+    try {
+      const response = await axios.post(
+        "https://apis.mailmort.co/transactional/settings",
+        {
+          timezone,
+          time_format: timeFormat,
+          anonymous_tracking: anonymousTracking,
+          default_sender: defaultSender,
+        },
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+        }
+      );
+    } catch (error) {
+      console.log("could no tchange the setting ", error);
+    }
+  };
+  useEffect(() => {
+    const getDefaultSetting = async () => {
+      try {
+        await findSenders();
+        const response = await axios.get(
+          "https://apis.mailmort.co/campaigns/settings",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
+        setSetting(response.data.campaign_settings);
+        setTestList(setting.test_list.join(","));
+        setTimezone(setting.timezone);
+        setTimeFormat(setting.time_format);
+        setTimeFormat(12);
+        setAnonymousTracking(setting.anonymous_tracking);
+        setDefaultSender(setting.default_sender);
+        console.log(setting.test_list);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDefaultSetting();
+  }, []);
   return (
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
@@ -47,7 +118,13 @@ function Setting(props) {
               <div className="block-header block-header-default">
                 <h3 className="block-title">General</h3>
                 <div className="block-options">
-                  <button type="button" className="btn btn-sm btn-secondary">
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-secondary"
+                    onClick={() => {
+                      changeSettings();
+                    }}
+                  >
                     <i className="fa fa-floppy-disk"></i> Save
                   </button>
                 </div>
@@ -73,16 +150,28 @@ function Setting(props) {
                           id="example-select"
                           name="example-select"
                         >
-                          <option value="1">(GMT+5:30) Kolkata</option>
-                          <option value="2">Option #2</option>
-                          <option value="3">Option #3</option>
-                          <option value="4">Option #4</option>
-                          <option value="5">Option #5</option>
-                          <option value="6">Option #6</option>
-                          <option value="7">Option #7</option>
-                          <option value="8">Option #8</option>
-                          <option value="9">Option #9</option>
-                          <option value="10">Option #10</option>
+                          <option
+                            key={1000000000}
+                            value={setting.timezone}
+                            onClick={() => {
+                              tz = setting.timezone;
+                            }}
+                          >
+                            {setting.timezone}
+                          </option>
+                          {timezones.map((x, index) => {
+                            return (
+                              <option
+                                key={index}
+                                value={x}
+                                onClick={() => {
+                                  tz = x;
+                                }}
+                              >
+                                {x}
+                              </option>
+                            );
+                          })}
                         </select>
                       </div>
                       <div className="mb-4">
@@ -94,8 +183,11 @@ function Setting(props) {
                               type="radio"
                               id="24hour"
                               name="timeFormat"
-                              value="24hr"
+                              value={24}
                               checked
+                              onClick={() => {
+                                tf = 24;
+                              }}
                             />
                             <label
                               className="form-check-label"
@@ -110,43 +202,16 @@ function Setting(props) {
                               type="radio"
                               id="12hour"
                               name="timeFormat"
-                              value="12hr"
+                              value={12}
+                              onClick={() => {
+                                tf = 12;
+                              }}
                             />
                             <label
                               className="form-check-label"
                               htmlFor="12hour"
                             >
                               12 Hours{" "}
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mb-4">
-                        <label className="form-label">Date Format</label>
-                        <div className="space-x-2">
-                          <div className="form-check form-check-inline">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              id="date1"
-                              name="dateFormat"
-                              value="24hr"
-                              checked
-                            />
-                            <label className="form-check-label" htmlFor="date1">
-                              DD-MM-YYYY
-                            </label>
-                          </div>
-                          <div className="form-check form-check-inline">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              id="date2"
-                              name="dateFormat"
-                              value="12hr"
-                            />
-                            <label className="form-check-label" htmlFor="date2">
-                              MM-DD-YYYY
                             </label>
                           </div>
                         </div>
@@ -167,35 +232,61 @@ function Setting(props) {
                             <input
                               className="form-check-input"
                               type="radio"
-                              id="24hour"
                               name="anonymousTracking"
-                              value="enabled"
-                              checked
+                              value={true}
+                              checked={anonymousTracking}
+                              onClick={() => {
+                                setAnonymousTracking(true);
+                              }}
                             />
                             <label
                               className="form-check-label"
                               htmlFor="24hour"
                             >
-                              24 Hours
+                              Enabled
                             </label>
                           </div>
                           <div className="form-check form-check-inline">
                             <input
                               className="form-check-input"
                               type="radio"
-                              id="12hour"
                               name="anonymousTracking"
-                              value="disabled"
+                              value={false}
+                              checked={!anonymousTracking}
+                              onClick={() => {
+                                setAnonymousTracking(false);
+                              }}
                             />
                             <label
                               className="form-check-label"
                               htmlFor="12hour"
                             >
-                              12 Hours{" "}
+                              Disabled
                             </label>
                           </div>
                         </div>
                       </div>
+                    </div>
+                    <div className=" space-x-8">
+                      <label className="form-label "> select senders</label>
+                      <select
+                        onChange={(e) => {
+                          at = e.target.value;
+                        }}
+                      >
+                        <option value={""} key={10000}>
+                          {" "}
+                          select
+                        </option>
+                        {defaultSender.map((x, index) => {
+                          return (
+                            <option value={x.sender_email} key={index}>
+                              {" "}
+                              {x.sender_email}
+                            </option>
+                          );
+                        })}
+                      </select>
                     </div>
                   </div>
                 </form>
@@ -243,119 +334,11 @@ function Setting(props) {
                           name="test-list"
                           rows="15"
                           placeholder="Email IDs"
+                          value={testList}
+                          onChange={(e) => {
+                            setTestList(e.target.value);
+                          }}
                         ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-xl-6">
-            <div className="block block-rounded">
-              <div className="block-header block-header-default">
-                <h3 className="block-title">Default Sender</h3>
-                <div className="block-options">
-                  <button type="button" className="btn btn-sm btn-secondary">
-                    <i className="fa fa-floppy-disk"></i> Save
-                  </button>
-                </div>
-              </div>
-              <div className="block-content block-content-full">
-                <form
-                  action="be_forms_elements.html"
-                  method="POST"
-                  encType="multipart/form-data"
-                  onSubmit={() => {}}
-                >
-                  <div className="row push">
-                    <div className="col-lg-4">
-                      <p className="fs-sm text-muted">
-                        These are default settings. These can be modified for
-                        individual campaigns while creating them.
-                      </p>
-                    </div>
-                    <div className="col-lg-8 col-xl-5">
-                      <div className="mb-4">
-                        <label
-                          className="form-label"
-                          htmlFor="example-text-input"
-                        >
-                          Sender Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="senderName"
-                          name="senderName"
-                          placeholder="Text"
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          className="form-label"
-                          htmlFor="example-email-input"
-                        >
-                          Sender Email
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="senderEmail"
-                          name="senderEmail"
-                          placeholder="Email"
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          className="form-label"
-                          htmlFor="example-password-input"
-                        >
-                          Reply To
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="replyTo"
-                          name="replyTo"
-                          placeholder="Email"
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          className="form-label"
-                          htmlFor="example-textarea-input"
-                        >
-                          Email Header
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="emailHeader"
-                          name="emailHeader"
-                          rows="4"
-                          placeholder="The text in the braces will be replaced by a clickable link."
-                        >
-                          {/*  If you are not able to see this mail, click {here} */}
-                        </textarea>
-                      </div>
-                      <div className="mb-4">
-                        <label
-                          className="form-label"
-                          htmlFor="example-textarea-input"
-                        >
-                          Email Footer
-                        </label>
-                        <textarea
-                          className="form-control"
-                          id="emailFooter"
-                          name="emailFooter"
-                          rows="4"
-                          placeholder="The text in the braces will be replaced by a clickable link."
-                        >
-                          {/*  If you wish to unsubscribe from our newsletter, click{" "}
-                          {here} */}
-                        </textarea>
                       </div>
                     </div>
                   </div>

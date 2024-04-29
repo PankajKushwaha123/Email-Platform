@@ -5,14 +5,47 @@ import Navigationbar from "./Navigationbar";
 import Header from "./Header";
 import Footer from "./Footer";
 import axios from "axios";
-import contactsData from "./module/contactsData.json";
-import ContactItem from "./ContactItem";
+import Input from "./Input";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 function Contacts(props) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const toggle = props.toggle;
+  const [loading, setLoading] = useState(true);
   const mode = props.mode;
+  const [mailing_lists, setMailing_lists] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    mailing_lists: [],
+    notes: "",
+    history: [],
+    street: "",
+    city: "",
+    state: "",
+    country: "",
+    postal_code: "",
+  });
+  const [c, setC] = useState(0);
+  const handleChangemail = (event) => {
+    const options = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOptions(options);
+    setFormData({
+      ...formData,
+      mailing_lists: selectedOptions,
+    });
+  };
   let id = 1;
-  const arr = contactsData.contacts;
+
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -24,23 +57,233 @@ function Contacts(props) {
             headers: { Authorization: "Bearer " + Cookies.get("token") },
           }
         );
+        const mailing_lists_response = await axios.get(
+          "https://apis.mailmort.co/contacts/lists",
+          {
+            headers: { Authorization: "Bearer " + Cookies.get("token") },
+          }
+        );
         setContacts(response.data.contacts);
-        console.log(response.data.contacts);
+        setMailing_lists(mailing_lists_response.data.mailing_lists);
       } catch (error) {
         console.error("Error fetching contacts:", error);
+      } finally {
+        setLoading(false); // Set loading state to false after the request completes
       }
     };
 
     fetchContacts();
-  }, []);
+  }, [c]);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
+    try {
+      let first_name = formData.first_name;
+      let last_name = formData.last_name;
+      let email = formData.first_name;
+      let phone = formData.phone;
+      let mailing_lists = selectedOptions;
+      let notes = formData.notes;
+      let history = formData.history;
+      let street = formData.street;
+      let city = formData.city;
+      let state = formData.state;
+      let country = formData.country;
+      let postal_code = formData.postal_code;
+
+      const response = await axios.post(
+        "https://apis.mailmort.co/contacts/add",
+        {
+          first_name,
+          last_name,
+          email,
+          phone,
+          mailing_lists,
+          notes,
+          history,
+          street,
+          city,
+          state,
+          country,
+          postal_code,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + Cookies.get("token"),
+          },
+        }
+      );
+      alert("sent");
+      setC(c + 1);
+      console.log(selectedOptions);
+
+      console.log("Success:", response.data);
+      // Reset form after successful submission if needed
+      /* setFormData({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        mailing_lists: [],
+        notes: "",
+        history: [],
+        street: "",
+        city: "",
+        state: "",
+        country: "",
+        postal_code: "",
+      }); */
+    } catch (error) {
+      console.error("not able to submit form data ", error);
+    }
+  };
   return (
     <>
       <div id="page-container" className={mode}>
         <Navigationbar onClickHandler={toggle} />
         <Header />
+        {show && (
+          <>
+            {/* <Button variant="primary" onClick={handleShow}></Button>
+             */}
+            <Modal show={show} onHide={handleClose} dialogClassName="modal-lg">
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  <div className="flex flex-row ">
+                    <h className="justify-center">Add Contact</h>
+                  </div>
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <form onSubmit={handleSubmit}>
+                  <div className="flex flex-row space-x-2">
+                    <Input
+                      name="first_name"
+                      type="text"
+                      value={formData.first_name}
+                      onChange={handleChange}
+                      placeholder="First name"
+                    />
+                    <Input
+                      name="last_name"
+                      type="text"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                      placeholder="Last name"
+                    />
+                  </div>
+                  <div className="flex flex-row space-x-2">
+                    <Input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Email"
+                    />
+                    <Input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Phone"
+                    />
+                  </div>
+                  <div className="flex flex-row space-x-2">
+                    <Input
+                      type="text"
+                      name="street"
+                      value={formData.street}
+                      onChange={handleChange}
+                      placeholder="Street"
+                    />
+                    <Input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      placeholder="City"
+                    />
+                  </div>
+                  <textarea
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    className="w-full shadow-md bg-slate-200 text-black"
+                    placeholder="Notes"
+                  ></textarea>
+                  <div className=" flex flex-col w-full ">
+                    <select multiple onChange={handleChangemail}>
+                      {mailing_lists.map((x, index) => {
+                        return <option value={x}>{x}</option>;
+                      })}
+                    </select>
 
-        <main id="main-container">
+                    <p>Selected options: {selectedOptions.join(", ")}</p>
+                  </div>
+                  <div className="flex flex-row mx-1 space-x-4">
+                    <Input
+                      input
+                      type="text"
+                      name="state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      placeholder="State"
+                    />
+                    <Input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleChange}
+                      placeholder="Country"
+                    />
+                    <Input
+                      type="text"
+                      name="postal_code"
+                      value={formData.postal_code}
+                      onChange={handleChange}
+                      placeholder="Postal Code"
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Submit
+                  </button>
+                </form>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Exit
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    handleClose();
+                  }}
+                >
+                  Add
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        )}
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
           <div className="bg-body-light">
             <div className="content content-full">
               <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -77,20 +320,29 @@ function Contacts(props) {
                 <h3 className="block-title">
                   All Contacts{" "}
                   <small className="fst-italic">
-                    (total {arr.length} contacts)
+                    (total {contacts.length} contacts)
                   </small>
                 </h3>
-                <div className="block-options">
-                  <button type="button" className="btn btn-sm btn-secondary">
-                    <input
+                <div className="">
+                  <button
+                    type="button"
+                    className="btn btn-sm "
+                    onClick={() => {
+                      setShow(true);
+                    }}
+                  >
+                    {/*  <input
                       type="file"
                       name=" import contacts"
                       placeholder="import contacts"
-                    />
-                    <i className="fa fa-floppy-disk"></i> Import Contacts
+                      className="text-blue-500"
+
+                    /> */}
+                    add contact
                   </button>
                 </div>
               </div>
+
               <div className="block-content block-content-full">
                 <table className="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                   <thead>
@@ -117,14 +369,22 @@ function Contacts(props) {
                   <tbody>
                     {contacts.map((x) => {
                       return (
-                        <ContactItem
-                          key={id}
-                          id={id++}
-                          name={x.first_name + " " + x.last_name}
-                          email={x.email}
-                          lists={x.mailing_lists}
-                          phone={x.phone}
-                        />
+                        <tr>
+                          <td className="text-center fs-sm">{id++}</td>
+                          <td className="fw-semibold fs-sm">
+                            {x.first_name + " " + x.last_name}
+                          </td>
+                          <td className="d-none d-sm-table-cell fs-sm">
+                            {x.email}
+                            <span className="text-muted"></span>
+                          </td>
+                          <td className="d-none d-sm-table-cell">
+                            {x.mailing_lists}
+                          </td>
+                          <td>
+                            <span className="text-muted fs-sm">{x.phone}</span>
+                          </td>
+                        </tr>
                       );
                     })}
                   </tbody>

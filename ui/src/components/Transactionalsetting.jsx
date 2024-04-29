@@ -120,6 +120,12 @@ function Transactionalsetting(props) {
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
       <Header />
+      {loading && (
+        <div
+          className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+          role="status"
+        ></div>
+      )}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
@@ -170,14 +176,6 @@ function Transactionalsetting(props) {
               <div className="flex-grow-1">
                 <h1 className="h3 fw-bold mb-2">
                   Transactional Email Settings
-                  {loading && (
-                    <div
-                      className="spinner-border overflow-hidden"
-                      role="status"
-                    >
-                      <span className="visually-hidden">Loading...</span>
-                    </div>
-                  )}
                 </h1>
                 <h2 className="fs-base lh-base fw-medium text-muted mb-0">
                   Manage preferences and settings for transactional emails.
@@ -202,7 +200,7 @@ function Transactionalsetting(props) {
           </div>
         </div>
 
-        <div className="content">
+        <div className={`${loading ? "blur-md " : " "} content`}>
           <div className="row">
             <div className="col-12">
               <div className="block block-rounded">
@@ -211,7 +209,7 @@ function Transactionalsetting(props) {
                   <div className="block-options">
                     <button
                       type="button"
-                      className="btn btn-sm btn-secondary"
+                      className="btn btn-sm btn-secondary  "
                       onClick={handleShow}
                     >
                       <i className="fa fa-plus"></i> Create

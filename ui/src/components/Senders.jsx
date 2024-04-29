@@ -84,6 +84,7 @@ function Senders(props) {
   // Delete function
   const handleDelete = (index) => {
     const deleteSenders = async () => {
+      setLoading(true);
       try {
         const response = await axios.delete(
           "https://apis.mailmort.co/users/senders",
@@ -108,6 +109,7 @@ function Senders(props) {
       // Otherwise, update the senders state with the new array
       setSenders(updatedSenders);
     }
+    setLoading(false);
     // Create a copy of the senders array
   };
 
@@ -115,7 +117,13 @@ function Senders(props) {
     <div id="page-container" className={mode}>
       <Navigationbar onClickHandler={toggle} />
       <Header />
-      <main id="main-container">
+      {loading && (
+        <div
+          className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+          role="status"
+        ></div>
+      )}
+      <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
         {show && (
           <>
             {/* <Button variant="primary" onClick={handleShow}></Button>
@@ -213,11 +221,6 @@ function Senders(props) {
               </div>
             </div>
             <div className="block-content">
-              {loading && (
-                <div className="spinner-border " role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              )}
               <table className="table table-hover table-vcenter">
                 <thead>
                   <tr>

@@ -177,8 +177,13 @@ function Campaign(props) {
             </div>
           </div>
         </div>
-
-        <div className="content">
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <div className={`${loading ? "blur-md " : " "} content`}>
           <div className="block block-rounded">
             <div className="block-header block-header-default">
               <h3 className="block-title">All Campaigns (Total: 32)</h3>
@@ -241,11 +246,7 @@ function Campaign(props) {
                 </div>
               </div>
             </div>
-            {loading && (
-              <div className="spinner-border ml-10 " role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            )}
+
             <div
               id="one-dashboard-search-orders"
               className="block-content border-bottom d-none"
@@ -290,7 +291,7 @@ function Campaign(props) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="fs-sm">
+                  <tbody className="fs-sm ">
                     {campaigns.map((x, index) => {
                       return (
                         <tr>

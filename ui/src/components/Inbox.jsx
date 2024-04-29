@@ -21,6 +21,7 @@ import MailItem from "./MailItem";
 import Mails from "./module/inboxData.json";
 
 function Inbox(props) {
+  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,6 +36,7 @@ function Inbox(props) {
   useEffect(() => {
     const fetchMails = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           "https://apis.mailmort.co/inbox/fetch",
           {
@@ -45,6 +47,8 @@ function Inbox(props) {
         setMails(response.data);
       } catch (error) {
         console.log("errror while fetching mails", error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchMails();
@@ -92,8 +96,13 @@ function Inbox(props) {
             </Modal>
           </>
         )}
-
-        <main id="main-container">
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
           <div className="content">
             <div className="row">
               <div className="col-md-5 col-xl-1">

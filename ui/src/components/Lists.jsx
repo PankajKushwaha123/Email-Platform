@@ -18,6 +18,7 @@ function Lists(props) {
   const [contactInList, setContactInList] = useState([]);
   const getMailingListContacts = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://apis.mailmort.co/contacts/listcontacts",
         {
@@ -31,11 +32,14 @@ function Lists(props) {
       setContactInList(response.data.contacts);
     } catch (error) {
       console.log("unabe to fetch contacts of that lists", error);
+    } finally {
+      setLoading(false);
     }
   };
   const deleteLists = (index) => {
     const deleteList = async () => {
       try {
+        setLoading(true);
         const response = await axios.delete(
           "https://apis.mailmort.co/contacts/deletelist",
           {
@@ -46,6 +50,8 @@ function Lists(props) {
         setC(c + 1);
       } catch (error) {
         console.log("COULD NOT DELETE Lists ", error);
+      } finally {
+        setLoading(false);
       }
     };
     deleteList();
@@ -65,6 +71,7 @@ function Lists(props) {
   useEffect(() => {
     const fetchLists = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           "https://apis.mailmort.co/contacts/lists",
           {
@@ -116,8 +123,13 @@ function Lists(props) {
             </div>
           </div>
         </div>
-
-        <div className="content">
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <div className={`${loading ? "blur-md " : " "} content`}>
           <div className="block block-rounded g-0">
             <div className="tab-content">
               <div
@@ -126,7 +138,8 @@ function Lists(props) {
                 role="tabpanel"
                 aria-labelledby="btabs-vertical-home-tab"
               >
-                <h4 className="fw-semibold">Contact List</h4>
+                <h4 className="fw-semibold space-x-4">Contact List</h4>
+
                 <table className="table table-vcenter">
                   <thead>
                     <tr>

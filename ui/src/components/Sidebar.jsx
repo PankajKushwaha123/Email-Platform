@@ -83,7 +83,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="js-sidebar-scroll ">
+    <nav className="js-sidebar-scroll ">
       <div className="content-side ">
         <ul className="nav-main">
           <li className="nav-main-heading">Inbox</li>
@@ -195,7 +195,7 @@ function Sidebar() {
           </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 }
 

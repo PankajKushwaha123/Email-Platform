@@ -277,7 +277,13 @@ function Contacts(props) {
             </Modal>
           </>
         )}
-        <main id="main-container">
+        {loading && (
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+        )}
+        <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
           <div className="bg-body-light">
             <div className="content content-full">
               <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -338,11 +344,6 @@ function Contacts(props) {
               </div>
 
               <div className="block-content block-content-full">
-                {loading && (
-                  <div className="spinner-border " role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                )}
                 <table className="table table-bordered table-striped table-vcenter js-dataTable-buttons">
                   <thead>
                     <tr>

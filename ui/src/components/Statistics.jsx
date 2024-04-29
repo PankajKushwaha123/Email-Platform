@@ -11,6 +11,70 @@ import InfoCard from "./InfoCard";
 import CampaignItem from "./CampaignItem";
 import data from "./module/dashbord.json";
 function Statistics(props) {
+  const chartData = {
+    data: {
+      labels: [], // Replace with indexes
+      datasets: [
+        {
+          label: "delivery Rates",
+          data: [],
+          borderColor: ["rgba(255,0,0,0.9)"],
+          pointBorderColor: ["rgba(255,206,86,0.5)"],
+          pointBackgroundColor: ["rgba(0,0,0,1)"],
+        },
+        {
+          label: "opening Rates",
+          data: [],
+          borderColor: ["rgba(200,220,20,0.9)"],
+          pointBorderColor: ["rgba(255,206,86,0.2)"],
+          pointBackgroundColor: ["rgba(0,0,0,1)"],
+        },
+        {
+          label: " conversionRates",
+          data: [],
+          borderColor: ["rgba(160,220,20,0.9)"],
+          pointBorderColor: ["rgba(215,206,86,0.2)"],
+          pointBackgroundColor: ["rgba(0,0,0,1)"],
+        },
+        {
+          label: " Unsubscription Rates",
+          data: [],
+          borderColor: ["rgba(120,220,20,0.9)"],
+          pointBorderColor: ["rgba(175,206,86,0.2)"],
+          pointBackgroundColor: ["rgba(0,0,0,1)"],
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: "click through rate",
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Campaings",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "(numbers)",
+          },
+          ticks: {
+            beginAtZero: true,
+            min: 0,
+            max: 1000,
+            stepSize: 100,
+          },
+        },
+      },
+    },
+  };
+  const [loading, setLoading] = useState(false);
   const toggle = props.toggle;
   const mode = props.mode;
   const arr = data.rows;
@@ -18,8 +82,21 @@ function Statistics(props) {
   const [tdate, setTdate] = useState("");
   const [campaign, setCampaign] = useState([]);
   const [stats, setStats] = useState({});
+
+  if (campaign.length !== 0) {
+    campaign.forEach((x, index) => {
+      const statistics = x.campaign_statistics;
+      chartData.data.datasets[0].data.push(statistics.delivery_rate + 10);
+      chartData.data.datasets[1].data.push(statistics.opening_rate + 13);
+      chartData.data.datasets[2].data.push(statistics.conversion_rate + 99);
+      chartData.data.datasets[3].data.push(statistics.unsubscription_rate + 88);
+      chartData.data.labels.push(index + 1); // Adding 1 to index to start from 1
+    });
+  }
+
   const handleOnClick = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://apis.mailmort.co/campaigns/campaignstats",
         {
@@ -35,6 +112,8 @@ function Statistics(props) {
       setStats(response.data.statistics);
     } catch (error) {
       console.log("errror while fetching campaigns", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,8 +122,13 @@ function Statistics(props) {
       <Navigationbar onClickHandler={toggle} />
 
       <Header />
-
-      <main id="main-container">
+      {loading && (
+        <div
+          className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+          role="status"
+        ></div>
+      )}
+      <main id="main-container" className={`${loading ? "blur-md " : " "} `}>
         <div className="bg-body-light">
           <div className="content content-full">
             <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -165,12 +249,16 @@ function Statistics(props) {
                 <div className="block-content block-content-full text-center ">
                   <div className="col-xxl-9 d-flex">
                     <div className="card border-0 flex-fill w-100  ">
-                      <div className="card-header border-4 card-header-space-between ">
+                      <div className=" group card-header border-4card-header-space-between ">
                         <h2 className="card-header-title h4 text-uppercase">
                           heading
                         </h2>
-
-                        <LineChart data={slc.data} option={slc.options} />
+                        <div className="top-0 chart-container bg-white  group-hover:mt-10 transition-all duration-300">
+                          <LineChart
+                            data={chartData.data}
+                            option={chartData.options}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

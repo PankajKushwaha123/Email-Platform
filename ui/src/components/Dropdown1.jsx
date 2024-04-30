@@ -6,17 +6,19 @@ import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 function Dropdown1() {
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="" id="-basic">
-        <img
-          className="rounded-circle"
-          src={img1}
-          alt="Header Avatar"
-          style={{ width: "21px" }}
-        />
-        <span className="d-none d-sm-inline-block ms-2">
-          {Cookies.get("name")}
-        </span>
+    <Dropdown className="bg-gray-700 rounded-lg  ">
+      <Dropdown.Toggle variant="" id="-basic" className="text-white">
+        <div className="flex flex-row ">
+          <img
+            className="rounded-circle "
+            src={img1}
+            alt="Header Avatar"
+            style={{ width: "21px" }}
+          />
+          <span className="d-none d-sm-inline-block ms-2 text-white">
+            {Cookies.get("name")}
+          </span>
+        </div>
       </Dropdown.Toggle>
 
       <Dropdown.Menu>

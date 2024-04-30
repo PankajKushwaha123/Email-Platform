@@ -18,7 +18,7 @@ function Lists(props) {
   const [loading, setLoading] = useState(false);
   const [c, setC] = useState(0);
   const [lists, setLists] = useState([]);
-  const [list_id, setList_id] = useState();
+  const [list_id, setList_id] = useState(" ");
   const [list_name, setList_name] = useState("");
   const [emails, setEmails] = useState([]);
   const [options, setOptions] = useState([]);
@@ -27,6 +27,7 @@ function Lists(props) {
   const [contactInList, setContactInList] = useState([]);
   var num = [];
   const navigate = useNavigate();
+
   const createList = async () => {
     try {
       const response = await axios.post(
@@ -59,13 +60,13 @@ function Lists(props) {
       console.log(error);
     }
   };
-  const getMailingListContacts = async () => {
+  const getMailingListContacts = async (x) => {
     try {
       setLoading(true);
       const response = await axios.post(
         "https://apis.mailmort.co/contacts/listcontacts",
         {
-          list_id,
+          list_id: x,
         },
         {
           headers: { Authorization: "Bearer " + Cookies.get("token") },
@@ -319,7 +320,7 @@ function Lists(props) {
                             {index + 1}
                           </th>
                           <td className="fw-semibold fs-sm">
-                            <a href="#contactsTable">{x}</a>
+                            <span>{x}</span>
                           </td>
                           <td className="d-none d-sm-table-cell">27-05-2023</td>
 
@@ -332,9 +333,7 @@ function Lists(props) {
                                 title=""
                                 data-bs-original-title="View Contacts"
                                 onClick={() => {
-                                  setList_id(x);
-                                  getMailingListContacts();
-                                  getMailingListContacts();
+                                  getMailingListContacts(x);
                                 }}
                               >
                                 <i className="fa fa-fw fa-pencil"></i>

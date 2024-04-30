@@ -8,9 +8,10 @@ import Input from "./Input";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import moment from "moment-timezone";
+import { Link, useNavigate } from "react-router-dom";
 function Transactionalsetting(props) {
   const [show, setShow] = useState(false);
-
+  const navigate = useNavigate();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,7 @@ function Transactionalsetting(props) {
   };
   const changeSettings = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "https://apis.mailmort.co/transactional/settings",
         {
@@ -73,6 +75,7 @@ function Transactionalsetting(props) {
       );
       setCounter(counter + 1);
     } catch (error) {
+      alert("not getting api keys");
       console.log("could not add api keys", error);
     } finally {
       setLoading(false);
@@ -80,7 +83,6 @@ function Transactionalsetting(props) {
   };
   const handleApiDelete = async (index) => {
     try {
-      setLoading(true);
       const response = await axios.delete(
         "https://apis.mailmort.co/transactional/deleteAPI",
         {
@@ -97,6 +99,9 @@ function Transactionalsetting(props) {
     }
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchApi = async () => {
       try {
         setLoading(true);
@@ -107,7 +112,7 @@ function Transactionalsetting(props) {
           }
         );
         await findSenders();
-        setApiKeys(response.data.api_keys);
+        setApiKeys(response.data);
       } catch (error) {
         console.log("error while getting api keys");
       } finally {
@@ -233,10 +238,10 @@ function Transactionalsetting(props) {
                         return (
                           <tr key={index}>
                             <td className="fst-italic">{x.key_name}</td>
-                            <td className="text-primary">{x.key_value}</td>
+                            <td className="text-primary">{x.api_key}</td>
                             <td className="d-none d-sm-table-cell">
-                              <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
-                                {x.api_secret}
+                              <span className="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill ">
+                                {x.createdAt.substr(0, 10)}
                               </span>
                             </td>
                             <td className="text-center">

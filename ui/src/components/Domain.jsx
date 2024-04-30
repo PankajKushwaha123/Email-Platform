@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Cookies from "js-cookie";
 import Navigationbar from "./Navigationbar";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
 import Input from "./Input";
@@ -16,6 +17,7 @@ function Domain(props) {
   const toggle = props.toggle;
   const mode = props.mode;
   const [changer, setChanger] = useState(0);
+  const navigate = useNavigate();
   const addDomain = () => {
     console.log("inside add sender");
 
@@ -80,6 +82,9 @@ function Domain(props) {
     // Create a copy of the senders array
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     setLoading(true);
     const fetchDomains = async () => {
       try {

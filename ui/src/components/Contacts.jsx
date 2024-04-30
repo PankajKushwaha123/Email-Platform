@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Navigationbar from "./Navigationbar";
 import Header from "./Header";
@@ -10,6 +10,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 function Contacts(props) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,6 +34,32 @@ function Contacts(props) {
     postal_code: "",
   });
   const [c, setC] = useState(0);
+  const deleteContacts = async (index) => {
+    try {
+      var emails = [];
+      emails.push(contacts[index].email);
+      const response = await axios.delete(
+        "https://apis.mailmort.co/contacts/delete",
+        {
+          headers: { Authorization: "Bearer " + Cookies.get("token") },
+          data: { emails },
+        }
+      );
+      console.log(response);
+      setC(c + 1);
+      const updatedContacts = contacts.filter((_, i) => i !== index);
+      if (updatedContacts.length === 0) {
+        // If updatedSenders is empty, initialize senders with an empty array
+        setContacts([]);
+      } else {
+        // Otherwise, update the senders state with the new array
+        setContacts(updatedContacts);
+      }
+      alert("deleted");
+    } catch (error) {
+      alert("could not delete the contact");
+    }
+  };
   const handleChangemail = (event) => {
     const options = Array.from(
       event.target.selectedOptions,
@@ -44,11 +71,13 @@ function Contacts(props) {
       mailing_lists: selectedOptions,
     });
   };
-  let id = 1;
 
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchContacts = async () => {
       try {
         const response = await axios.get(
@@ -125,21 +154,6 @@ function Contacts(props) {
       console.log(selectedOptions);
 
       console.log("Success:", response.data);
-      // Reset form after successful submission if needed
-      /* setFormData({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone: "",
-        mailing_lists: [],
-        notes: "",
-        history: [],
-        street: "",
-        city: "",
-        state: "",
-        country: "",
-        postal_code: "",
-      }); */
     } catch (error) {
       console.error("not able to submit form data ", error);
     }
@@ -218,10 +232,14 @@ function Contacts(props) {
                     className="w-full shadow-md bg-slate-200 text-black"
                     placeholder="Notes"
                   ></textarea>
-                  <div className=" flex flex-col w-full ">
+                  <div className=" flex flex-col w-full">
                     <select multiple onChange={handleChangemail}>
                       {mailing_lists.map((x, index) => {
-                        return <option value={x}>{x}</option>;
+                        return (
+                          <option value={x} className="bg-sky-100">
+                            {x}
+                          </option>
+                        );
                       })}
                     </select>
 
@@ -326,7 +344,7 @@ function Contacts(props) {
                 <div className="">
                   <button
                     type="button"
-                    className="btn btn-sm "
+                    className="btn btn-sm btn-secondary "
                     onClick={() => {
                       setShow(true);
                     }}
@@ -364,13 +382,14 @@ function Contacts(props) {
                         Lists
                       </th>
                       <th style={{ width: "15%" }}>Phone Number</th>
+                      <th style={{ width: "15%" }}>delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {contacts.map((x) => {
+                    {contacts.map((x, index) => {
                       return (
-                        <tr>
-                          <td className="text-center fs-sm">{id++}</td>
+                        <tr key={index + 1}>
+                          <td className="text-center fs-sm">{index + 1}</td>
                           <td className="fw-semibold fs-sm">
                             {x.first_name + " " + x.last_name}
                           </td>
@@ -383,6 +402,20 @@ function Contacts(props) {
                           </td>
                           <td>
                             <span className="text-muted fs-sm">{x.phone}</span>
+                          </td>
+                          <td>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-alt-secondary js-bs-tooltip-enabled"
+                              data-bs-toggle="tooltip"
+                              title=""
+                              data-bs-original-title="Delete List"
+                              onClick={() => {
+                                deleteContacts(index);
+                              }}
+                            >
+                              <i className="fa fa-fw fa-trash"></i>
+                            </button>
                           </td>
                         </tr>
                       );

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
+import Cookies from "js-cookie";
+import { Link, useNavigate } from "react-router-dom";
 function Transactional(props) {
   const toggle = props.toggle;
   const mode = props.mode;

@@ -12,6 +12,7 @@ function Setting(props) {
   const mode = props.mode;
   const timezones = moment.tz.names();
   const [setting, setSetting] = useState({});
+  const [loading, setLoading] = useState(false);
   const [testList, setTestList] = useState("");
   const [id, setId] = useState("");
   const [timezone, setTimezone] = useState("");
@@ -24,6 +25,7 @@ function Setting(props) {
   var ds;
   const findSenders = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(
         "https://apis.mailmort.co/users/senders",
         {
@@ -33,6 +35,8 @@ function Setting(props) {
       setDefaultSender(response.data.senders);
     } catch (error) {
       console.log("could not add senders lists");
+    } finally {
+      setLoading(false);
     }
   };
   const changeSettings = async () => {
@@ -56,6 +60,7 @@ function Setting(props) {
   useEffect(() => {
     const getDefaultSetting = async () => {
       try {
+        setLoading(true);
         await findSenders();
         const response = await axios.get(
           "https://apis.mailmort.co/campaigns/settings",
@@ -73,6 +78,8 @@ function Setting(props) {
         console.log(setting.test_list);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getDefaultSetting();
@@ -82,8 +89,16 @@ function Setting(props) {
       <Navigationbar onClickHandler={toggle} />
 
       <Header />
-
-      <main id="main-container">
+      {loading && (
+        <div className="relative">
+          <div
+            className="spinner-border fixed bg-white z-[100] ml-[35%] mt-[25%]"
+            role="status"
+          ></div>
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent z-[101]"></div>
+        </div>
+      )}
+      <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
         <div className="bg-body-light">
           <div className="content content-full">
             <div className="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2">
@@ -268,25 +283,28 @@ function Setting(props) {
                       </div>
                     </div>
                     <div className=" space-x-8">
-                      <label className="form-label "> select senders</label>
-                      <select
-                        onChange={(e) => {
-                          at = e.target.value;
-                        }}
-                      >
-                        <option value={""} key={10000}>
-                          {" "}
-                          select
-                        </option>
-                        {defaultSender.map((x, index) => {
-                          return (
-                            <option value={x.sender_email} key={index}>
-                              {" "}
-                              {x.sender_email}
-                            </option>
-                          );
-                        })}
-                      </select>
+                      <div className="mb-4">
+                        <label className="form-label "> Select Senders</label>
+                        <select
+                          className="form-select"
+                          onChange={(e) => {
+                            at = e.target.value;
+                          }}
+                        >
+                          <option value={""} key={10000}>
+                            {" "}
+                            select
+                          </option>
+                          {defaultSender.map((x, index) => {
+                            return (
+                              <option value={x.sender_email} key={index}>
+                                {" "}
+                                {x.sender_email}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -343,57 +361,6 @@ function Setting(props) {
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-xl-6">
-            <div className="block block-rounded">
-              <div className="block-header block-header-default">
-                <h3 className="block-title">Other Settings</h3>
-              </div>
-              <div className="block-content">
-                <p className="fs-sm text-muted">
-                  Looking for other setting, any of these?
-                </p>
-                <div className="row items-push-2x text-center text-sm-start">
-                  <div className="col-sm-6 col-xl-4 text-center">
-                    <button type="button" className="btn btn-secondary">
-                      Manage Senders
-                    </button>
-                    <div className="mt-2">
-                      Users who can send using your domains
-                    </div>
-                  </div>
-                  <div className="col-sm-6 col-xl-4 text-center">
-                    <button type="button" className="btn btn-secondary">
-                      Manage Contact Lists
-                    </button>
-                    <div className="mt-2">Manage list of contacts.</div>
-                  </div>
-                  <div className="col-sm-6 col-xl-4 text-center">
-                    <button type="button" className="btn btn-secondary">
-                      Transactional Settings
-                    </button>
-                    <div className="mt-2">SMTP and API Settings</div>
-                  </div>
-                  <div className="col-sm-6 col-xl-4 text-center">
-                    <button type="button" className="btn btn-secondary">
-                      Manage Domains
-                    </button>
-                    <div className="mt-2">
-                      List of domains attached to your account
-                    </div>
-                  </div>
-                  <div className="col-sm-6 col-xl-4 text-center">
-                    <button type="button" className="btn btn-secondary">
-                      Manage Plans
-                    </button>
-                    <div className="mt-2">
-                      Your current plan and upgrade options.
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

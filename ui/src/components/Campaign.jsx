@@ -9,22 +9,25 @@ import data from "./module/dashbord.json";
 import Input from "./Input";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function Campaign(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const toggle = props.toggle;
   const mode = props.mode;
-  const arr = data.rows;
   const [loading, setLoading] = useState(true);
   const [campaigns, setCampaigns] = useState([]);
   const [temp, setTemp] = useState();
+  const navigate = useNavigate();
   const openModal = (x) => {
     setTemp(x);
     setShow(true);
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchCampaigns = async () => {
       try {
         const response = await axios.get("https://apis.mailmort.co/campaigns", {
@@ -160,10 +163,8 @@ function Campaign(props) {
               <h1 className="h3 fw-bold mb-2">Campaign Dashboard</h1>
               <h2 className="h6 fw-medium fw-medium text-muted mb-0">
                 Welcome{" "}
-                <a className="fw-semibold" href="#">
-                  user...
-                </a>
-                , everything looks great.
+                <span className="fw-semibold">{Cookies.get("name")}</span>,
+                everything looks great.
               </h2>
             </div>
             <div className="mt-3 mt-md-0 ms-md-3 space-x-1">

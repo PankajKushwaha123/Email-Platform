@@ -7,8 +7,9 @@ import axios from "axios";
 import Input from "./Input";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-
+import { Link, useNavigate } from "react-router-dom";
 function Inboxes(props) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [inboxes, setInboxes] = useState([]);
@@ -69,6 +70,9 @@ function Inboxes(props) {
     addInb();
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchSenders = async () => {
       try {
         const response2 = await axios.get(

@@ -1,19 +1,24 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import img1 from "../assets/media/avatars/avatar10.jpg";
+import Cookies from "js-cookie";
 
 import { Link } from "react-router-dom";
 function Dropdown1() {
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="" id="-basic">
-        <img
-          className="rounded-circle"
-          src={img1}
-          alt="Header Avatar"
-          style={{ width: "21px" }}
-        />
-        <span className="d-none d-sm-inline-block ms-2">User</span>
+    <Dropdown className="bg-gray-700 rounded-lg  ">
+      <Dropdown.Toggle variant="" id="-basic" className="text-white">
+        <div className="flex flex-row ">
+          <img
+            className="rounded-circle "
+            src={img1}
+            alt="Header Avatar"
+            style={{ width: "21px" }}
+          />
+          <span className="d-none d-sm-inline-block ms-2 text-white">
+            {Cookies.get("name")}
+          </span>
+        </div>
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -23,7 +28,7 @@ function Dropdown1() {
             src={img1}
             alt=""
           />
-          <p className="mt-2 mb-0 fw-medium">User</p>
+          <p className="mt-2 mb-0 fw-medium">{Cookies.get("name")}</p>
           <p className="mb-0 text-muted fs-sm fw-medium">Administrator</p>
         </div>
         <div className="p-2">

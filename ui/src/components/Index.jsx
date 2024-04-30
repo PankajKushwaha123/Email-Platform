@@ -1,10 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import "../assets/css/oneui.min.css";
 import img1 from "../assets/media/photos/photo28@2x.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Input from "./Input";
 function Indx() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,6 +18,8 @@ function Indx() {
       .post("https://apis.mailmort.co/users/login", { email, password })
       .then((res) => {
         Cookies.set("token", res.data.token, { expires: 7 }); // expires in 7 days
+        Cookies.set("name", res.data.name, { expires: 7 });
+        Cookies.set("email", res.data.email, { expires: 7 });
         navigate("/inbox");
         setLoading(false);
       })
@@ -26,10 +29,25 @@ function Indx() {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      navigate("/inbox");
+    }
+  }, []);
+
   return (
     <>
       <div id="page-container">
-        <main id="main-container">
+        {loading && (
+          <div className="relative">
+            <div
+              className="spinner-border fixed bg-white z-[100] ml-[49%] mt-[25%]"
+              role="status"
+            ></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-transparent z-[101]"></div>
+          </div>
+        )}
+        <main id="main-container" className={`${loading ? "blur-md" : ""}`}>
           <div className="bg">
             <div
               className="bg-image"
@@ -106,29 +124,21 @@ function Indx() {
                           method="POST"
                         >
                           <div className="mb-4">
-                            <input
-                              type="Email"
-                              className="form-control form-control-lg form-control-alt py-3"
-                              id="login-username"
-                              name="login-username"
-                              placeholder="Username"
+                            <Input
+                              name="Email"
+                              type="email"
                               value={username}
-                              onChange={(e) => {
-                                setUsername(e.target.value);
-                              }}
+                              set={setUsername}
+                              placeholder="Email"
                             />
                           </div>
                           <div className="mb-4">
-                            <input
+                            <Input
+                              name="password"
                               type="password"
-                              className="form-control form-control-lg form-control-alt py-3"
-                              id="login-password"
-                              name="login-password"
-                              placeholder="Password"
                               value={password}
-                              onChange={(e) => {
-                                setPassword(e.target.value);
-                              }}
+                              set={setPassword}
+                              placeholder="Password"
                             />
                           </div>
                           <div className="d-flex justify-content-between align-items-center mb-4">
@@ -150,18 +160,6 @@ function Indx() {
                                 <i className="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i>{" "}
                                 Sign In
                               </button>
-                              {loading && (
-                                <div className="flex items-center justify-center">
-                                  <div
-                                    className="spinner-border text-primary"
-                                    role="status"
-                                  >
-                                    <span className="visually-hidden">
-                                      Loading...
-                                    </span>
-                                  </div>
-                                </div>
-                              )}
                             </div>
                           </div>
                         </form>

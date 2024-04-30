@@ -1,6 +1,16 @@
 import React from "react";
-
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { Link } from "react-router-dom";
 function Logout() {
+  useEffect(() => {
+    Cookies.remove("token");
+
+    Cookies.remove("name");
+
+    Cookies.remove("email");
+  }, []);
   return (
     <div id="page-container">
       <main id="main-container">
@@ -69,9 +79,9 @@ function Logout() {
                       src="../assets/media/avatars/avatar10.jpg"
                       alt=""
                     />
-                    <p className="fw-semibold text-center my-2">
-                      user@example.com
-                    </p>
+                    <Link to="/" className="btn btn-secondary">
+                      Login
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -12,13 +12,10 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Cookies from "js-cookie";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Navigationbar from "./Navigationbar";
 import Footer from "./Footer";
-import MailItem from "./MailItem";
-import Mails from "./module/inboxData.json";
 
 function Inbox(props) {
   const [loading, setLoading] = useState(false);
@@ -29,11 +26,15 @@ function Inbox(props) {
   const [temp, setTemp] = useState({});
   const toggle = props.toggle;
   const mode = props.mode;
+  const navigate = useNavigate();
   const [screen, setScreen] = useState("actual");
   const changeScreenSize = () => {
     screen == "actual" ? setScreen("fullscreen") : setScreen("actual");
   };
   useEffect(() => {
+    if (!Cookies.get("token")) {
+      navigate("/");
+    }
     const fetchMails = async () => {
       try {
         setLoading(true);
@@ -117,153 +118,8 @@ function Inbox(props) {
                     Inbox Menu
                   </button>
                 </div>
-
-                {/*  <div id="one-inbox-side-nav" className="d-none d-md-block push">
-                  <div className={`block block-rounded block-mode-actual`}>
-                    <div className="block-header block-header-default">
-                      <h3 className="block-title">Inbox</h3>
-                      <div className="block-options">
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-alt-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#one-inbox-new-message"
-                        >
-                          <i className="fa fa-pencil-alt me-1 opacity-50"></i>{" "}
-                          Compose
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="block-content">
-                      <ul className="nav nav-pills flex-column fs-sm push">
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center active"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-inbox me-1 opacity-50"></i>{" "}
-                              Inbox
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              {Mails.mails.length}
-                            </span>
-                          </a>
-                        </li>
-                       
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-star me-1 opacity-50"></i>{" "}
-                              Starred
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              48
-                            </span>
-                          </a>
-                        </li>
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-paper-plane me-1 opacity-50"></i>{" "}
-                              Sent
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              1480
-                            </span>
-                          </a>
-                        </li>
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-pencil-alt me-1 opacity-50"></i>{" "}
-                              Draft
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              2
-                            </span>
-                          </a>
-                        </li>
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-folder me-1 opacity-50"></i>{" "}
-                              Archive
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              1987
-                            </span>
-                          </a>
-                        </li>
-                        <li className="nav-item my-1">
-                          <a
-                            className="nav-link d-flex justify-content-between align-items-center"
-                            href="#"
-                          >
-                            <span>
-                              <i className="fa fa-fw fa-trash-alt me-1 opacity-50"></i>{" "}
-                              Trash
-                            </span>
-                            <span className="badge rounded-pill bg-black-50">
-                              10
-                            </span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="block block-rounded">
-                    <div className="block-header block-header-default">
-                      <h3 className="block-title">Manage Inbox Access</h3>
-                      <div className="block-options">
-                        <button type="button" className="btn-block-option">
-                          <Link to="/settings">
-                            <i className="si si-settings"></i>
-                          </Link>
-                        </button>
-                      </div>
-                    </div>
-                    <div className="block-content">
-                      <ul className="nav-items fs-sm">
-                        <li>
-                          <a className="d-flex py-2" href="#">
-                            <div className="flex-shrink-0 me-3 ms-2 overlay-container overlay-bottom">
-                              <img
-                                className="img-avatar img-avatar48"
-                                src={img2}
-                                alt=""
-                              />
-                              <span className="overlay-item item item-tiny item-circle border border-2 border-white bg-success"></span>
-                            </div>
-                            <div className="flex-grow-1">
-                              <div className="fw-semibold">Hrishikesh</div>
-                              <div className="fw-normal text-muted">
-                                email addr
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> */}
               </div>
               <div className="col-md-7 col-xl-9">
-                {/* to toogle to full screen block-mode-fullscreen */}
                 <div className={`block block-rounded block-mode-${screen} `}>
                   <div className="block-header block-header-default">
                     <h3 className="block-title">
@@ -371,13 +227,7 @@ function Inbox(props) {
                         <tbody>
                           {mails.map((x, index) => {
                             return (
-                              <tr
-                                onClick={() => {
-                                  setTemp(x);
-                                  setShow(true);
-                                }}
-                                key={index}
-                              >
+                              <tr key={index}>
                                 <td
                                   className="text-center"
                                   style={{ width: "60px" }}
@@ -399,10 +249,19 @@ function Inbox(props) {
                                 <td
                                   className="d-none d-sm-table-cell fw-semibold"
                                   style={{ width: "140px" }}
+                                  onClick={() => {
+                                    setTemp(x);
+                                    setShow(true);
+                                  }}
                                 >
                                   {x.from.value[0].name}
                                 </td>
-                                <td>
+                                <td
+                                  onClick={() => {
+                                    setTemp(x);
+                                    setShow(true);
+                                  }}
+                                >
                                   <span className="text-sky-700 font-semibold">
                                     {x.subject}
                                   </span>
@@ -411,71 +270,26 @@ function Inbox(props) {
                                 <td
                                   className="d-none d-xl-table-cell text-muted"
                                   style={{ width: "80px" }}
+                                  onClick={() => {
+                                    setTemp(x);
+                                    setShow(true);
+                                  }}
                                 >
                                   <i className="fa fa-paperclip me-1"></i> (3)
                                 </td>
                                 <td
                                   className="d-none d-xl-table-cell text-muted"
                                   style={{ width: "120px" }}
+                                  onClick={() => {
+                                    setTemp(x);
+                                    setShow(true);
+                                  }}
                                 >
                                   <span>{x.date.substr(0, 10)}</span>
                                 </td>
                               </tr>
                             );
                           })}
-                          <tr
-                            onClick={() => {
-                              setShow(true);
-                            }}
-                          >
-                            <td
-                              className="text-center"
-                              style={{ width: "60px" }}
-                            >
-                              <div className="form-check d-inline-block">
-                                <input
-                                  className="form-check-input"
-                                  type="checkbox"
-                                  value=""
-                                  id="inbox-msg15"
-                                  name="inbox-msg15"
-                                />
-                                <label
-                                  className="form-check-label"
-                                  htmlFor="inbox-msg15"
-                                ></label>
-                              </div>
-                            </td>
-                            <td
-                              className="d-none d-sm-table-cell fw-semibold"
-                              style={{ width: "140px" }}
-                            >
-                              name
-                            </td>
-                            <td>
-                              <a
-                                className="fw-semibold"
-                                data-bs-toggle="modal"
-                                data-bs-target="#one-inbox-message"
-                                href="#"
-                              >
-                                subject
-                              </a>
-                              <div className="text-muted mt-1">description</div>
-                            </td>
-                            <td
-                              className="d-none d-xl-table-cell text-muted"
-                              style={{ width: "80px" }}
-                            >
-                              <i className="fa fa-paperclip me-1"></i> (3)
-                            </td>
-                            <td
-                              className="d-none d-xl-table-cell text-muted"
-                              style={{ width: "120px" }}
-                            >
-                              <em>time</em>
-                            </td>
-                          </tr>
                         </tbody>
                       </table>
                     </div>

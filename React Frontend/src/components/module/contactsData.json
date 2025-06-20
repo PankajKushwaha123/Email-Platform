@@ -1,0 +1,60 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Shivam Tripathi",
+      "email": "shivam1705of@gmail.com",
+      "type": "vip",
+      "registered": "10 "
+    },
+    {
+      "id": 2,
+      "name": "Hrishikesh Bhatt",
+      "email": "Hrishikesh@gmail.com",
+      "type": "disabled",
+      "registered": 18
+    },
+    {
+      "id": 3,
+      "name": "Pankaj Kushwaha",
+      "email": "Pankaj@gmail.com",
+      "type": "business",
+      "registered": 19
+    },
+    {
+      "id": 4,
+      "name": "Krishna Gajula",
+      "email": "Krishna@gmail.com",
+      "type": "business",
+      "registered": 15
+    },
+    {
+      "id": 5,
+      "name": "Shivam Swaraj",
+      "email": "Swaraj@gmail.com",
+      "type": "disabled",
+      "registered": 13
+    },
+    {
+      "id": 6,
+      "name": "Harshit Badoliya",
+      "email": "Harshit@gmail.com",
+      "type": "vip",
+      "registered": 10
+    },
+    {
+      "id": 7,
+      "name": "Sunit Pal",
+      "email": "Sunit@gmail.com",
+      "type": "disabled",
+      "registered": 12
+    },
+    {
+      "id": 8,
+      "name": "Vikrant Sharma",
+      "email": "Vikrant@gmail.com",
+      "type": "business",
+      "registered": 14
+    }
+  ]
+}

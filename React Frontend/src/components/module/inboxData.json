@@ -1,0 +1,40 @@
+{
+  "mails": [
+    {
+      "name": "Shivam Tripathi",
+      "subject": "Your subscription was updated",
+      "description": "We are glad you decided to go with a vip..",
+      "time": "15 min ago"
+    },
+    {
+      "name": "Devansh Tripathi",
+      "subject": "Your subscription was updated",
+      "description": "netflix subscribed",
+      "time": "14 min ago"
+    },
+    {
+      "name": "Hrishikesh Bhatt",
+      "subject": "Your application was uploaded successfully",
+      "description": "you applied in stanford university",
+      "time": "13 min ago"
+    },
+    {
+      "name": "Pankaj Kushwaha",
+      "subject": "got admission in jaypee university",
+      "description": "Congrats Pankaj, You got addmission in jaypee university",
+      "time": "2 min ago"
+    },
+    {
+      "name": "Krishna Gajula ",
+      "subject": "Your Application was rejected",
+      "description": "your application is left swiped",
+      "time": "18 min ago"
+    },
+    {
+      "name": "Harshit Kapoor",
+      "subject": "Supplementry exam notification ",
+      "description": "you failed in 6 subjects",
+      "time": "15 min ago"
+    }
+  ]
+}

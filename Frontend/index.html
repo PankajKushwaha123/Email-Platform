@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>MailMort</title>
+        <link rel="shortcut icon" href="images/sam-dark-02.svg">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:description" content="">
+        <meta property="og:title" content="Wallet Home">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:title" content="Wallet Home">
+        <style>
+            a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-box !important;box-sizing:content-box !important;vertical-align:middle}.hs-breadcrumb-menu{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px}.hs-breadcrumb-menu-item{float:left;padding:10px 0px 10px 10px}.hs-breadcrumb-menu-divider:before{content:'›';padding-left:10px}.hs-featured-image-link{border:0}.hs-featured-image{float:right;margin:0 0 20px 20px;max-width:50%}@media (max-width: 568px){.hs-featured-image{float:none;margin:0;width:100%;max-width:100%}}.hs-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px}
+        </style>
+        <link rel="stylesheet" href="css/main.min.css">
+        <link rel="stylesheet" href="css/theme-overrides.min.css">
+        <link rel="stylesheet" href="css/module_49171282491_menu-section.min.css">
+        <link rel="stylesheet" href="css/module_-2712622_Site_Search_Input.min.css">
+        <link rel="stylesheet" href="css/module_49175118734_page-title.min.css">
+        <style>
+            .wallet_module_page_title_title,
+            .wallet_module_page_title_text {
+            color: #FFFFFF;
+            }
+        </style>
+        <link rel="stylesheet" href="css/module_49173591616_quote.min.css">
+        <link rel="stylesheet" href="css/module_49173076760_icon-card-set.min.css">
+        <link rel="stylesheet" href="css/module_49170909784_fancy-header.min.css">
+        <link rel="stylesheet" href="css/module_49173953866_calendar.min.css">
+        <link rel="stylesheet" href="css/module_49173953868_testimonial.min.css">
+        <link rel="stylesheet" href="css/splide.min.css">
+        <link rel="stylesheet" href="css/module_49174427242_image-text.min.css">
+        <link rel="stylesheet" href="css/module_49170910583_accordion.min.css">
+        <link rel="stylesheet" href="css/module_49173609308_call-to-action-section.min.css">
+        <link rel="stylesheet" href="css/module_49175118735_social-accounts.min.css">
+        <style>
+            @font-face {
+            font-family: "Lexend Deca";
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+            src: url("fonts/regular.woff2") format("woff2"), url("fonts/regular.woff") format("woff");
+            }
+            @font-face {
+            font-family: "Lexend Deca";
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+            src: url("fonts/700.woff2") format("woff2"), url("fonts/700.woff") format("woff");
+            }
+        </style>
+        <!-- Editor Styles -->
+        <style id="hs_editor_style" type="text/css">
+            html{scroll-behavior:smooth}
+            .dnd_area-row-0-background-color {
+            background-color: rgba(21, 24, 108, 1) !important;
+            }
+            .dnd_area-row-1-background-color {
+            background-color: rgba(232, 246, 255, 1) !important;
+            }
+            .dnd_area-row-5-background-color {
+            background-color: rgba(232, 246, 255, 1) !important;
+            }
+            .dnd_area-row-8-background-color {
+            background-color: rgba(161, 255, 249, 1) !important;
+            }
+            .dnd_area-row-11-background-color {
+            background-color: rgba(66, 232, 224, 1) !important;
+            }
+            .dnd_area-module-13-flexbox-positioning {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: column !important;
+            -ms-flex-align: start !important;
+            -ms-flex-pack: start;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start;
+            }
+            .dnd_area-module-13-flexbox-positioning > div {
+            max-width: 100%;
+            flex-shrink: 0 !important;
+            }
+            .dnd_area-module-10-flexbox-positioning {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: column !important;
+            -ms-flex-align: start !important;
+            -ms-flex-pack: start;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start;
+            }
+            .dnd_area-module-10-flexbox-positioning > div {
+            max-width: 100%;
+            flex-shrink: 0 !important;
+            }
+            .dnd_area-module-7-flexbox-positioning {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: column !important;
+            -ms-flex-align: start !important;
+            -ms-flex-pack: start;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            justify-content: flex-start;
+            }
+            .dnd_area-module-7-flexbox-positioning > div {
+            max-width: 100%;
+            flex-shrink: 0 !important;
+            }
+            /* HubSpot Non-stacked Media Query Styles */
+            @media (min-width:768px) {
+            .dnd_area-row-0-vertical-alignment > .row-fluid {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: row;
+            display: flex !important;
+            flex-direction: row;
+            }
+            .dnd_area-column-3-vertical-alignment {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: column !important;
+            -ms-flex-pack: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            }
+            .dnd_area-column-3-vertical-alignment > div {
+            flex-shrink: 0 !important;
+            }
+            .dnd_area-column-1-vertical-alignment {
+            display: -ms-flexbox !important;
+            -ms-flex-direction: column !important;
+            -ms-flex-pack: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            }
+            .dnd_area-column-1-vertical-alignment > div {
+            flex-shrink: 0 !important;
+            }
+            }
+            /* HubSpot Styles (default) */
+            .dnd_area-row-0-margin {
+            margin-bottom: 0px !important;
+            }
+            .dnd_area-row-0-padding {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+            padding-left: 50px !important;
+            padding-right: 50px !important;
+            }
+            .dnd_area-row-1-padding {
+            padding-top: 100px !important;
+            padding-bottom: 60px !important;
+            padding-left: 100px !important;
+            padding-right: 100px !important;
+            }
+            .dnd_area-row-4-margin {
+            margin-bottom: 60px !important;
+            }
+            .dnd_area-row-5-padding {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+            padding-left: 100px !important;
+            padding-right: 100px !important;
+            }
+            .dnd_area-row-6-margin {
+            margin-bottom: 60px !important;
+            }
+            .dnd_area-row-8-padding {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+            padding-left: 100px !important;
+            padding-right: 100px !important;
+            }
+            .dnd_area-row-9-margin {
+            margin-bottom: 60px !important;
+            }
+            .dnd_area-row-11-margin {
+            margin-bottom: 0px !important;
+            }
+            .dnd_area-row-11-padding {
+            padding-top: 100px !important;
+            padding-bottom: 100px !important;
+            padding-left: 100px !important;
+            padding-right: 100px !important;
+            }
+            .dnd_area-column-11-margin {
+            margin-bottom: 40px !important;
+            }
+            .dnd_area-column-11-row-1-margin {
+            margin-top: 20px !important;
+            }
+            .dnd_area-column-8-margin {
+            margin-bottom: 40px !important;
+            }
+            .dnd_area-column-8-row-1-margin {
+            margin-top: 20px !important;
+            }
+            .dnd_area-column-5-margin {
+            margin-bottom: 40px !important;
+            }
+            .dnd_area-column-5-row-1-margin {
+            margin-top: 20px !important;
+            }
+            .footer-row-0-margin {
+            margin-bottom: 0px !important;
+            }
+            .footer-row-1-margin {
+            margin-bottom: 0px !important;
+            }
+            /* HubSpot Styles (mobile) */
+            @media (max-width: 767px) {
+            .dnd_area-row-0-padding {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+            padding-left: 40px !important;
+            padding-right: 40px !important;
+            }
+            .dnd_area-row-1-padding {
+            padding-top: 40px !important;
+            padding-bottom: 0px !important;
+            padding-left: 40px !important;
+            padding-right: 40px !important;
+            }
+            .dnd_area-row-5-padding {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+            padding-left: 40px !important;
+            padding-right: 40px !important;
+            }
+            .dnd_area-row-8-padding {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+            padding-left: 40px !important;
+            padding-right: 40px !important;
+            }
+            .dnd_area-row-11-padding {
+            padding-top: 40px !important;
+            padding-bottom: 40px !important;
+            padding-left: 40px !important;
+            padding-right: 40px !important;
+            }
+            }
+        </style>
+        <link rel="canonical" href="">
+        <meta property="og:url" content="">
+        <meta name="twitter:card" content="summary">
+        <meta http-equiv="content-language" content="de">
+        <meta name="generator" content="HubSpot">
+    </head>
+    <body>
+        <div class="body-wrapper   hs-content-id-49172901142 hs-site-page page ">
+            <div data-global-resource-path="wallet/templates/partials/header.html">
+                <header class="header">
+                    <div class="container-fluid content-wrapper">
+                        <div class="row-fluid-wrapper">
+                            <div class="row-fluid">
+                                <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                                </div>
+                                <!--end widget-span -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header__container content-wrapper">
+                        <div class="header__logo header__logo--main">
+                            <span id="hs_cos_wrapper_site_logo_hs_logo_widget" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_logo" style="" data-hs-cos-general-type="widget" data-hs-cos-type="logo"><a href="" id="hs-link-site_logo_hs_logo_widget" style="border-width:0px;border:0px;"><img src="images/email.png" class="hs-image-widget " style="width:733px;border-width:0px;border:0px;" width="733" alt="" title="" srcset="images/wallet-logo-01_3.png 367w, images/wallet-logo-01_2.png 733w, images/wallet-logo-01_6.png 1100w, images/wallet-logo-01_5.png 1466w, images/wallet-logo-01_1.png 1833w, images/wallet-logo-01_4.png 2199w" sizes="(max-width: 733px) 100vw, 733px"></a></span>
+                        </div>
+                        <div class="header__column">
+                            <div class="header__row-1">
+                                <div class="header--toggle header__navigation--toggle">
+                                    <span id="hs_cos_wrapper_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                            <g id="bars1_layer">
+                                                <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="header__navigation header--element">
+                                    <div id="hs_cos_wrapper_navigation-primary" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                        <nav aria-label="Main menu" class="navigation-primary">
+                                            <ul class="submenu level-1">
+                                                <li class="no-submenu menu-item hs-skip-lang-url-rewrite">
+                                                    <a href="" class="menu-link active-item" aria-current="page">Home</a>
+                                                </li>
+                                                <li class="has-submenu menu-item hs-skip-lang-url-rewrite">
+                                                    <a href="#features" class="menu-link active-branch" >Features</a>
+                                                    <input type="checkbox" id="Templates" class="submenu-toggle">
+                                                    <label class="menu-arrow" for="Templates">
+                                                    <span class="menu-arrow-bg"></span>
+                                                    </label>
+                                                </li>
+                                                <li class="has-submenu menu-item hs-skip-lang-url-rewrite">
+                                                    <a href="#Price" class="menu-link">Pricing</a>
+                                                    <input type="checkbox" id="System Pages" class="submenu-toggle">
+                                                    <label class="menu-arrow" for="System Pages">
+                                                    <span class="menu-arrow-bg"></span>
+                                                    </label>
+                                                    
+                                                </li>
+                                                <li class="no-submenu menu-item hs-skip-lang-url-rewrite">
+                                                    <a href="#AboutUs" class="menu-link">About us</a>
+                                                </li>
+                                                <li>
+                                                
+                                                <a class="button" href="?hsLang=de">
+                                                Sign Up
+                                                </a>
+                                                
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid content-wrapper">
+                        <div class="row-fluid-wrapper">
+                            <div class="row-fluid">
+                                <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                                </div>
+                                <!--end widget-span -->
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+            <main id="main-content" class="body-container-wrapper">
+                <div class="container-fluid body-container body-container--home">
+                    <div class="row-fluid-wrapper">
+                        <div class="row-fluid">
+                            <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                                <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd_area-row-0-vertical-alignment dnd_area-row-0-background-color dnd_area-row-0-margin dnd-section dnd_area-row-0-padding">
+                                    <div class="row-fluid ">
+                                        <div class="span6 widget-span widget-type-cell dnd-column dnd_area-column-1-vertical-alignment" style="" data-widget-type="cell" data-x="0" data-w="6">
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-2 dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        <div id="hs_cos_wrapper_dnd_area-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                            <section class="wallet_module_page_title">
+                                                                <div class="wallet_module_page_title_container">
+                                                                    <h1 class="wallet_module_page_title_title"><u class="wallet_u">Streamline Your</u> Communications with Our Powerful Email Solutions.</h1>
+                                                                </div>
+                                                                <a class="button" href="?hsLang=de">
+                                                                Get's Started
+                                                                </a>
+                                                            </section>
+                                                        </div>
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                        </div>
+                                        <!--end widget-span -->
+                                        <div class="span6 widget-span widget-type-cell dnd-column dnd_area-column-3-vertical-alignment" style="" data-widget-type="cell" data-x="6" data-w="6">
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-3 dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        <div id="hs_cos_wrapper_dnd_area-module-4" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module wallet_linked_image widget-type-linked_image widget-type-linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                            <span id="hs_cos_wrapper_dnd_area-module-4_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><img src="images/0014.png" class="hs-image-widget " style="width:700px;border-width:0px;border:0px;" width="700" alt="Services Image" title="Services Image" srcset="images/0014_5.png 350w, images/0014.png 700w, images/0014_6.png 1050w, images/0014_3.png 1400w, images/0014_4.png 1750w, images/0014_2.png 2100w" sizes="(max-width: 700px) 100vw, 700px"></span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                <div class="row-fluid-wrapper row-depth-1 row-number-4 dnd_area-row-1-padding dnd_area-row-1-background-color dnd-section" id="features">
+                                    <div class="row-fluid ">
+                                        <div class="span4 widget-span widget-type-cell dnd_area-column-5-margin dnd-column" style="" data-widget-type="cell" data-x="0" data-w="4">
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-5 dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        <div id="hs_cos_wrapper_dnd_area-module-6" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                            <span id="hs_cos_wrapper_dnd_area-module-6_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
+                                                                <h2>Automation Tools.</h2>
+                                                                <p>Streamline your workflows and save time with powerful automation features.there live the blind texts.<br> Set up automated drip campaigns, welcome sequences, and more to engage your audience effectively.</p>
+                                                                <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean and beyond then.</p>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-6 dnd-row dnd_area-column-5-row-1-margin">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd_area-module-7-flexbox-positioning dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                            
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                        </div>
+                                        <!--end widget-span -->
+                                        <div class="span4 widget-span widget-type-cell dnd_area-column-8-margin dnd-column" style="" data-widget-type="cell" data-x="4" data-w="4">
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-7 dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        <div id="hs_cos_wrapper_dnd_area-module-9" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                            <span id="hs_cos_wrapper_dnd_area-module-9_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
+                                                                <h2>Personalization Options.</h2>
+                                                                <p>Deliver personalized experiences to your subscribers with dynamic content and segmentation.</p>
+                                                                <p>Address your audience by name and send targeted messages based on their behavior and preferences.</p>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-8 dnd_area-column-8-row-1-margin dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module dnd_area-module-10-flexbox-positioning" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                        </div>
+                                        <!--end widget-span -->
+                                        <div class="span4 widget-span widget-type-cell dnd_area-column-11-margin dnd-column" style="" data-widget-type="cell" data-x="8" data-w="4">
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-9 dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                        <div id="hs_cos_wrapper_dnd_area-module-12" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                            <span id="hs_cos_wrapper_dnd_area-module-12_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
+                                                                <h2>Integration Capabilities.</h2>
+                                                                <p>Seamlessly integrate with your favorite tools and platforms for enhanced functionality..</p>
+                                                                <p>Connect with CRM systems, e-commerce platforms, and more to sync data and streamline your operations.</p>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                            <div class="row-fluid-wrapper row-depth-1 row-number-10 dnd_area-column-11-row-1-margin dnd-row">
+                                                <div class="row-fluid ">
+                                                    <div class="span12 widget-span widget-type-custom_widget dnd_area-module-13-flexbox-positioning dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                    </div>
+                                                    <!--end widget-span -->
+                                                </div>
+                                                <!--end row-->
+                                            </div>
+                                            <!--end row-wrapper -->
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                
+                                <!--end row-wrapper -->
+                                <div class="row-fluid-wrapper row-depth-1 row-number-12 dnd-section" id="Price">
+                                    <div class="row-fluid ">
+                                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                            <div id="hs_cos_wrapper_dnd_area-module-15" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                <section class="wallet_cards">
+                                                    <div class="wallet_card_3 wallet_module_icon_card">
+                                                        <img class="wallet_module_icon_card_img" src="images/0009.png" alt="Services Image">
+                                                        <div class="wallet_module_icon_card_text">
+                                                            <h3>Basic Plan.</h3>
+                                                            <p>$5/Month.</p>
+                                                            <ul><li>Customizable templates</li>
+                                                              <li>Basic analytics</li>
+                                                              <li>Email support</li></ul>
+                                                        </div>
+                                                        <a class="button" href="?hsLang=de">
+                                                        Read More
+                                                        </a>
+                                                    </div>
+                                                    <div class="wallet_card_3 wallet_module_icon_card wallet_module_icon_card_secondary_skin">
+                                                        <img class="wallet_module_icon_card_img" src="images/0018.png" alt="Services Image">
+                                                        <div class="wallet_module_icon_card_text">
+                                                            <h3>Standard Plan.</h3>
+                                                            <p>$10/Month.</p>
+                                                            <ul><li>Advanced analytics</li>
+                                                              <li>Automation tools</li>
+                                                              <li>Priority support</li></ul>
+                                                        </div>
+                                                        <a class="button" href="?hsLang=de">
+                                                        Read More
+                                                        </a>
+                                                    </div>
+                                                    <div class="wallet_card_3 wallet_module_icon_card">
+                                                        <img class="wallet_module_icon_card_img" src="images/0014_1.png" alt="Services Image">
+                                                        <div class="wallet_module_icon_card_text">
+                                                            <h3>Premium Plan.</h3>
+                                                            <p>$50/Month.</p>
+                                                            <ul><li>Personalization options</li>
+                                                              <li>Tracking Matrix</li>
+                                                              <li>Dedicated account manager</li></ul>
+                                                        </div>
+                                                        <a class="button" href="?hsLang=de">
+                                                        Read More
+                                                        </a>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                
+                                <div class="row-fluid-wrapper row-depth-1 row-number-17 dnd-section dnd_area-row-8-padding dnd_area-row-8-background-color" id="AboutUs">
+                                    <div class="row-fluid ">
+                                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                            <div id="hs_cos_wrapper_dnd_area-module-20" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                <section class="wallet_module_image_text">
+                                                    <img class="wallet_module_image_text_img" src="images/0016.png" alt="Paragraph Image">
+                                                    <div class="wallet_module_image_text_container">
+                                                        <h2 class="wallet_module_image_text_title">Aout us.</h2>
+                                                        <p>Our mission is simple: to provide innovative and reliable email marketing solutions that enable businesses to achieve their marketing goals and surpass their expectations. We strive to empower our clients with cutting-edge technology, actionable insights, and unparalleled support to succeed in today's competitive digital landscape.</p>
+                                                        <a class="button" href="?hsLang=de">
+                                                        Read More
+                                                        </a>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                <div class="row-fluid-wrapper row-depth-1 row-number-18 dnd-section dnd_area-row-9-margin">
+                                    <div class="row-fluid ">
+                                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                            <div id="hs_cos_wrapper_dnd_area-module-21" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                <div class="wallet_module_fancy_header_container">
+                                                    <h2 class="wallet_module_fancy_header">Questions &amp; answers.</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                <div class="row-fluid-wrapper row-depth-1 row-number-19 dnd-section">
+                                    <div class="row-fluid ">
+                                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                            <div id="hs_cos_wrapper_dnd_area-module-22" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                <section class="wallet_module_accordion">
+                                                    <div class="wallet_module_accordion_item">
+                                                        <div class="wallet_module_accordion_q">
+                                                            <span class="wallet_module_accordion_open">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="plus1_layer">
+                                                                            <path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <span class="wallet_module_accordion_close">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="minus2_layer">
+                                                                            <path d="M424 318.2c13.3 0 24-10.7 24-24v-76.4c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h400z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <p class="wallet_module_accordion_title">What's our vision?</p>
+                                                            <div class="wallet_module_accordion_icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+                                                                    <g id="bullseye3_layer">
+                                                                        <path d="M256 72c101.689 0 184 82.295 184 184 0 101.689-82.295 184-184 184-101.689 0-184-82.295-184-184 0-101.689 82.295-184 184-184m0-64C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 184c35.29 0 64 28.71 64 64s-28.71 64-64 64-64-28.71-64-64 28.71-64 64-64m0-64c-70.692 0-128 57.308-128 128s57.308 128 128 128 128-57.308 128-128-57.308-128-128-128z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <p class="wallet_module_accordion_text wallet_module_accordion_close">At MailMort, our vision is to revolutionize the way businesses engage with their audience through email marketing. We envision a future where email marketing is not just a tool for communication, but a strategic driver of business growth and customer relationships.</p>
+                                                    </div>
+                                                    <div class="wallet_module_accordion_item">
+                                                        <div class="wallet_module_accordion_q">
+                                                            <span class="wallet_module_accordion_open">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="plus4_layer">
+                                                                            <path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <span class="wallet_module_accordion_close">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="minus5_layer">
+                                                                            <path d="M424 318.2c13.3 0 24-10.7 24-24v-76.4c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h400z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <p class="wallet_module_accordion_title">What kind of facilities do we have?</p>
+                                                            <div class="wallet_module_accordion_icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" aria-hidden="true">
+                                                                    <g id="dollar-sign6_layer">
+                                                                        <path d="M113.411 169.375c0-23.337 21.536-38.417 54.865-38.417 26.726 0 54.116 12.263 76.461 28.333 5.88 4.229 14.13 2.354 17.575-4.017l23.552-43.549c2.649-4.898 1.596-10.991-2.575-14.68-24.281-21.477-59.135-34.09-91.289-37.806V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v49.832c-58.627 13.29-97.299 55.917-97.299 108.639 0 123.533 184.765 110.81 184.765 169.414 0 19.823-16.311 41.158-52.124 41.158-30.751 0-62.932-15.88-87.848-35.887-5.31-4.264-13.082-3.315-17.159 2.14l-30.389 40.667c-3.627 4.854-3.075 11.657 1.302 15.847 24.049 23.02 59.249 41.255 98.751 47.973V500c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12v-47.438c65.72-10.215 106.176-59.186 106.176-116.516.001-119.688-184.764-103.707-184.764-166.671z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <p class="wallet_module_accordion_text wallet_module_accordion_close">We provide access to a cutting-edge email marketing platform equipped with advanced features and intuitive tools to create, manage, and analyze email campaigns.</p>
+                                                    </div>
+                                                    <div class="wallet_module_accordion_item">
+                                                        <div class="wallet_module_accordion_q">
+                                                            <span class="wallet_module_accordion_open">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="plus7_layer">
+                                                                            <path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <span class="wallet_module_accordion_close">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="minus8_layer">
+                                                                            <path d="M424 318.2c13.3 0 24-10.7 24-24v-76.4c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h400z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <p class="wallet_module_accordion_title">What's our working hours?</p>
+                                                            <div class="wallet_module_accordion_icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+                                                                    <g id="clock9_layer">
+                                                                        <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm57.1 350.1L224.9 294c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h48c6.6 0 12 5.4 12 12v137.7l63.5 46.2c5.4 3.9 6.5 11.4 2.6 16.8l-28.2 38.8c-3.9 5.3-11.4 6.5-16.8 2.6z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <p class="wallet_module_accordion_text wallet_module_accordion_close">Monday to Friday 9:00 AM to 5:00 PM</p>
+                                                    </div>
+                                                    <div class="wallet_module_accordion_item">
+                                                        <div class="wallet_module_accordion_q">
+                                                            <span class="wallet_module_accordion_open">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="plus10_layer">
+                                                                            <path d="M448 294.2v-76.4c0-13.3-10.7-24-24-24H286.2V56c0-13.3-10.7-24-24-24h-76.4c-13.3 0-24 10.7-24 24v137.8H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h137.8V456c0 13.3 10.7 24 24 24h76.4c13.3 0 24-10.7 24-24V318.2H424c13.3 0 24-10.7 24-24z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <span class="wallet_module_accordion_close">
+                                                                <span id="hs_cos_wrapper_dnd_area-module-22_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true">
+                                                                        <g id="minus11_layer">
+                                                                            <path d="M424 318.2c13.3 0 24-10.7 24-24v-76.4c0-13.3-10.7-24-24-24H24c-13.3 0-24 10.7-24 24v76.4c0 13.3 10.7 24 24 24h400z"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                            </span>
+                                                            <p class="wallet_module_accordion_title">Where are we located?</p>
+                                                            <div class="wallet_module_accordion_icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" aria-hidden="true">
+                                                                    <g id="map12_layer">
+                                                                        <path d="M576 56.015v335.97a23.998 23.998 0 0 1-13.267 21.466l-128 64C418.948 485.344 400 473.992 400 455.985v-335.97a23.998 23.998 0 0 1 13.267-21.466l128-64C557.052 26.656 576 38.008 576 56.015zm-206.253 42.07l-144-64c-15.751-7-33.747 4.461-33.747 21.932v335.967a24 24 0 0 0 14.253 21.931l144 64c15.751 7 33.747-4.461 33.747-21.931V120.017a24 24 0 0 0-14.253-21.932zm-228.48-63.536l-128 63.985A23.998 23.998 0 0 0 0 120v335.985c0 18.007 18.948 29.359 34.733 21.466l128-63.985A23.998 23.998 0 0 0 176 392V56.015c0-18.007-18.948-29.359-34.733-21.466z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <p class="wallet_module_accordion_text wallet_module_accordion_close">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown.</p>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                                <div class="row-fluid-wrapper row-depth-1 row-number-20 dnd_area-row-11-margin dnd-section dnd_area-row-11-background-color dnd_area-row-11-padding">
+                                    <div class="row-fluid ">
+                                        <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                            <div id="hs_cos_wrapper_dnd_area-module-23" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                <a class="wallet_module_cta_section" href="?hsLang=de">
+                                                    <div class="wallet_module_cta_section_chevron">
+                                                        <span id="hs_cos_wrapper_dnd_area-module-23_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" aria-hidden="true">
+                                                                <g id="chevron-right1_layer">
+                                                                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
+                                                                </g>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="wallet_module_cta_section_text wallet_text_big">
+                                                        Don't miss <u class="wallet_u">the chance</u>
+                                                        <div class="button">
+                                                            Create account
+                                                        </div>
+                                                    </div>
+                                                    <img class="wallet_module_cta_section_img" src="images/0003.png" alt="CTA Image">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!--end widget-span -->
+                                    </div>
+                                    <!--end row-->
+                                </div>
+                                <!--end row-wrapper -->
+                            </div>
+                            <!--end widget-span -->
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <div data-global-resource-path="wallet/templates/partials/footer.html">
+                <footer class="footer">
+                    <div class="container-fluid content-wrapper">
+                        <div class="row-fluid-wrapper">
+                            <div class="row-fluid">
+                                <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+                                    <div class="row-fluid-wrapper row-depth-1 row-number-1 dnd-section footer-row-0-margin">
+                                        <div class="row-fluid ">
+                                            <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                <div id="hs_cos_wrapper_footer-module-1" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                </div>
+                                            </div>
+                                            <!--end widget-span -->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    <!--end row-wrapper -->
+                                    <div class="row-fluid-wrapper row-depth-1 row-number-2 footer-row-1-margin dnd-section">
+                                        <div class="row-fluid ">
+                                            <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                <div id="hs_cos_wrapper_footer-module-2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                    <div class="wallet_module_social_accounts">
+                                                        <a href="https://www.facebook.com" target="_blank" rel="noopener">
+                                                            <span id="hs_cos_wrapper_footer-module-2_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon wallet_module_social_accounts_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" aria-labelledby="facebook-f1" role="img">
+                                                                    <title id="facebook-f1">Follow us on Facebook</title>
+                                                                    <g id="facebook-f1_layer">
+                                                                        <path d="M76.7 512V283H0v-91h76.7v-71.7C76.7 42.4 124.3 0 193.8 0c33.3 0 61.9 2.5 70.2 3.6V85h-48.2c-37.8 0-45.1 18-45.1 44.3V192H256l-11.7 91h-73.6v229"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                        <a href="https://www.linkedin.com" target="_blank" rel="noopener">
+                                                            <span id="hs_cos_wrapper_footer-module-2__2" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon wallet_module_social_accounts_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-labelledby="linkedin-in2" role="img">
+                                                                    <title id="linkedin-in2">Follow us on LinkedIn</title>
+                                                                    <g id="linkedin-in2_layer">
+                                                                        <path d="M100.3 480H7.4V180.9h92.9V480zM53.8 140.1C24.1 140.1 0 115.5 0 85.8 0 56.1 24.1 32 53.8 32c29.7 0 53.8 24.1 53.8 53.8 0 29.7-24.1 54.3-53.8 54.3zM448 480h-92.7V334.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V480h-92.8V180.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V480z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                        <a href="https://www.twitter.com" target="_blank" rel="noopener">
+                                                            <span id="hs_cos_wrapper_footer-module-2__3" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon wallet_module_social_accounts_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-labelledby="twitter3" role="img">
+                                                                    <title id="twitter3">Follow us on Twitter</title>
+                                                                    <g id="twitter3_layer">
+                                                                        <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                        <a href="https://www.instagram.com" target="_blank" rel="noopener">
+                                                            <span id="hs_cos_wrapper_footer-module-2__4" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_icon wallet_module_social_accounts_icon" style="" data-hs-cos-general-type="widget" data-hs-cos-type="icon">
+                                                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-labelledby="instagram4" role="img">
+                                                                    <title id="instagram4">Follow us on Instagram</title>
+                                                                    <g id="instagram4_layer">
+                                                                        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+                                                                    </g>
+                                                                </svg>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end widget-span -->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    <!--end row-wrapper -->
+                                    <div class="row-fluid-wrapper row-depth-1 row-number-3 dnd-section">
+                                        <div class="row-fluid ">
+                                            <div class="span12 widget-span widget-type-custom_widget dnd-module" style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+                                                <div id="hs_cos_wrapper_footer-module-3" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+                                                    <span id="hs_cos_wrapper_footer-module-3_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text">
+                                                        <div class="wallet_footer_text">
+                                                            <span>© 2024 MailMort.<br>Made By Humans on 🌍.</span>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--end widget-span -->
+                                        </div>
+                                        <!--end row-->
+                                    </div>
+                                    <!--end row-wrapper -->
+                                </div>
+                                <!--end widget-span -->
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <!-- HubSpot performance collection script -->
+        <script defer="" src="js/embed.js"></script>
+        <script src="js/main.min.js"></script>
+        <script>
+            var hsVars = hsVars || {}; hsVars['language'] = 'de';
+        </script>
+        <script src="js/project.js"></script>
+        <script src="js/module_49171282491_menu-section.min.js"></script>
+        <script src="js/module_-2712622_Site_Search_Input.min.js"></script>
+        <script src="js/module_49173953868_testimonial.min.js"></script>
+        <script src="js/splide.min.js"></script>
+        <script src="js/module_49170910583_accordion.min.js"></script>
+        <!-- Start of HubSpot Analytics Code -->
+        <script type="text/javascript">
+            var _hsq = _hsq || [];
+            _hsq.push(["setContentType", "standard-page"]);
+            _hsq.push(["setCanonicalUrl", "http:\/\/theburnhambox-19808513.hs-sites.com\/wallet"]);
+            _hsq.push(["setPageId", "49172901142"]);
+            _hsq.push(["setContentMetadata", {
+                "contentPageId": 49172901142,
+                "legacyPageId": "49172901142",
+                "contentFolderId": null,
+                "contentGroupId": null,
+                "abTestId": null,
+                "languageVariantId": 49172901142,
+                "languageCode": "de",
+                
+            }]);
+        </script>
+        <script type="text/javascript" id="hs-script-loader" async="" defer="" src="js/19808513.js"></script>
+        <!-- End of HubSpot Analytics Code -->
+        <script type="text/javascript">
+            var hsVars = {
+                render_id: "840ee0df-b05a-4384-b32c-7b8e2c377950",
+                ticks: 1710445441649,
+                page_id: 49172901142,
+                
+                content_group_id: 0,
+                portal_id: 19808513,
+                app_hs_base_url: "https://app.hubspot.com",
+                cp_hs_base_url: "https://cp.hubspot.com",
+                language: "de",
+                analytics_page_type: "standard-page",
+                analytics_page_id: "49172901142",
+                category_id: 1,
+                folder_id: 0,
+                is_hubspot_user: false
+            }
+        </script>
+        <script defer="" src="js/index.js"></script>
+    </body>
+</html>
